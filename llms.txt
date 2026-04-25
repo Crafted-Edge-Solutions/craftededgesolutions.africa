@@ -1,0 +1,27 @@
+# Crafted Edge Solutions
+
+> Kenya-based digital systems company building websites, automations, dashboards, AI assistants, payment systems, and digital marketing solutions for growing businesses across Africa.
+
+Crafted Edge Solutions designs and builds the full operational layer for businesses — not just websites, but the booking flows, automations, payments, and dashboards that make a business run digitally. Based in Nairobi, Kenya. Globally capable.
+
+Contact: admin@craftededgesolutions.africa | +254 769 071 925 | WhatsApp: https://wa.me/254769071925
+
+## Services
+
+- [Professional Websites](https://craftededgesolutions.africa/services.html): Custom, fast, conversion-focused websites built to turn visitors into enquiries. Mobile-first, SEO-optimised, no templates.
+- [Booking & Client Portals](https://craftededgesolutions.africa/services.html): Online booking systems, intake forms, client portals with automated confirmations, reminders, and payment collection.
+- [Workflow Automation](https://craftededgesolutions.africa/services.html): Lead follow-ups, invoice triggers, onboarding flows, approval workflows, and data sync between tools — running 24/7.
+- [AI Assistants & Chatbots](https://craftededgesolutions.africa/services.html): Custom AI trained on your business for FAQs, lead qualification, appointment booking, and 24/7 client support.
+- [Payment & Subscription Systems](https://craftededgesolutions.africa/services.html): M-Pesa (Daraja API), card payments via Stripe/Flutterwave, recurring billing, automated receipts.
+- [Dashboards & Reporting](https://craftededgesolutions.africa/services.html): Real-time business dashboards pulling data from multiple sources — revenue, bookings, team activity.
+- [Digital Marketing](https://craftededgesolutions.africa/services.html): SEO, Google Ads, Meta Ads, email marketing campaigns, social media management, and performance reporting.
+
+## Solutions
+
+- [Solutions Overview](https://craftededgesolutions.africa/solutions.html): Industry-specific digital systems for fitness studios, service businesses, e-commerce, internal operations, and AI-powered customer engagement.
+
+## Company
+
+- [Home](https://craftededgesolutions.africa/): Overview and value proposition
+- [About](https://craftededgesolutions.africa/about.html): Company background, team, and approach
+- [Contact](https://craftededgesolutions.africa/contact.html): Book a free consultation or send an enquiry
