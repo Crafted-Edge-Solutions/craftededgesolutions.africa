@@ -483,3 +483,70 @@ footer {
 .text-center { text-align: center; }
 .text-center .section-label { justify-content: center; }
 .text-center .section-sub { margin-left: auto; margin-right: auto; }
+
+/* ——— WHATSAPP FLOAT ——— */
+.whatsapp-float {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.whatsapp-float:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 8px 30px rgba(37,211,102,0.6);
+}
+
+/* ——— NEWSLETTER BAND ——— */
+.newsletter-band {
+  padding: 80px 5%;
+  background: rgba(13,26,46,0.4);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.newsletter-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.newsletter-inner h2 { font-size: clamp(1.5rem, 2.5vw, 2.2rem); margin-bottom: 12px; }
+.newsletter-inner > p { color: var(--text-secondary); font-weight: 300; line-height: 1.7; margin-bottom: 28px; }
+.newsletter-form { display: flex; gap: 10px; max-width: 480px; margin: 0 auto 12px; }
+@media (max-width: 500px) { .newsletter-form { flex-direction: column; } }
+.newsletter-form input[type="email"] {
+  flex: 1;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(99,151,255,0.2);
+  border-radius: var(--radius-btn);
+  padding: 13px 16px;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.newsletter-form input[type="email"]:focus { border-color: rgba(47,125,246,0.5); }
+.newsletter-form input[type="email"]::placeholder { color: var(--text-muted); }
+.newsletter-btn {
+  background: linear-gradient(135deg, var(--blue), #1a5fd4);
+  color: #fff;
+  padding: 13px 22px;
+  border-radius: var(--radius-btn);
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: var(--font-body);
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(47,125,246,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.newsletter-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(47,125,246,0.45); }
+.newsletter-note { font-size: 0.72rem; color: var(--text-muted); line-height: 1.5; }
