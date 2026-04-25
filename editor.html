@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crafted Edge — Page Editor</title>
+
+  <!-- GrapeJS -->
+  <link rel="stylesheet" href="https://unpkg.com/grapesjs@0.21.13/dist/css/grapes.min.css" />
+  <script src="https://unpkg.com/grapesjs@0.21.13/dist/grapes.min.js"></script>
+  <script src="https://unpkg.com/grapesjs-blocks-basic@1.0.2/dist/index.js"></script>
+  <script src="https://unpkg.com/grapesjs-preset-webpage@1.0.3/dist/index.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #07111f;
+      color: #d6dee8;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* TOP BAR */
+    .editor-topbar {
+      height: 52px;
+      background: #060e1a;
+      border-bottom: 1px solid rgba(99,151,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      flex-shrink: 0;
+      z-index: 999;
+    }
+
+    .editor-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #f0f4ff;
+    }
+
+    .editor-logo-mark {
+      width: 28px; height: 28px;
+      background: linear-gradient(135deg, #3b82f6, #22d3ee);
+      border-radius: 7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .editor-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .editor-btn {
+      padding: 7px 16px;
+      border-radius: 7px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.06);
+      color: #94a3c0;
+      border: 1px solid rgba(99,151,255,0.15);
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,0.1); color: #f0f4ff; }
+
+    .btn-blue {
+      background: #3b82f6;
+      color: white;
+      box-shadow: 0 2px 12px rgba(59,130,246,0.35);
+    }
+    .btn-blue:hover { background: #60a5fa; }
+
+    .btn-green {
+      background: #10b981;
+      color: white;
+    }
+    .btn-green:hover { background: #34d399; }
+
+    .editor-status {
+      font-size: 0.72rem;
+      color: #4ade80;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+    }
+
+    /* EDITOR AREA */
+    .editor-wrap {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #gjs {
+      height: 100%;
+    }
+
+    /* GrapeJS theme overrides */
+    .gjs-one-bg { background-color: #060e1a; }
+    .gjs-two-bg { background-color: #0d1526; }
+    .gjs-three-bg { background-color: #111e35; }
+    .gjs-four-bg { background-color: #0a1828; }
+
+    .gjs-pn-panel { background: #060e1a; border-right: 1px solid rgba(99,151,255,0.1); }
+    .gjs-pn-views-container { background: #0d1526; border-left: 1px solid rgba(99,151,255,0.1); }
+    .gjs-pn-commands { background: #060e1a; border-bottom: 1px solid rgba(99,151,255,0.1); }
+
+    .gjs-toolbar { background: rgba(6,14,26,0.95); }
+    .gjs-resizer-h { border-color: #3b82f6; }
+
+    .gjs-block { border-color: rgba(99,151,255,0.15); background: rgba(13,21,38,0.7); color: #94a3c0; }
+    .gjs-block:hover { border-color: #3b82f6; color: #f0f4ff; }
+    .gjs-block-label { color: inherit; }
+
+    .gjs-sm-sector-title { background: #0a1828; border-bottom-color: rgba(99,151,255,0.1); color: #94a3c0; }
+    .gjs-sm-property__inner label { color: #94a3c0; }
+
+    .gjs-layer-name { color: #94a3c0; }
+
+    /* Notification bar */
+    .save-notice {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: #10b981;
+      color: white;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      z-index: 9999;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+
+    .save-notice.show { transform: translateX(-50%) translateY(0); }
+
+    /* Export modal */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 9998;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal-box {
+      background: #0d1526;
+      border: 1px solid rgba(99,151,255,0.2);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 480px;
+      width: 90%;
+    }
+
+    .modal-box h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #f0f4ff;
+      margin-bottom: 8px;
+    }
+
+    .modal-box p {
+      font-size: 0.85rem;
+      color: #94a3c0;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .modal-actions { display: flex; gap: 10px; justify-content: flex-end; }
+
+    .deploy-link {
+      display: block;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(99,151,255,0.15);
+      border-radius: 10px;
+      margin-bottom: 10px;
+      text-decoration: none;
+      color: #f0f4ff;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .deploy-link:hover { border-color: rgba(99,151,255,0.4); background: rgba(255,255,255,0.07); }
+    .deploy-link-title { font-size: 0.9rem; font-weight: 600; }
+    .deploy-link-sub { font-size: 0.75rem; color: #94a3c0; margin-top: 2px; }
+  </style>
+</head>
+<body>
+
+  <div class="editor-topbar">
+    <div class="editor-logo">
+      <div class="editor-logo-mark">CE</div>
+      Crafted Edge · Page Editor
+    </div>
+    <div class="editor-actions">
+      <div class="editor-status">
+        <div class="status-dot"></div>
+        Live editing
+      </div>
+      <button class="editor-btn btn-ghost" onclick="previewPage()">👁 Preview</button>
+      <button class="editor-btn btn-ghost" onclick="undoAction()">↩ Undo</button>
+      <button class="editor-btn btn-ghost" onclick="redoAction()">↪ Redo</button>
+      <button class="editor-btn btn-blue" onclick="savePage()">💾 Save</button>
+      <button class="editor-btn btn-green" onclick="exportPage()">⬇ Export HTML</button>
+    </div>
+  </div>
+
+  <div class="editor-wrap">
+    <div id="gjs"></div>
+  </div>
+
+  <div class="save-notice" id="saveNotice">✓ Changes saved to browser</div>
+
+  <div class="modal-overlay" id="exportModal">
+    <div class="modal-box">
+      <h3>Export &amp; Deploy</h3>
+      <p>Download your page as a standalone HTML file, or deploy directly to one of these platforms:</p>
+      <a href="https://app.netlify.com/drop" target="_blank" class="deploy-link">
+        <div class="deploy-link-title">🚀 Netlify Drop</div>
+        <div class="deploy-link-sub">Drag your HTML file — live in 30 seconds, free custom domain</div>
+      </a>
+      <a href="https://vercel.com/new" target="_blank" class="deploy-link">
+        <div class="deploy-link-title">▲ Vercel</div>
+        <div class="deploy-link-sub">Connect GitHub → auto-deploy on every push</div>
+      </a>
+      <a href="https://pages.github.com/" target="_blank" class="deploy-link">
+        <div class="deploy-link-title">🐙 GitHub Pages</div>
+        <div class="deploy-link-sub">Free hosting from your GitHub repo</div>
+      </a>
+      <div class="modal-actions" style="margin-top:16px">
+        <button class="editor-btn btn-ghost" onclick="document.getElementById('exportModal').classList.remove('open')">Close</button>
+        <button class="editor-btn btn-blue" onclick="downloadHTML()">⬇ Download HTML</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load the landing page HTML
+    async function getLandingHTML() {
+      try {
+        const res = await fetch('index.html');
+        return await res.text();
+      } catch(e) {
+        return '<div style="color:white;padding:40px;text-align:center">Loading page content...</div>';
+      }
+    }
+
+    let editor;
+
+    async function initEditor() {
+      const pageHTML = await getLandingHTML();
+
+      // Extract body content and styles
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(pageHTML, 'text/html');
+
+      // Get all style content
+      let css = '';
+      doc.querySelectorAll('style').forEach(s => { css += s.textContent + '\n'; });
+
+      // Get body HTML (minus scripts)
+      doc.querySelectorAll('script, template').forEach(el => el.remove());
+      const bodyContent = doc.body.innerHTML;
+
+      editor = grapesjs.init({
+        container: '#gjs',
+        height: '100%',
+        width: 'auto',
+        storageManager: {
+          type: 'local',
+          autosave: true,
+          autoload: true,
+          stepsBeforeSave: 3,
+          id: 'crafted-edge-',
+        },
+        plugins: [
+          'gjs-blocks-basic',
+          'gjs-preset-webpage',
+        ],
+        pluginsOpts: {
+          'gjs-blocks-basic': { flexGrid: true },
+          'gjs-preset-webpage': {
+            modalImportTitle: 'Import Template',
+            modalImportButton: 'Import',
+          },
+        },
+        canvas: {
+          styles: [
+            'https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap'
+          ],
+        },
+        deviceManager: {
+          devices: [
+            { name: 'Desktop', width: '' },
+            { name: 'Tablet', width: '768px', widthMedia: '768px' },
+            { name: 'Mobile', width: '390px', widthMedia: '390px' },
+          ]
+        },
+        styleManager: {
+          enriched: true,
+          sectors: [
+            { name: 'General', open: false, properties: ['display','float','position','top','right','left','bottom'] },
+            { name: 'Dimension', open: false, properties: ['width','height','max-width','min-height','margin','padding'] },
+            { name: 'Typography', open: true, properties: ['font-family','font-size','font-weight','letter-spacing','color','line-height','text-align','text-decoration'] },
+            { name: 'Decorations', open: false, properties: ['background-color','border-radius','border','box-shadow','opacity'] },
+            { name: 'Extra', open: false, properties: ['cursor','overflow','transition'] },
+          ]
+        },
+        fromElement: false,
+        components: bodyContent,
+        style: css,
+      });
+
+      // Add keyboard shortcuts
+      editor.Commands.add('undo', { run: e => e.UndoManager.undo() });
+      editor.Commands.add('redo', { run: e => e.UndoManager.redo() });
+
+      // Show storage save confirmation
+      editor.on('storage:store', () => showSaveNotice());
+
+      // Custom toolbar buttons
+      editor.Panels.addButton('options', [{
+        id: 'undo-btn', command: 'core:undo', className: 'fa fa-undo', attributes: { title: 'Undo' }
+      }, {
+        id: 'redo-btn', command: 'core:redo', className: 'fa fa-repeat', attributes: { title: 'Redo' }
+      }]);
+    }
+
+    function showSaveNotice() {
+      const n = document.getElementById('saveNotice');
+      n.classList.add('show');
+      setTimeout(() => n.classList.remove('show'), 2500);
+    }
+
+    function savePage() {
+      if (editor) {
+        editor.store();
+        showSaveNotice();
+      }
+    }
+
+    function undoAction() {
+      if (editor) editor.UndoManager.undo();
+    }
+
+    function redoAction() {
+      if (editor) editor.UndoManager.redo();
+    }
+
+    function previewPage() {
+      if (editor) editor.runCommand('preview');
+    }
+
+    function exportPage() {
+      document.getElementById('exportModal').classList.add('open');
+    }
+
+    function downloadHTML() {
+      if (!editor) return;
+      const html = editor.getHtml();
+      const css = editor.getCss();
+
+      const fullHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crafted Edge Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>${css}</style>
+</head>
+<body>${html}</body>
+</html>`;
+
+      const blob = new Blob([fullHTML], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'crafted-edge-solutions.html';
+      a.click();
+      URL.revokeObjectURL(url);
+
+      document.getElementById('exportModal').classList.remove('open');
+    }
+
+    // Close modal on overlay click
+    document.getElementById('exportModal').addEventListener('click', function(e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+
+    initEditor();
+  </script>
+</body>
+</html>

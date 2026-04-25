@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Crafted Edge Solutions</title>
+  <meta name="description" content="Crafted Edge Solutions is a Kenya-based software and systems integration company building practical digital systems for growing businesses." />
+  <link rel="canonical" href="https://craftededgesolutions.africa/about.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .about-hero { padding: 140px 5% 80px; position: relative; overflow: hidden; }
+    .about-hero-glow { position:absolute; top:-150px; left:50%; transform:translateX(-50%); width:700px; height:600px; background:radial-gradient(ellipse,rgba(47,125,246,0.1) 0%,transparent 70%); pointer-events:none; }
+
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 768px) { .mission-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+    .mission-text h2 { margin-bottom: 20px; }
+    .mission-text p { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; font-weight: 300; }
+
+    .values-list { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+    .value-item { display: flex; align-items: flex-start; gap: 14px; padding: 18px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; }
+    .value-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+    .value-item h4 { font-family: var(--font-display); font-size: 0.92rem; font-weight: 700; margin-bottom: 4px; }
+    .value-item p { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.65; font-weight: 300; margin: 0; }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 700px) { .stat-row { grid-template-columns: repeat(2,1fr); } }
+
+    .stat-box { text-align: center; }
+    .stat-num { font-family: var(--font-display); font-size: 2.4rem; font-weight: 800; color: var(--text-primary); line-height: 1; margin-bottom: 8px; }
+    .stat-num span { color: var(--blue-bright); }
+    .stat-label { font-size: 0.82rem; color: var(--text-secondary); font-weight: 300; }
+
+    .process-timeline { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
+    .pt-item { display: grid; grid-template-columns: 80px 1fr; gap: 24px; position: relative; padding-bottom: 40px; }
+    .pt-item:last-child { padding-bottom: 0; }
+    .pt-item::before { content:''; position:absolute; left:39px; top:56px; bottom:0; width:1px; background:linear-gradient(180deg,var(--border),transparent); }
+    .pt-item:last-child::before { display:none; }
+    .pt-num { width: 56px; height: 56px; border-radius: 16px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; font-weight: 800; color: var(--blue-bright); flex-shrink: 0; }
+    .pt-content { padding-top: 12px; }
+    .pt-content h3 { margin-bottom: 8px; font-size: 1.05rem; }
+    .pt-content p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+
+    .stack-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 48px; }
+    @media (max-width: 600px) { .stack-grid { grid-template-columns: repeat(2,1fr); } }
+    .stack-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; display: flex; align-items: center; gap: 10px; }
+    .stack-ico { font-size: 1.2rem; }
+    .stack-name { font-size: 0.82rem; color: var(--text-secondary); font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">CE</div>
+      Crafted Edge
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="about.html" class="active">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" style="color:var(--blue-bright)">→ Book a Consultation</a>
+  </div>
+
+  <div class="about-hero">
+    <div class="about-hero-glow"></div>
+    <div class="section-inner">
+      <div class="section-label">About Us</div>
+      <h1 class="fade-up">We build the digital backbone<br/><span class="accent">of growing businesses</span></h1>
+      <p class="fade-up fade-up-1" style="font-size:1.05rem;color:var(--text-secondary);max-width:580px;line-height:1.8;margin-top:18px;font-weight:300">Crafted Edge Solutions is a Nairobi-based software and systems integration company. We build practical digital systems — not just websites — that help businesses automate their operations, serve clients better, and grow with confidence.</p>
+    </div>
+  </div>
+
+  <section style="padding:0 5% 100px">
+    <div class="section-inner">
+
+      <!-- MISSION -->
+      <div class="mission-grid">
+        <div class="mission-text">
+          <div class="section-label">Our Mission</div>
+          <h2>Practical technology for businesses that are ready to grow</h2>
+          <p>We started Crafted Edge Solutions because we kept seeing the same problem: small and medium businesses in Kenya were being underserved by the technology market. Either the tools were too expensive, too generic, or too complicated for a non-technical business owner to run.</p>
+          <p>We believe every business — regardless of size — deserves access to the same quality of digital infrastructure that enterprise companies use. Our job is to make that accessible, practical, and affordable.</p>
+          <p>We're not an agency that disappears after launch. We're a long-term technology partner that helps you grow.</p>
+        </div>
+        <div>
+          <div class="values-list">
+            <div class="value-item">
+              <div class="value-icon">🎯</div>
+              <div>
+                <h4>Practical over perfect</h4>
+                <p>We build what works for your business today, with a clear path to scale tomorrow. No over-engineered solutions you can't maintain.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🔗</div>
+              <div>
+                <h4>Connected, not isolated</h4>
+                <p>A website is not a solution. We think in systems — how your website, bookings, payments, and communications work together as one.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🤝</div>
+              <div>
+                <h4>Partner, not vendor</h4>
+                <p>We talk to you like a business partner. We want to understand your goals and bottlenecks — not just take a brief and disappear.</p>
+              </div>
+            </div>
+            <div class="value-item">
+              <div class="value-icon">🌍</div>
+              <div>
+                <h4>Built for Kenya, built for Africa</h4>
+                <p>We understand local market conditions — M-Pesa, WhatsApp-heavy client communication, mobile-first users, and the realities of scaling in Kenya.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-num">50<span>+</span></div>
+          <div class="stat-label">Projects delivered</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">12<span>+</span></div>
+          <div class="stat-label">Industries served</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">Client code ownership</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">24<span>/7</span></div>
+          <div class="stat-label">Systems running for clients</div>
+        </div>
+      </div>
+
+      <!-- PROCESS -->
+      <div id="process">
+        <div class="section-label">How We Work</div>
+        <h2>From conversation to live system</h2>
+        <p class="section-sub">We keep the process clear and collaborative. No jargon, no scope creep surprises, no disappearing act after launch.</p>
+        <div class="process-timeline">
+          <div class="pt-item">
+            <div class="pt-num">01</div>
+            <div class="pt-content">
+              <h3>Discover</h3>
+              <p>We start with a detailed conversation about your business — your goals, your bottlenecks, and what success looks like. We ask the kind of questions that reveal the actual problem, not just the surface request. No assumptions, no templates pulled out immediately.</p>
+            </div>
+          </div>
+          <div class="pt-item">
+            <div class="pt-num">02</div>
+            <div class="pt-content">
+              <h3>Design</h3>
+              <p>We map out the full system architecture — what we'll build, how the pieces connect, and what you'll be able to do with it. You see the full picture before a single line of code is written. Wireframes, flow diagrams, and a clear project scope document.</p>
+            </div>
+          </div>
+          <div class="pt-item">
+            <div class="pt-num">03</div>
+            <div class="pt-content">
+              <h3>Build</h3>
+              <p>We build in focused sprints and share progress as we go. You get access to a live staging environment from week one — so you're reviewing and testing a real working system, not waiting for a final reveal. Feedback is built in, not bolted on.</p>
+            </div>
+          </div>
+          <div class="pt-item">
+            <div class="pt-num">04</div>
+            <div class="pt-content">
+              <h3>Integrate &amp; Support</h3>
+              <p>We launch, connect all the pieces (payments, automations, notifications, third-party tools), and train your team. After launch, we stay on hand for questions, fixes, and improvements. We don't disappear once the invoice is paid.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TECH STACK -->
+      <div style="margin-top:80px">
+        <div class="section-label">Tech We Work With</div>
+        <h2>The right tool for the right job</h2>
+        <p class="section-sub" style="margin-bottom:0">We're not married to any single platform. We use whatever makes the most sense for your business, your team's ability to manage it, and your budget.</p>
+        <div class="stack-grid">
+          <div class="stack-item"><div class="stack-ico">⚡</div><div class="stack-name">n8n · Make · Zapier</div></div>
+          <div class="stack-item"><div class="stack-ico">🤖</div><div class="stack-name">OpenAI · Claude AI</div></div>
+          <div class="stack-item"><div class="stack-ico">💳</div><div class="stack-name">M-Pesa Daraja API</div></div>
+          <div class="stack-item"><div class="stack-ico">💰</div><div class="stack-name">Stripe · Flutterwave</div></div>
+          <div class="stack-item"><div class="stack-ico">💬</div><div class="stack-name">WhatsApp Business API</div></div>
+          <div class="stack-item"><div class="stack-ico">🌐</div><div class="stack-name">Next.js · React · Django</div></div>
+          <div class="stack-item"><div class="stack-ico">🗄️</div><div class="stack-name">PostgreSQL · Supabase</div></div>
+          <div class="stack-item"><div class="stack-ico">☁️</div><div class="stack-name">Cloudflare · Vercel · Railway</div></div>
+          <div class="stack-item"><div class="stack-ico">📊</div><div class="stack-name">Metabase · Custom Dashboards</div></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-glow"></div>
+    <div class="cta-band-inner">
+      <div class="section-label" style="justify-content:center">Work With Us</div>
+      <h2>Ready to build something that actually runs your business?</h2>
+      <p>Book a free 30-minute discovery call. No sales pressure — just a conversation about what your business needs.</p>
+      <div class="cta-band-actions">
+        <a href="contact.html" class="btn-primary" style="padding:15px 34px;font-size:1rem">Book a Free Call</a>
+        <a href="services.html" class="btn-secondary" style="padding:15px 28px;font-size:1rem">Explore our services →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-logo-mark">CE</div>Crafted Edge Solutions</div>
+        <p>Practical software systems for businesses ready to move beyond manual work. Nairobi, Kenya.</p>
+        <div class="footer-contact">
+          <a href="mailto:admin@craftededgesolutions.africa">admin@craftededgesolutions.africa</a>
+          <a href="tel:+254769071925">+254 769 071 925</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="services.html">Professional Websites</a></li><li><a href="services.html">Booking Systems</a></li><li><a href="services.html">Workflow Automation</a></li><li><a href="services.html">AI Assistants</a></li><li><a href="services.html">Payment Systems</a></li></ul></div>
+      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="solutions.html">Fitness &amp; Wellness</a></li><li><a href="solutions.html">Service Businesses</a></li><li><a href="solutions.html">E-commerce</a></li><li><a href="solutions.html">Admin Dashboards</a></li><li><a href="solutions.html">WhatsApp Automation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="about.html#process">Our Process</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Crafted Edge Solutions. All rights reserved.</p>
+      <div class="footer-tags"><span class="footer-tag">Software</span><span class="footer-tag">Automation</span><span class="footer-tag">AI</span><span class="footer-tag">Nairobi, Kenya</span></div>
+    </div>
+  </footer>
+
+  <script>function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}</script>
+</body>
+</html>

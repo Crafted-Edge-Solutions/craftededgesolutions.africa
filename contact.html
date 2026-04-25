@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Crafted Edge Solutions</title>
+  <meta name="description" content="Book a free consultation with Crafted Edge Solutions. We'll listen to your business and tell you exactly what to build." />
+  <link rel="canonical" href="https://craftededgesolutions.africa/contact.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .contact-page { padding: 130px 5% 100px; min-height: 100vh; position: relative; overflow: hidden; }
+    .contact-glow { position:absolute; top:-100px; left:50%; transform:translateX(-50%); width:700px; height:600px; background:radial-gradient(ellipse,rgba(47,125,246,0.1) 0%,transparent 70%); pointer-events:none; }
+
+    .contact-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+    .contact-info h1 { margin-bottom: 18px; }
+    .contact-info > p { font-size: 1rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 36px; font-weight: 300; }
+
+    .contact-methods { display: flex; flex-direction: column; gap: 14px; margin-bottom: 36px; }
+    .contact-method {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.2s;
+      text-decoration: none;
+    }
+    .contact-method:hover { border-color: var(--border-hover); }
+    .cm-icon { width: 38px; height: 38px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .cm-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+    .cm-value { font-size: 0.9rem; color: var(--text-primary); font-weight: 500; }
+
+    .contact-notes { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .contact-notes h4 { font-family: var(--font-display); font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; color: var(--text-primary); }
+    .contact-notes ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .contact-notes ul li { font-size: 0.82rem; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; font-weight: 300; }
+    .contact-notes ul li::before { content: '✓'; color: #4ade80; font-weight: 700; flex-shrink: 0; }
+
+    /* FORM */
+    .contact-form-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 36px;
+    }
+
+    .form-title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; margin-bottom: 6px; }
+    .form-sub { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 28px; font-weight: 300; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+    .form-group label { font-size: 0.78rem; font-weight: 600; color: var(--text-secondary); letter-spacing: 0.04em; }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(99,151,255,0.15);
+      border-radius: 9px;
+      padding: 12px 14px;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: 100%;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-muted); }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(47,125,246,0.5);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .form-group select { appearance: none; cursor: pointer; }
+    .form-group select option { background: #0d1a2e; color: var(--text-primary); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    .form-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--blue), #1a5fd4);
+      color: white;
+      padding: 14px 28px;
+      border-radius: var(--radius-btn);
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(47,125,246,0.3);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(47,125,246,0.45); }
+
+    .form-success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .form-success.show { display: block; }
+    .form-success .success-icon { font-size: 3rem; margin-bottom: 16px; }
+    .form-success h3 { font-size: 1.3rem; margin-bottom: 8px; }
+    .form-success p { color: var(--text-secondary); font-weight: 300; }
+
+    .privacy-note { font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 14px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">CE</div>
+      Crafted Edge
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="solutions.html">Solutions</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="solutions.html">Solutions</a>
+    <a href="about.html">About</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="contact.html" style="color:var(--blue-bright)">→ Book a Consultation</a>
+  </div>
+
+  <div class="contact-page">
+    <div class="contact-glow"></div>
+    <div class="contact-grid">
+      <!-- LEFT: INFO -->
+      <div class="contact-info">
+        <div class="section-label">Get in Touch</div>
+        <h1 class="fade-up">Let's talk about your business</h1>
+        <p class="fade-up fade-up-1">Tell us what you're building — or what's slowing you down. We'll map out the right system together and give you a clear recommendation, for free.</p>
+
+        <div class="contact-methods">
+          <a href="mailto:admin@craftededgesolutions.africa" class="contact-method">
+            <div class="cm-icon icon-blue">✉️</div>
+            <div>
+              <div class="cm-label">Email us</div>
+              <div class="cm-value">admin@craftededgesolutions.africa</div>
+            </div>
+          </a>
+          <a href="tel:+254769071925" class="contact-method">
+            <div class="cm-icon icon-cyan">📞</div>
+            <div>
+              <div class="cm-label">Call or WhatsApp</div>
+              <div class="cm-value">+254 769 071 925</div>
+            </div>
+          </a>
+          <a href="https://maps.google.com/?q=Nairobi,Kenya" target="_blank" class="contact-method">
+            <div class="cm-icon icon-green">📍</div>
+            <div>
+              <div class="cm-label">Location</div>
+              <div class="cm-value">Nairobi, Kenya</div>
+            </div>
+          </a>
+        </div>
+
+        <div class="contact-notes">
+          <h4>What to expect after you reach out</h4>
+          <ul>
+            <li>We respond within 24 hours on business days</li>
+            <li>Free 30-minute discovery call — no commitment</li>
+            <li>Clear recommendation on what to build and in what order</li>
+            <li>Transparent scope and pricing before any work begins</li>
+            <li>No pushy sales — if we're not the right fit, we'll tell you</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: FORM -->
+      <div class="contact-form-wrap fade-up fade-up-1">
+        <div id="contactForm">
+          <div class="form-title">Start a conversation</div>
+          <div class="form-sub">Fill in as much or as little as you know right now — we'll figure out the rest on the call.</div>
+
+          <form onsubmit="handleSubmit(event)" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First name *</label>
+                <input type="text" id="firstName" name="firstName" placeholder="Grace" required />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input type="text" id="lastName" name="lastName" placeholder="Mwangi" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address *</label>
+              <input type="email" id="email" name="email" placeholder="grace@yourbusiness.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone / WhatsApp</label>
+              <input type="tel" id="phone" name="phone" placeholder="+254 7XX XXX XXX" />
+            </div>
+
+            <div class="form-group">
+              <label for="business">Business name &amp; industry</label>
+              <input type="text" id="business" name="business" placeholder="e.g. Fit Studio — Fitness Centre" />
+            </div>
+
+            <div class="form-group">
+              <label for="service">What are you looking for? *</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service or solution</option>
+                <option value="website">Professional Website</option>
+                <option value="booking">Booking &amp; Client Portal</option>
+                <option value="automation">Workflow Automation</option>
+                <option value="ai">AI Assistant / Chatbot</option>
+                <option value="payments">Payment &amp; Subscription System</option>
+                <option value="dashboard">Dashboard &amp; Reporting</option>
+                <option value="whatsapp">WhatsApp Automation</option>
+                <option value="full">Full digital system (multiple of the above)</option>
+                <option value="other">Not sure — need advice</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell us about your business and what you need</label>
+              <textarea id="message" name="message" placeholder="What does your business do? What's working well? What's the biggest pain point you want to fix?"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="timeline">When are you looking to start?</label>
+              <select id="timeline" name="timeline">
+                <option value="" disabled selected>Select timeline</option>
+                <option value="asap">As soon as possible</option>
+                <option value="1month">Within the next month</option>
+                <option value="3months">Within 3 months</option>
+                <option value="planning">Just planning / researching</option>
+              </select>
+            </div>
+
+            <button type="submit" class="form-submit">
+              Send message
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2.5 8h11M9.5 4.5l4 3.5-4 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <p class="privacy-note">We respect your privacy. Your information is never shared or sold.</p>
+          </form>
+        </div>
+
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">✅</div>
+          <h3>Message sent!</h3>
+          <p>Thank you — we'll be in touch within 24 hours.<br/>In the meantime, feel free to WhatsApp us on <a href="tel:+254769071925" style="color:var(--blue-bright)">+254 769 071 925</a>.</p>
+          <div style="margin-top:24px">
+            <a href="index.html" class="btn-secondary">← Back to home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-logo-mark">CE</div>Crafted Edge Solutions</div>
+        <p>Practical software systems for businesses ready to move beyond manual work. Nairobi, Kenya.</p>
+        <div class="footer-contact">
+          <a href="mailto:admin@craftededgesolutions.africa">admin@craftededgesolutions.africa</a>
+          <a href="tel:+254769071925">+254 769 071 925</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="services.html">Professional Websites</a></li><li><a href="services.html">Booking Systems</a></li><li><a href="services.html">Workflow Automation</a></li><li><a href="services.html">AI Assistants</a></li><li><a href="services.html">Payment Systems</a></li></ul></div>
+      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="solutions.html">Fitness &amp; Wellness</a></li><li><a href="solutions.html">Service Businesses</a></li><li><a href="solutions.html">E-commerce</a></li><li><a href="solutions.html">Admin Dashboards</a></li><li><a href="solutions.html">WhatsApp Automation</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="about.html#process">Our Process</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Crafted Edge Solutions. All rights reserved.</p>
+      <div class="footer-tags"><span class="footer-tag">Software</span><span class="footer-tag">Automation</span><span class="footer-tag">AI</span><span class="footer-tag">Nairobi, Kenya</span></div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const firstName = document.getElementById('firstName').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const service = document.getElementById('service').value;
+
+      if (!firstName || !email || !service) {
+        alert('Please fill in the required fields (marked with *)');
+        return;
+      }
+
+      // Build mailto link with form data
+      const subject = encodeURIComponent(`New enquiry from ${firstName} — ${service}`);
+      const body = encodeURIComponent(
+        `Name: ${firstName} ${document.getElementById('lastName').value}\n` +
+        `Email: ${email}\n` +
+        `Phone: ${document.getElementById('phone').value}\n` +
+        `Business: ${document.getElementById('business').value}\n` +
+        `Service: ${service}\n` +
+        `Timeline: ${document.getElementById('timeline').value}\n\n` +
+        `Message:\n${document.getElementById('message').value}`
+      );
+
+      window.location.href = `mailto:admin@craftededgesolutions.africa?subject=${subject}&body=${body}`;
+
+      // Show success state after brief delay
+      setTimeout(() => {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+      }, 500);
+    }
+  </script>
+</body>
+</html>

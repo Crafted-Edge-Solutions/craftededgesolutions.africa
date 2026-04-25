@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solutions — Crafted Edge Solutions</title>
+  <meta name="description" content="Industry-specific digital systems for fitness studios, service businesses, e-commerce, internal operations, and AI-powered customer engagement." />
+  <link rel="canonical" href="https://craftededgesolutions.africa/solutions.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .sol-hero { padding: 140px 5% 72px; position: relative; overflow: hidden; }
+    .sol-hero-glow { position:absolute; top:-150px; left:50%; transform:translateX(-50%); width:700px; height:600px; background:radial-gradient(ellipse,rgba(25,194,255,0.09) 0%,transparent 70%); pointer-events:none; }
+
+    .sol-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s, background 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sol-card:hover { border-color: var(--border-hover); transform: translateY(-3px); background: var(--bg-card-hover); }
+
+    .sol-card-header {
+      padding: 28px 28px 22px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sol-card-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+    }
+
+    .header-blue::before { background: radial-gradient(circle at 70% 30%, var(--blue), transparent 60%); }
+    .header-cyan::before { background: radial-gradient(circle at 70% 30%, var(--cyan), transparent 60%); }
+    .header-purple::before { background: radial-gradient(circle at 70% 30%, #a855f7, transparent 60%); }
+    .header-green::before { background: radial-gradient(circle at 70% 30%, #4ade80, transparent 60%); }
+    .header-orange::before { background: radial-gradient(circle at 70% 30%, #fb923c, transparent 60%); }
+    .header-pink::before { background: radial-gradient(circle at 70% 30%, #f472b6, transparent 60%); }
+
+    .sol-card-icon { font-size: 2rem; margin-bottom: 14px; }
+    .sol-card-header h3 { margin-bottom: 8px; }
+    .sol-card-header p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
+
+    .sol-card-body { padding: 22px 28px; flex: 1; }
+    .sol-card-body h4 { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+    .sol-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .sol-features li { display: flex; align-items: center; gap: 9px; font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; }
+    .sol-features li::before { content: '→'; color: var(--blue-bright); font-size: 0.75rem; flex-shrink: 0; }
+
+    .sol-card-footer { padding: 18px 28px; border-top: 1px solid var(--border); }
+    .sol-card-footer a { font-size: 0.85rem; color: var(--blue-bright); font-weight: 500; display: flex; align-items: center; gap: 6px; transition: gap 0.2s; }
+    .sol-card-footer a:hover { gap: 10px; }
+
+    .industry-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 768px) { .approach-grid { grid-template-columns: 1fr; } }
+
+    .approach-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 32px;
+    }
+
+    .approach-box h3 { margin-bottom: 12px; }
+    .approach-box p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
+    .approach-list { margin-top: 16px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .approach-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+    .approach-list li span:first-child { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-mark">CE</div>
+      Crafted Edge
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="solutions.html" class="active">Solutions</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Book a Consultation</a>
+    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="solutions.html" class="active">Solutions</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" style="color:var(--blue-bright)">→ Book a Consultation</a>
+  </div>
+
+  <div class="sol-hero">
+    <div class="sol-hero-glow"></div>
+    <div class="section-inner">
+      <div class="section-label">Solutions</div>
+      <h1 class="fade-up">Built for your industry,<br/><span class="accent-cyan">not just your inbox</span></h1>
+      <p class="fade-up fade-up-1" style="font-size:1.05rem;color:var(--text-secondary);max-width:580px;line-height:1.8;margin-top:18px;font-weight:300">We've built platforms for businesses across multiple sectors. Below are the systems we specialise in — each one battle-tested with real businesses.</p>
+    </div>
+  </div>
+
+  <section style="padding:0 5% 100px">
+    <div class="section-inner">
+      <div class="cards-grid-3" style="gap:24px">
+
+        <div class="sol-card fade-up">
+          <div class="sol-card-header header-cyan">
+            <div class="sol-card-icon">🏋️</div>
+            <h3>Fitness &amp; Wellness Platforms</h3>
+            <p>Complete digital operations for gyms, studios, and wellness centres — bookings, memberships, and client management in one place.</p>
+            <div class="industry-tag">🏢 Gyms · Studios · Spas · Clinics</div>
+          </div>
+          <div class="sol-card-body">
+            <h4>System includes</h4>
+            <ul class="sol-features">
+              <li>Class scheduling with capacity limits</li>
+              <li>Membership management &amp; recurring billing</li>
+              <li>Trainer assignment and session tracking</li>
+              <li>Automated session reminders via SMS/WhatsApp</li>
+              <li>Client progress tracking portal</li>
+              <li>Revenue and attendance dashboard</li>
+            </ul>
+          </div>
+          <div class="sol-card-footer">
+            <a href="contact.html">Discuss this solution →</a>
+          </div>
+        </div>
+
+        <div class="sol-card fade-up fade-up-1">
+          <div class="sol-card-header header-blue">
+            <div class="sol-card-icon">🛎️</div>
+            <h3>Service Business Booking Systems</h3>
+            <p>For consultants, clinics, salons, and home services — professional online booking with payments, intake, and automated follow-ups.</p>
+            <div class="industry-tag">🏢 Consultants · Salons · Clinics · Home Services</div>
+          </div>
+          <div class="sol-card-body">
+            <h4>System includes</h4>
+            <ul class="sol-features">
+              <li>Online booking with calendar sync (Google, Outlook)</li>
+              <li>Deposit or full payment at booking</li>
+              <li>Client intake forms &amp; pre-appointment checklists</li>
+              <li>Automated reminders, confirmations, follow-ups</li>
+              <li>No-show and cancellation management</li>
+              <li>Multi-staff and multi-location support</li>
+            </ul>
+          </div>
+          <div class="sol-card-footer">
+            <a href="contact.html">Discuss this solution →</a>
+          </div>
+        </div>
+
+        <div class="sol-card fade-up fade-up-2">
+          <div class="sol-card-header header-green">
+            <div class="sol-card-icon">🛒</div>
+            <h3>E-commerce &amp; Payment Workflows</h3>
+            <p>Online stores with M-Pesa and card payments, automated order processing, fulfilment triggers, and real-time business tracking.</p>
+            <div class="industry-tag">🏢 Retail · Food &amp; Beverage · Subscription Businesses</div>
+          </div>
+          <div class="sol-card-body">
+            <h4>System includes</h4>
+            <ul class="sol-features">
+              <li>M-Pesa STK Push &amp; card payments at checkout</li>
+              <li>Automated order confirmation &amp; fulfilment</li>
+              <li>Inventory tracking and low-stock alerts</li>
+              <li>Subscription &amp; repeat order management</li>
+              <li>Delivery status notifications to customers</li>
+              <li>Sales and revenue analytics dashboard</li>
+            </ul>
+          </div>
+          <div class="sol-card-footer">
+            <a href="contact.html">Discuss this solution →</a>
+          </div>
+        </div>
+
+        <div class="sol-card fade-up fade-up-1">
+          <div class="sol-card-header header-purple">
+            <div class="sol-card-icon">🗂️</div>
+            <h3>Internal Admin Dashboards</h3>
+            <p>Custom internal tools for managing teams, projects, and client data — built for how your business actually works, not a generic SaaS template.</p>
+            <div class="industry-tag">🏢 Agencies · SMEs · Operations Teams</div>
+          </div>
+          <div class="sol-card-body">
+            <h4>System includes</h4>
+            <ul class="sol-features">
+              <li>Team and task management with role-based access</li>
+              <li>Client and project tracking in one view</li>
+              <li>Custom approval and sign-off workflows</li>
+              <li>HR leave requests, timesheets, and payroll data</li>
+              <li>Weekly automated reporting by email</li>
+              <li>Integration with your existing tools</li>
+            </ul>
+          </div>
+          <div class="sol-card-footer">
+            <a href="contact.html">Discuss this solution →</a>
+          </div>
+        </div>
+
+        <div class="sol-card fade-up fade-up-2">
+          <div class="sol-card-header header-orange">
+            <div class="sol-card-icon">💬</div>
+            <h3>WhatsApp Automation</h3>
+            <p>Automated WhatsApp flows for client onboarding, order updates, appointment confirmations, and lead qualification — your business active 24/7.</p>
+            <div class="industry-tag">🏢 Any business using WhatsApp for client communication</div>
+          </div>
+          <div class="sol-card-body">
+            <h4>System includes</h4>
+            <ul class="sol-features">
+              <li>WhatsApp Business API integration</li>
+              <li>Automated welcome messages and lead qualification</li>
+              <li>Order and appointment status updates</li>
+              <li>FAQ bot trained on your business</li>
+              <li>Human handoff when the bot can't answer</li>
+              <li>Broadcast campaigns to opted-in contacts</li>
+            </ul>
+          </div>
+          <div class="sol-card-footer">
+            <a href="contact.html">Discuss this solution →</a>
+          </div>
+        </div>
+
+        <div class="sol-card fade-up fade-up-3">
+          <div class="sol-card-header header-pink">
+            <div class="sol-card-icon">🧠</div>
+            <h3>AI Concierge Systems</h3>
+            <p>Intelligent AI agents embedded in your website or WhatsApp — answering questions, booking appointments, and routing enquiries without any human input.</p>
+            <div class="industry-tag">🏢 Hotels · Clinics · Law Firms · Finance · Real Estate</div>
+          </div>
+          <div class="sol-card-body">
+            <h4>System includes</h4>
+            <ul class="sol-features">
+              <li>AI trained on your products, pricing, and FAQs</li>
+              <li>Website chat widget + WhatsApp integration</li>
+              <li>Appointment booking inside the conversation</li>
+              <li>Lead capture and CRM routing</li>
+              <li>Multi-language support (English, Swahili)</li>
+              <li>Performance analytics and conversation logs</li>
+            </ul>
+          </div>
+          <div class="sol-card-footer">
+            <a href="contact.html">Discuss this solution →</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- OUR APPROACH -->
+      <div style="margin-top:80px">
+        <div class="section-label">Our Approach</div>
+        <h2>Every solution starts with understanding<br/>your business — not our product catalogue</h2>
+        <div class="approach-grid">
+          <div class="approach-box">
+            <h3>We don't sell off-the-shelf</h3>
+            <p>We don't have packages where you pick a tier and we hand you a template. Every engagement starts with a discovery session where we understand your operations, your clients, and your specific bottlenecks.</p>
+            <ul class="approach-list">
+              <li><span>✓</span><span>Custom-built for your workflow, not generic</span></li>
+              <li><span>✓</span><span>Integrated with tools you already use</span></li>
+              <li><span>✓</span><span>Priced based on scope, not arbitrary tiers</span></li>
+            </ul>
+          </div>
+          <div class="approach-box">
+            <h3>You own everything</h3>
+            <p>Unlike SaaS products where you rent access, we build systems you own outright. Your data, your code, your infrastructure. We hand everything over and train your team to manage it.</p>
+            <ul class="approach-list">
+              <li><span>✓</span><span>Full source code ownership</span></li>
+              <li><span>✓</span><span>No vendor lock-in or monthly licence fees</span></li>
+              <li><span>✓</span><span>Team training and documentation included</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-glow"></div>
+    <div class="cta-band-inner">
+      <div class="section-label" style="justify-content:center">Start Here</div>
+      <h2>See your business in one of these?</h2>
+      <p>Book a free discovery call and let's map out the exact system your business needs to operate more efficiently.</p>
+      <div class="cta-band-actions">
+        <a href="contact.html" class="btn-primary" style="padding:15px 34px;font-size:1rem">Book a Free Call</a>
+        <a href="services.html" class="btn-secondary" style="padding:15px 28px;font-size:1rem">View all services →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo"><div class="nav-logo-mark">CE</div>Crafted Edge Solutions</div>
+        <p>Practical software systems for businesses ready to move beyond manual work. Nairobi, Kenya.</p>
+        <div class="footer-contact">
+          <a href="mailto:admin@craftededgesolutions.africa">admin@craftededgesolutions.africa</a>
+          <a href="tel:+254769071925">+254 769 071 925</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>Services</h5><ul><li><a href="services.html">Professional Websites</a></li><li><a href="services.html">Booking Systems</a></li><li><a href="services.html">Workflow Automation</a></li><li><a href="services.html">AI Assistants</a></li><li><a href="services.html">Payment Systems</a></li></ul></div>
+      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="solutions.html">Fitness &amp; Wellness</a></li><li><a href="solutions.html">Service Businesses</a></li><li><a href="solutions.html">E-commerce</a></li><li><a href="solutions.html">Admin Dashboards</a></li><li><a href="solutions.html">WhatsApp Automation</a></li><li><a href="solutions.html">AI Concierge</a></li></ul></div>
+      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Crafted Edge Solutions. All rights reserved.</p>
+      <div class="footer-tags"><span class="footer-tag">Software</span><span class="footer-tag">Automation</span><span class="footer-tag">AI</span><span class="footer-tag">Nairobi, Kenya</span></div>
+    </div>
+  </footer>
+
+  <script>function toggleMenu(){document.getElementById('mobileMenu').classList.toggle('open');}</script>
+</body>
+</html>
