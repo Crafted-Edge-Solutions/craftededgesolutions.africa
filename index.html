@@ -164,10 +164,6 @@
     }
 
     .why-points { display: flex; flex-direction: column; gap: 22px; margin-top: 32px; }
-    .why-pt { display: flex; gap: 14px; align-items: flex-start; }
-    .why-pt-icon { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.95rem; margin-top: 2px; }
-    .why-pt h4 { font-family: var(--font-display); font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
-    .why-pt p { font-size: 0.87rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
 
     .sys-visual { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 28px; }
     .sys-hub { width: 64px; height: 64px; border-radius: 16px; background: linear-gradient(135deg, var(--blue), var(--cyan)); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; margin: 0 auto 22px; box-shadow: 0 0 40px rgba(47,125,246,0.28); }
@@ -467,7 +463,8 @@
   <!-- BUILDER TEASER -->
   <section class="builder-teaser">
     <div class="builder-teaser-glow"></div>
-    <div class="builder-teaser-inner">
+    <div class="section-inner">
+    <div class="builder-teaser-grid">
       <div class="builder-copy fade-up">
         <div class="builder-badge">
           <span class="builder-badge-dot"></span>
@@ -523,7 +520,7 @@
                 <div class="bf-block-h">What We Offer</div>
                 <div class="bf-block-p">Drag a block here to add your services…</div>
               </div>
-              <div class="bf-drop-hint" style="top:auto;bottom:8px;height:38px;display:flex;align-items:center;justify-content:center;font-size:0.52rem;color:var(--text-muted)">+ Drop a block here</div>
+              <div class="bf-drop-hint">+ Drop a block here</div>
             </div>
             <div class="bf-props">
               <div class="bf-prop-title">Properties</div>
@@ -547,6 +544,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
