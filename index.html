@@ -584,8 +584,8 @@
     <div class="newsletter-inner">
       <div class="section-label" style="justify-content:center">Newsletter</div>
       <h2>Stay in the loop</h2>
-      <p>Practical tips on digital systems, automation, and AI for growing businesses — straight to your inbox. No fluff, no spam.</p>
-      <!-- Wire up: sign up at formspree.io → replace YOUR_FORM_ID in the fetch URL below -->
+      <p>Practical tips on digital systems, automation, and AI for growing businesses — straight to your inbox. Powered by Listmonk.</p>
+      <!-- Wire up: replace LISTMONK_URL and LIST_UUID with your actual Listmonk details -->
       <form class="newsletter-form" id="newsletterForm" onsubmit="handleNewsletter(event)" novalidate>
         <input type="email" name="email" placeholder="your@email.com" required />
         <button type="submit" class="newsletter-btn">Subscribe</button>
@@ -632,6 +632,7 @@
           <li><a href="services.html">Payment Systems</a></li>
           <li><a href="services.html">Dashboards</a></li>
           <li><a href="services.html">Digital Marketing</a></li>
+          <li><a href="services.html">Managed Newsletters</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -684,11 +685,19 @@
       const btn = e.target.querySelector('.newsletter-btn');
       btn.textContent = 'Subscribing…';
       btn.disabled = true;
-      // TODO: replace YOUR_FORM_ID with your Formspree form ID (formspree.io)
-      fetch('https://formspree.io/f/YOUR_FORM_ID', {
+
+      // Listmonk subscription details
+      const LISTMONK_URL = 'https://newsletter.craftededgesolutions.africa'; // Replace with actual Listmonk URL
+      const LIST_UUIDS = ['your-list-uuid-here']; // Replace with actual List UUID(s)
+
+      fetch(`${LISTMONK_URL}/api/public/subscription`, {
         method: 'POST',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          list_uuids: LIST_UUIDS,
+          status: 'enabled'
+        })
       }).catch(() => {}).finally(() => {
         document.getElementById('newsletterForm').style.display = 'none';
         const msg = document.getElementById('newsletterMsg');
