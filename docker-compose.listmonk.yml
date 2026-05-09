@@ -11,6 +11,27 @@ services:
       - POSTGRES_DB=listmonk
     volumes:
       - listmonk_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U listmonk -d listmonk -h localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app-init:
+    image: listmonk/listmonk:latest
+    container_name: listmonk_app_init
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - LISTMONK_db__host=db
+      - LISTMONK_db__user=listmonk
+      - LISTMONK_db__password=listmonk
+      - LISTMONK_db__database=listmonk
+      - LISTMONK_db__port=5432
+    volumes:
+      - ./listmonk/config.toml:/listmonk/config.toml
+    command: sh -c "cd /listmonk && echo 'y' | ./listmonk --install && sleep 2"
 
   app:
     image: listmonk/listmonk:latest
@@ -28,7 +49,15 @@ services:
     volumes:
       - ./listmonk/config.toml:/listmonk/config.toml
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      app-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 volumes:
   listmonk_data:
