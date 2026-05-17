@@ -3,349 +3,463 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Services in Kenya | Web Design, Automation & Marketing | Crafted Edge Solutions</title>
-  <meta name="description" content="Web design, booking systems, workflow automation, AI chatbots, M-Pesa payment integration, business dashboards, and digital marketing services in Nairobi, Kenya." />
-  <meta name="keywords" content="web design Nairobi, booking system Kenya, workflow automation, AI chatbot Kenya, M-Pesa integration, digital marketing Kenya, business dashboard" />
-  <meta property="og:site_name" content="Crafted Edge Solutions" />
-  <meta property="og:title" content="Digital Services in Kenya | Web Design, Automation & Marketing" />
-  <meta property="og:description" content="Web design, booking systems, AI chatbots, M-Pesa payments, and digital marketing for businesses in Kenya and Africa." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://craftededgesolutions.africa/services.html" />
-  <meta property="og:image" content="https://craftededgesolutions.africa/og-image.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Digital Services in Kenya | Web Design, Automation & Marketing" />
-  <meta name="twitter:description" content="Web design, booking systems, AI chatbots, M-Pesa payments, and digital marketing for businesses in Kenya." />
-  <meta name="twitter:image" content="https://craftededgesolutions.africa/og-image.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <title>Capabilities — Crafted Edge Solutions</title>
+  <meta name="description" content="What we build: software platforms, AI systems, automation infrastructure, and cloud hosting — engineered end-to-end." />
   <link rel="canonical" href="https://craftededgesolutions.africa/services.html" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-  <style>
-    .services-hero { padding: 140px 5% 80px; position: relative; overflow: hidden; }
-    .services-hero-glow { position:absolute; top:-150px; left:50%; transform:translateX(-50%); width:700px; height:600px; background:radial-gradient(ellipse,rgba(47,125,246,0.1) 0%,transparent 70%); pointer-events:none; }
 
-    .service-detail-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 36px;
-      display: grid;
-      grid-template-columns: 1fr 1.8fr;
-      gap: 36px;
-      align-items: start;
-      transition: border-color 0.25s, background 0.25s;
-      margin-bottom: 20px;
+  <style>
+    .page-hero {
+      padding: 180px 32px 100px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .service-detail-card:hover { border-color: var(--border-hover); background: var(--bg-card-hover); }
+    .page-hero-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
 
-    @media (max-width: 700px) { .service-detail-card { grid-template-columns: 1fr; } }
+    @media (max-width: 800px) {
+      .page-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .page-hero { padding: 130px 32px 60px; }
+    }
 
-    .sdc-left { }
-    .sdc-icon { width: 54px; height: 54px; border-radius: 14px; display:flex; align-items:center; justify-content:center; font-size:1.4rem; margin-bottom:16px; border:1px solid rgba(99,151,255,0.12); }
-    .sdc-left h3 { font-size:1.2rem; margin-bottom:10px; }
-    .sdc-left p { font-size:0.875rem; color:var(--text-secondary); line-height:1.7; font-weight:300; }
-    .sdc-price { margin-top:16px; font-size:0.75rem; color:var(--text-muted); letter-spacing:0.04em; }
-    .sdc-price strong { color:var(--cyan); font-size:0.85rem; }
+    .page-hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.045em;
+      font-weight: 400;
+    }
 
-    .sdc-right { }
-    .sdc-right h4 { font-family:var(--font-display); font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:14px; }
-    .feature-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
-    .feature-list li { display:flex; align-items:flex-start; gap:10px; font-size:0.875rem; color:var(--text-secondary); line-height:1.6; font-weight:300; }
-    .feature-list li::before { content:''; width:16px; height:16px; border-radius:4px; background:rgba(47,125,246,0.15); border:1px solid rgba(47,125,246,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; font-size:0.55rem; color:var(--blue-bright); }
+    .page-hero h1 em { font-style: italic; color: var(--accent); }
 
-    .sdc-tag { display:inline-flex; align-items:center; gap:6px; padding:4px 12px; border-radius:100px; border:1px solid var(--border); font-size:0.7rem; color:var(--text-muted); margin-top:14px; }
+    .page-hero .lead {
+      font-size: 1.1rem;
+      color: var(--fg-mid);
+      max-width: 44ch;
+    }
 
-    .compare-table { width:100%; border-collapse:collapse; margin-top:40px; }
-    .compare-table th { font-family:var(--font-display); font-size:0.75rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); padding:12px 16px; text-align:left; border-bottom:1px solid var(--border); }
-    .compare-table td { padding:12px 16px; font-size:0.875rem; color:var(--text-secondary); border-bottom:1px solid rgba(99,151,255,0.06); font-weight:300; }
-    .compare-table tr:last-child td { border-bottom:none; }
-    .compare-table tr:hover td { background:rgba(255,255,255,0.02); }
-    .chk { color:#4ade80; } .x { color:#f87171; }
+    /* Capability block */
+    .cap-block {
+      padding: 100px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .cap-block-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 100px 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .cap-block-inner { grid-template-columns: 1fr; gap: 32px; }
+      .cap-block { padding: 70px 32px; }
+    }
+
+    .cap-num {
+      font-family: var(--f-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--fg-dim);
+      padding-top: 10px;
+    }
+
+    .cap-block h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .cap-block h2 em { font-style: italic; color: var(--accent); }
+
+    .cap-block .cap-summary {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--fg-mid);
+      margin-bottom: 28px;
+    }
+
+    .cap-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cap-tag {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--fg-mid);
+      padding: 5px 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+    }
+
+    .cap-includes h4 {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 22px;
+      font-weight: 400;
+    }
+
+    .cap-includes ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cap-includes li {
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: var(--fg);
+      display: grid;
+      grid-template-columns: 32px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .cap-includes li:last-child { border-bottom: 1px solid var(--line); }
+
+    .cap-includes .li-num {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      color: var(--fg-dim);
+      padding-top: 4px;
+    }
+
+    .cap-includes li span.it { color: var(--fg-mid); display: block; font-size: 0.86rem; margin-top: 4px; }
+
+    /* ENGAGE */
+    .engage {
+      padding: 120px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .engage-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) { .engage-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    .engage h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+    }
+
+    .engage h2 em { font-style: italic; color: var(--accent); }
+
+    .engage-tiers { display: flex; flex-direction: column; gap: 24px; }
+
+    .tier {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 32px;
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .tier:last-child { border-bottom: 1px solid var(--line); }
+
+    .tier-label {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      padding-top: 4px;
+    }
+
+    .tier h3 {
+      font-family: var(--f-display);
+      font-size: 1.5rem;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .tier p {
+      font-size: 0.92rem;
+      color: var(--fg-mid);
+      line-height: 1.6;
+      max-width: 48ch;
+    }
+
+    /* CTA */
+    #cta-band { padding: 140px 32px; }
+
+    .cta-band-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    @media (max-width: 800px) { .cta-band-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    .cta-band-inner h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      font-weight: 400;
+    }
+    .cta-band-inner h2 em { font-style: italic; color: var(--accent); }
+
+    .cta-band-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 800px) { .cta-band-actions { justify-content: flex-start; } }
   </style>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How much does a website cost in Kenya?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A professional business website from Crafted Edge Solutions starts from KSh 35,000 depending on scope. This includes custom design, mobile-first development, SEO setup, and a content management system. Complex sites with booking, payments, or custom features are quoted after a free discovery call." }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you integrate M-Pesa payments into websites?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We integrate M-Pesa STK Push via the Daraja API for one-time payments, bookings, and recurring subscriptions. We also support card payments via Stripe and Flutterwave." }
-      },
-      {
-        "@type": "Question",
-        "name": "How long does it take to build a website?",
-        "acceptedAnswer": { "@type": "Answer", "text": "A professional website takes 2–4 weeks. Booking systems and client portals take 3–5 weeks. Complex systems with automation, AI, and payments can take 4–8 weeks depending on scope." }
-      },
-      {
-        "@type": "Question",
-        "name": "Can you build an AI chatbot for my business?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We build custom AI assistants trained on your specific products, services, and FAQs. These can be deployed as a website chat widget or integrated with WhatsApp to handle enquiries, qualify leads, and book appointments 24/7." }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you offer digital marketing services?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We offer SEO, Google Ads, Meta Ads (Facebook and Instagram), email marketing campaigns, and social media management — all data-driven and reported monthly." }
-      }
-    ]
-  }
-  </script>
 </head>
 <body>
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
-  <div class="curtain" id="curtain"></div>
 
+  <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">
-      <img src="logo-primary.png" alt="Crafted Edge Solutions" class="nav-logo-img">
-    </a>
+    <a href="index.html" class="nav-mark"><img src="logo.png" alt="Crafted Edge Solutions" class="logo-mark" />Crafted Edge<span>.</span></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html" class="active">Services</a></li>
-      <li><a href="solutions.html">Solutions</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="index.html">Index</a></li>
+      <li><a href="services.html" class="active">Capabilities</a></li>
+      <li><a href="solutions.html">Work</a></li>
+      <li><a href="about.html">Studio</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="https://newsletter.craftededgesolutions.africa" target="_blank" style="color:#4ade80;font-weight:600">Portal ✦</a></li>
-      <li><a href="builder.html" style="color:#c084fc;font-weight:600">Builder ✦</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">Book a Consultation</a>
-    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <a href="contact.html" class="nav-cta">Start a project →</a>
+    <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="services.html" class="active">Services</a>
-    <a href="solutions.html">Solutions</a>
-    <a href="about.html">About</a>
+    <a href="index.html">Index</a>
+    <a href="services.html">Capabilities</a>
+    <a href="solutions.html">Work</a>
+    <a href="about.html">Studio</a>
     <a href="contact.html">Contact</a>
-    <a href="https://newsletter.craftededgesolutions.africa" target="_blank" style="color:#4ade80;font-weight:600">Portal ✦</a>
-    <a href="contact.html" style="color:var(--blue-bright)">→ Book a Consultation</a>
+    <a href="contact.html">→ Start a project</a>
   </div>
 
   <!-- HERO -->
-  <div class="services-hero">
-    <div class="services-hero-glow"></div>
-    <div class="section-inner">
-      <div class="section-label">Services</div>
-      <h1 class="fade-up">Everything your business<br/><span class="accent">needs to operate digitally</span></h1>
-      <p class="fade-up fade-up-1" style="font-size:1.05rem;color:var(--text-secondary);max-width:580px;line-height:1.8;margin-top:18px;font-weight:300">We don't sell you one product. We map out what your business needs and build the right combination of tools that actually solve your problem.</p>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom:32px">— Capabilities</div>
+        <h1>The full<br/>stack your<br/>business <em>runs on.</em></h1>
+      </div>
+      <p class="lead">Every engagement starts in the same place — your business — and ends with a complete operating system built around it. Four core capabilities, composed for what you actually need.</p>
     </div>
-  </div>
+  </section>
 
-  <!-- SERVICE DETAIL CARDS -->
-  <section style="padding:0 5% 100px">
-    <div class="section-inner">
-
-      <div class="service-detail-card">
-        <div class="sdc-left">
-          <div class="sdc-icon icon-blue">🌐</div>
-          <h3>Professional Websites</h3>
-          <p>A website that works as a sales tool, not just a digital brochure. We build fast-loading, SEO-optimised, conversion-focused sites that turn visitors into enquiries.</p>
-          <div class="sdc-tag">🕐 2–4 weeks delivery</div>
-        </div>
-        <div class="sdc-right">
-          <h4>What's included</h4>
-          <ul class="feature-list">
-            <li>Custom design — no templates, no drag-and-drop guesswork</li>
-            <li>Mobile-first, fully responsive across all devices</li>
-            <li>SEO foundations — meta, schema, sitemap, speed optimisation</li>
-            <li>Contact forms, lead capture, and WhatsApp click-to-chat</li>
-            <li>Google Analytics and performance monitoring setup</li>
-            <li>Content Management System (edit your own content)</li>
-            <li>Domain, hosting, and SSL configuration</li>
-          </ul>
+  <!-- CAPABILITIES -->
+  <section class="cap-block">
+    <div class="cap-block-inner">
+      <div class="cap-num">— 01</div>
+      <div>
+        <h2>Software<br/><em>Platforms</em></h2>
+        <p class="cap-summary">Production-grade web platforms, internal tools, and client portals — architected, built, and maintained as one continuous engagement. The system runs your business, and you own the code.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">React · Next.js</span>
+          <span class="cap-tag">Django · FastAPI</span>
+          <span class="cap-tag">Postgres · Supabase</span>
+          <span class="cap-tag">TypeScript</span>
         </div>
       </div>
+      <div class="cap-includes">
+        <h4>— Engagement includes</h4>
+        <ul>
+          <li><span class="li-num">01</span><span>Architecture &amp; data modelling<span class="it">Schema design, API contracts, integration boundaries — defined upfront.</span></span></li>
+          <li><span class="li-num">02</span><span>Custom UI &amp; UX engineering<span class="it">Designed and built for your actual users — not pulled from a template library.</span></span></li>
+          <li><span class="li-num">03</span><span>Authentication &amp; role management<span class="it">Multi-tenant, multi-role, audit-logged — production-ready from launch.</span></span></li>
+          <li><span class="li-num">04</span><span>Integration layer<span class="it">M-Pesa, Stripe, WhatsApp, email — connected to your platform, not bolted on.</span></span></li>
+          <li><span class="li-num">05</span><span>SEO, performance &amp; analytics<span class="it">Built for organic discovery and measured against real metrics.</span></span></li>
+          <li><span class="li-num">06</span><span>Code ownership transferred<span class="it">Repository, infrastructure, and documentation — yours outright.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-      <div class="service-detail-card">
-        <div class="sdc-left">
-          <div class="sdc-icon icon-cyan">📅</div>
-          <h3>Booking &amp; Client Portals</h3>
-          <p>Stop managing appointments over WhatsApp. Give clients a professional self-service experience while you focus on delivering your service.</p>
-          <div class="sdc-tag">🕐 3–5 weeks delivery</div>
-        </div>
-        <div class="sdc-right">
-          <h4>What's included</h4>
-          <ul class="feature-list">
-            <li>Online booking with real-time calendar availability</li>
-            <li>Client intake forms and pre-appointment questionnaires</li>
-            <li>Automated confirmation, reminder, and follow-up emails/SMS</li>
-            <li>Deposit or full payment collection at booking</li>
-            <li>Rescheduling and cancellation self-service</li>
-            <li>Staff scheduling and multi-location support</li>
-            <li>Client portal for session history and invoices</li>
-          </ul>
+  <section class="cap-block">
+    <div class="cap-block-inner">
+      <div class="cap-num">— 02</div>
+      <div>
+        <h2>AI<br/><em>Systems</em></h2>
+        <p class="cap-summary">Conversational agents, document intelligence, and decision-support systems — built on the right stack for your workload, privacy posture, and budget. Not a chatbot bolted onto your site.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">OpenAI · Claude · Groq</span>
+          <span class="cap-tag">Ollama · Local LLMs</span>
+          <span class="cap-tag">MCP Protocol</span>
+          <span class="cap-tag">RAG · Vector Search</span>
         </div>
       </div>
+      <div class="cap-includes">
+        <h4>— Engagement includes</h4>
+        <ul>
+          <li><span class="li-num">01</span><span>Agent design &amp; tool architecture<span class="it">What the agent can do, what it can't, and how it decides — defined deliberately.</span></span></li>
+          <li><span class="li-num">02</span><span>Custom knowledge ingestion<span class="it">Your docs, products, pricing, FAQ — embedded and retrievable.</span></span></li>
+          <li><span class="li-num">03</span><span>Multi-channel deployment<span class="it">Web chat, WhatsApp, email, internal tools — single agent, multiple surfaces.</span></span></li>
+          <li><span class="li-num">04</span><span>Human handoff &amp; escalation<span class="it">Knows when to step aside and route to a real person.</span></span></li>
+          <li><span class="li-num">05</span><span>Local inference option<span class="it">For sensitive data — runs on your hardware, no third-party API calls.</span></span></li>
+          <li><span class="li-num">06</span><span>Observability &amp; cost controls<span class="it">Conversation logs, quality monitoring, hard spend caps.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-      <div class="service-detail-card">
-        <div class="sdc-left">
-          <div class="sdc-icon icon-purple">⚡</div>
-          <h3>Workflow Automation</h3>
-          <p>Every manual task in your business is a cost. We find the repetitive processes and build automations that run themselves — 24/7, without errors.</p>
-          <div class="sdc-tag">🕐 2–4 weeks delivery</div>
-        </div>
-        <div class="sdc-right">
-          <h4>Common automations we build</h4>
-          <ul class="feature-list">
-            <li>Lead follow-up sequences triggered by form submissions</li>
-            <li>Invoice generation and payment reminder workflows</li>
-            <li>Client onboarding — welcome emails, document collection</li>
-            <li>Internal approval workflows for HR, finance, or ops</li>
-            <li>Data sync between your tools (CRM, email, calendar, sheets)</li>
-            <li>WhatsApp and email notification triggers</li>
-            <li>Reporting and weekly summary automation</li>
-          </ul>
+  <section class="cap-block">
+    <div class="cap-block-inner">
+      <div class="cap-num">— 03</div>
+      <div>
+        <h2>Automation<br/>&amp; <em>Integrations</em></h2>
+        <p class="cap-summary">We connect the tools your business already runs on, eliminate the manual handoffs between them, and turn repetitive workflows into self-running systems. The operations layer your team gets back hours from.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">n8n · Make · Zapier</span>
+          <span class="cap-tag">M-Pesa Daraja</span>
+          <span class="cap-tag">WhatsApp Business API</span>
+          <span class="cap-tag">Listmonk · Email</span>
+          <span class="cap-tag">Stripe · Paystack</span>
         </div>
       </div>
+      <div class="cap-includes">
+        <h4>— Engagement includes</h4>
+        <ul>
+          <li><span class="li-num">01</span><span>Workflow mapping &amp; audit<span class="it">Find every manual step in your operations and quantify what it costs.</span></span></li>
+          <li><span class="li-num">02</span><span>Payment infrastructure<span class="it">M-Pesa STK Push, card payments, recurring billing, automated receipts.</span></span></li>
+          <li><span class="li-num">03</span><span>Messaging automation<span class="it">WhatsApp confirmations, reminders, status updates, lead qualification.</span></span></li>
+          <li><span class="li-num">04</span><span>CRM &amp; data sync<span class="it">Your tools talking to each other — leads, contacts, invoices, all in sync.</span></span></li>
+          <li><span class="li-num">05</span><span>Reporting &amp; alerting<span class="it">Weekly automated summaries by email, real-time alerts for anomalies.</span></span></li>
+          <li><span class="li-num">06</span><span>Marketing &amp; broadcast<span class="it">Listmonk-powered email campaigns, subscriber segmentation, deliverability tracking.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-      <div class="service-detail-card">
-        <div class="sdc-left">
-          <div class="sdc-icon icon-orange">🤖</div>
-          <h3>AI Assistants &amp; Chatbots</h3>
-          <p>A 24/7 AI assistant that knows your business, answers client questions, qualifies leads, and books appointments — without any human input.</p>
-          <div class="sdc-tag">🕐 3–6 weeks delivery</div>
-        </div>
-        <div class="sdc-right">
-          <h4>What's included</h4>
-          <ul class="feature-list">
-            <li>AI trained on your specific products, services, and FAQs</li>
-            <li>Website chat widget and/or WhatsApp integration</li>
-            <li>Lead qualification and routing to your CRM</li>
-            <li>Appointment booking directly through the AI</li>
-            <li>Escalation to a human agent when needed</li>
-            <li>Conversation analytics and performance reporting</li>
-            <li>Ongoing training and improvement</li>
-          </ul>
+  <section class="cap-block">
+    <div class="cap-block-inner">
+      <div class="cap-num">— 04</div>
+      <div>
+        <h2>Infrastructure<br/>&amp; <em>Hosting</em></h2>
+        <p class="cap-summary">Cloud and self-hosted infrastructure you actually own — not rented black boxes you can't escape from. Built for predictable costs, real performance, and the ability to leave the vendor without leaving your business behind.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">Linux · Docker · systemd</span>
+          <span class="cap-tag">Cloudflare · Railway · Vercel</span>
+          <span class="cap-tag">Hetzner · DigitalOcean</span>
+          <span class="cap-tag">Postgres · Redis</span>
         </div>
       </div>
+      <div class="cap-includes">
+        <h4>— Engagement includes</h4>
+        <ul>
+          <li><span class="li-num">01</span><span>Architecture &amp; capacity planning<span class="it">Sized for what you need now, scalable to where you're going.</span></span></li>
+          <li><span class="li-num">02</span><span>Self-hosted setup<span class="it">Linux servers, Docker, systemd services — for control and cost ceilings.</span></span></li>
+          <li><span class="li-num">03</span><span>Managed cloud setup<span class="it">When self-host is overkill — Vercel, Railway, Cloudflare Pages.</span></span></li>
+          <li><span class="li-num">04</span><span>Monitoring &amp; alerting<span class="it">Uptime, errors, performance — you find out before your customers do.</span></span></li>
+          <li><span class="li-num">05</span><span>Backups &amp; disaster recovery<span class="it">Daily encrypted backups, tested restore procedures.</span></span></li>
+          <li><span class="li-num">06</span><span>Security &amp; SSL<span class="it">SSL, firewalls, secrets management, principle of least privilege.</span></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-      <div class="service-detail-card">
-        <div class="sdc-left">
-          <div class="sdc-icon icon-green">💳</div>
-          <h3>Payment &amp; Subscription Systems</h3>
-          <p>Accept M-Pesa, cards, and recurring payments through a seamless checkout experience — with full tracking, automated receipts, and financial reporting.</p>
-          <div class="sdc-tag">🕐 2–4 weeks delivery</div>
+  <!-- HOW WE ENGAGE -->
+  <section class="engage">
+    <div class="engage-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom:24px">— Engagement</div>
+        <h2>Three ways<br/>to <em>work together.</em></h2>
+      </div>
+      <div class="engage-tiers">
+        <div class="tier">
+          <div class="tier-label">— 01 / Project</div>
+          <div>
+            <h3>Defined scope, fixed outcome.</h3>
+            <p>A clearly-scoped piece of work — a platform, an AI system, an integration. Fixed timeline, fixed price, fixed deliverables. Best when you know exactly what needs to be built.</p>
+          </div>
         </div>
-        <div class="sdc-right">
-          <h4>What's included</h4>
-          <ul class="feature-list">
-            <li>M-Pesa STK Push (Daraja API) integration</li>
-            <li>Card payments via Stripe or Flutterwave</li>
-            <li>Subscription and recurring billing management</li>
-            <li>Automated receipts, invoices, and payment confirmations</li>
-            <li>Failed payment retry logic and dunning management</li>
-            <li>Financial dashboard — revenue, transactions, refunds</li>
-            <li>Multi-currency support for international clients</li>
-          </ul>
+        <div class="tier">
+          <div class="tier-label">— 02 / Retainer</div>
+          <div>
+            <h3>Ongoing engineering partnership.</h3>
+            <p>Monthly engagement — design, build, maintain, improve. We become an extension of your team for as long as it makes sense. Best for businesses that need a continuous technical edge.</p>
+          </div>
+        </div>
+        <div class="tier">
+          <div class="tier-label">— 03 / Discovery</div>
+          <div>
+            <h3>30-minute strategy call.</h3>
+            <p>Not sure where to start? Book a free discovery call. We'll listen, ask the right questions, and tell you exactly what to build first — even if it's not with us.</p>
+          </div>
         </div>
       </div>
-
-      <div class="service-detail-card">
-        <div class="sdc-left">
-          <div class="sdc-icon icon-pink">📊</div>
-          <h3>Dashboards &amp; Reporting</h3>
-          <p>Make decisions from data, not gut feeling. We build real-time dashboards that pull data from across your tools into one clear view.</p>
-          <div class="sdc-tag">🕐 3–5 weeks delivery</div>
-        </div>
-        <div class="sdc-right">
-          <h4>What's included</h4>
-          <ul class="feature-list">
-            <li>Custom dashboard built around your KPIs and metrics</li>
-            <li>Real-time data from multiple sources (POS, bookings, CRM, ads)</li>
-            <li>Team performance and activity tracking</li>
-            <li>Automated weekly/monthly reports by email</li>
-            <li>Revenue forecasting and trend analysis</li>
-            <li>Role-based access — different views for different team members</li>
-            <li>Mobile-friendly — check your numbers from anywhere</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="service-detail-card">
-        <div class="sdc-left">
-          <div class="sdc-icon icon-teal">✉️</div>
-          <h3>Managed Email Marketing</h3>
-          <p>Don't just send emails; build a community. We set up and manage high-performance newsletter systems that keep your brand top-of-mind and drive recurring revenue.</p>
-          <div class="sdc-tag">🕐 Ongoing retainer or project basis</div>
-        </div>
-        <div class="sdc-right">
-          <h4>What's included</h4>
-          <ul class="feature-list">
-            <li>Listmonk setup and hosting — your own private, high-speed newsletter platform</li>
-            <li>Custom newsletter template design matching your brand identity</li>
-            <li>Automated welcome sequences and lead nurturing drip campaigns</li>
-            <li>Audience segmentation for targeted, high-conversion messaging</li>
-            <li>A/B testing of subject lines and content for maximum engagement</li>
-            <li>Detailed analytics — open rates, click-throughs, and conversion tracking</li>
-            <li>Compliance management (GDPR/CAN-SPAM) and list hygiene</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
   </section>
 
   <!-- CTA -->
-  <div class="cta-band">
-    <div class="cta-band-glow"></div>
+  <section id="cta-band">
     <div class="cta-band-inner">
-      <div class="section-label" style="justify-content:center">Let's Talk</div>
-      <h2>Not sure which services you need?</h2>
-      <p>Book a free 30-minute discovery call. We'll listen to your business and tell you exactly what to build — and in what order.</p>
+      <h2>Have something<br/>serious to build? <em>Let's talk.</em></h2>
       <div class="cta-band-actions">
-        <a href="contact.html" class="btn-primary" style="padding:15px 34px;font-size:1rem">Book a Free Call</a>
-        <a href="solutions.html" class="btn-secondary" style="padding:15px 28px;font-size:1rem">See our solutions →</a>
+        <a href="contact.html" class="btn btn-primary">Start a project →</a>
+        <a href="solutions.html" class="btn btn-secondary">See selected work</a>
       </div>
     </div>
-  </div>
+  </section>
 
+  <!-- FOOTER -->
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo" style="margin-bottom: 20px;">
-          <img src="logo-primary.png" alt="Crafted Edge Solutions" class="nav-logo-img">
-        </a>
-        <p>Practical software systems for businesses ready to move beyond manual work. Nairobi, Kenya.</p>
+        <div class="nav-mark"><img src="logo.png" alt="Crafted Edge Solutions" class="logo-mark" />Crafted Edge<span>.</span></div>
+        <p>A product engineering studio building software, AI systems, and infrastructure for ambitious businesses.</p>
         <div class="footer-contact">
-          <a href="mailto:admin@craftededgesolutions.africa">admin@craftededgesolutions.africa</a>
+          <a href="mailto:hello@craftededgesolutions.africa">hello@craftededgesolutions.africa</a>
           <a href="tel:+254769071925">+254 769 071 925</a>
         </div>
       </div>
-      <div class="footer-col"><h5>Services</h5><ul><li><a href="services.html">Professional Websites</a></li><li><a href="services.html">Booking Systems</a></li><li><a href="services.html">Workflow Automation</a></li><li><a href="services.html">AI Assistants</a></li><li><a href="services.html">Payment Systems</a></li><li><a href="services.html">Managed Newsletters</a></li><li><a href="services.html">Digital Marketing</a></li></ul></div>
-      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="solutions.html">Fitness &amp; Wellness</a></li><li><a href="solutions.html">Service Businesses</a></li><li><a href="solutions.html">E-commerce</a></li><li><a href="solutions.html">Admin Dashboards</a></li><li><a href="solutions.html">WhatsApp Automation</a></li><li><a href="solutions.html">AI Concierge</a></li></ul></div>
-      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="about.html">Our Process</a></li><li><a href="contact.html">Contact</a></li><li><a href="https://newsletter.craftededgesolutions.africa" target="_blank">Client Portal</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+      <div class="footer-col"><h5>— Studio</h5><ul><li><a href="about.html">About</a></li><li><a href="about.html#process">Process</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>— Capabilities</h5><ul><li><a href="services.html">Software</a></li><li><a href="services.html">AI Systems</a></li><li><a href="services.html">Automation</a></li><li><a href="services.html">Infrastructure</a></li></ul></div>
+      <div class="footer-col"><h5>— Elsewhere</h5><ul><li><a href="https://meshack.craftededgesolutions.africa" target="_blank">Founder</a></li><li><a href="https://github.com/Crafted-Edge-Solutions" target="_blank">GitHub</a></li><li><a href="#">Privacy</a></li></ul></div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Crafted Edge Solutions. All rights reserved.</p>
-      <div class="footer-tags"><span class="footer-tag">Software</span><span class="footer-tag">Automation</span><span class="footer-tag">AI</span><span class="footer-tag">Nairobi, Kenya</span></div>
+      <p>© 2026 Crafted Edge Solutions</p>
+      <p>Nairobi · EAT · Operating globally</p>
     </div>
   </footer>
 
-  <a href="https://wa.me/254769071925" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
 
-  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 700, once: true, offset: 80 });</script>
-  <script src="main.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis/dist/lenis.min.js"></script>
+  <!-- Motion layer -->
+  <script src="motion.js"></script>
 </body>
 </html>

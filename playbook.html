@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Playbook — Crafted Edge</title>
+  <meta name="description" content="The principles behind our design work — transferable across brand, palette, and platform." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ===== PLAYBOOK STRUCTURE ===== */
+    .pb-hero {
+      padding: 180px 32px 100px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pb-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pb-hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(2.8rem, 7vw, 6.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.045em;
+      font-weight: 400;
+      margin-top: 28px;
+      margin-bottom: 36px;
+    }
+    .pb-hero h1 em { font-style: italic; color: var(--accent); }
+
+    .pb-hero .lead {
+      font-size: 1.2rem;
+      line-height: 1.65;
+      color: var(--fg-mid);
+      max-width: 56ch;
+    }
+
+    .pb-hero .meta-row {
+      display: flex;
+      gap: 32px;
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .pb-hero .meta-item {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+
+    .pb-hero .meta-item strong {
+      color: var(--fg);
+      font-weight: 400;
+      display: block;
+      margin-top: 6px;
+    }
+
+    /* ===== PRINCIPLE BLOCKS ===== */
+    .principle {
+      padding: 100px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .principle-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 64px;
+    }
+
+    @media (max-width: 800px) {
+      .principle-inner { grid-template-columns: 1fr; gap: 24px; }
+      .principle { padding: 64px 32px; }
+    }
+
+    .principle-num {
+      font-family: var(--f-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--fg-dim);
+      padding-top: 8px;
+    }
+
+    .principle-title {
+      font-family: var(--f-display);
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+    .principle-title em { font-style: italic; color: var(--accent); }
+
+    .principle-body {
+      max-width: 60ch;
+    }
+
+    .principle-body p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--fg-mid);
+      margin-bottom: 18px;
+    }
+
+    .principle-body p:last-child { margin-bottom: 0; }
+    .principle-body strong { color: var(--fg); font-weight: 500; }
+
+    /* ===== CONTRAST PAIR ===== */
+    .pair {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    @media (max-width: 600px) { .pair { grid-template-columns: 1fr; } }
+
+    .pair-cell {
+      padding: 22px 26px;
+      border-right: 1px solid var(--line);
+    }
+    .pair-cell:last-child { border-right: none; }
+
+    @media (max-width: 600px) {
+      .pair-cell { border-right: none; border-bottom: 1px solid var(--line); }
+      .pair-cell:last-child { border-bottom: none; }
+    }
+
+    .pair-label {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .pair-label.bad { color: #d56b5b; }
+    .pair-label.good { color: var(--accent); }
+
+    .pair-content {
+      font-size: 0.95rem;
+      color: var(--fg);
+      line-height: 1.55;
+    }
+
+    .pair-content.muted { color: var(--fg-mid); font-size: 0.88rem; }
+
+    /* ===== ADAPTATION BAND ===== */
+    .adapt {
+      padding: 100px 32px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.014);
+    }
+
+    .adapt-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .adapt-head {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 64px;
+      align-items: end;
+      margin-bottom: 56px;
+    }
+
+    @media (max-width: 800px) { .adapt-head { grid-template-columns: 1fr; gap: 24px; } }
+
+    .adapt-head h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+    }
+    .adapt-head h2 em { font-style: italic; color: var(--accent); }
+    .adapt-head .lead { color: var(--fg-mid); }
+
+    .adapt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    @media (max-width: 700px) { .adapt-grid { grid-template-columns: 1fr; } }
+
+    .adapt-cell {
+      padding: 32px 28px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .adapt-cell h4 {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .adapt-cell .ces, .adapt-cell .wellness {
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .adapt-cell .ces {
+      background: rgba(232, 146, 64, 0.08);
+      border: 1px solid rgba(232, 146, 64, 0.2);
+      color: var(--fg);
+    }
+
+    .adapt-cell .wellness {
+      background: rgba(122, 148, 114, 0.08);
+      border: 1px solid rgba(122, 148, 114, 0.25);
+      color: var(--fg);
+    }
+
+    .adapt-cell .lbl {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    /* ===== IMPLEMENTATION ===== */
+    .impl {
+      padding: 100px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .impl-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) { .impl-inner { grid-template-columns: 1fr; gap: 32px; } }
+
+    .impl h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+    }
+    .impl h2 em { font-style: italic; color: var(--accent); }
+
+    .impl-list { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+    .impl-item {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+    }
+    .impl-item:last-child { border-bottom: 1px solid var(--line); }
+
+    .impl-item h4 {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+
+    .impl-item p {
+      font-size: 0.96rem;
+      line-height: 1.65;
+      color: var(--fg-mid);
+    }
+
+    .impl-item code {
+      font-family: var(--f-mono);
+      font-size: 0.85rem;
+      background: rgba(255,255,255,0.04);
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: var(--fg);
+      border: 1px solid var(--line);
+    }
+
+    /* ===== TOKEN COMPARISON ===== */
+    .tokens-section {
+      padding: 100px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tokens-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .tokens-section h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+      max-width: 18ch;
+      margin: 16px 0 56px;
+    }
+    .tokens-section h2 em { font-style: italic; color: var(--accent); }
+
+    .tokens-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    @media (max-width: 800px) { .tokens-grid { grid-template-columns: 1fr; } }
+
+    .token-card {
+      border: 1px solid var(--line-strong);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .token-card-head {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line-strong);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .token-card.ces .token-card-head { background: rgba(232,146,64,0.08); }
+    .token-card.wellness .token-card-head { background: rgba(122,148,114,0.08); }
+
+    .token-card-head h3 {
+      font-family: var(--f-display);
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      font-weight: 400;
+    }
+
+    .token-card-head .badge {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-mid);
+    }
+
+    .token-body { padding: 24px; }
+
+    .token-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+    }
+    .token-row:last-child { border-bottom: none; }
+
+    .token-row .key {
+      font-family: var(--f-mono);
+      font-size: 0.75rem;
+      color: var(--fg-dim);
+      letter-spacing: 0.04em;
+    }
+
+    .token-row .val {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--fg);
+    }
+
+    .swatch {
+      width: 22px; height: 22px;
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    /* ===== CTA ===== */
+    .pb-cta {
+      padding: 140px 32px;
+    }
+
+    .pb-cta-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    @media (max-width: 800px) { .pb-cta-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    .pb-cta h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      font-weight: 400;
+    }
+    .pb-cta h2 em { font-style: italic; color: var(--accent); }
+
+    .pb-cta-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 800px) { .pb-cta-actions { justify-content: flex-start; } }
+
+    /* TOC / Index */
+    .toc {
+      padding: 80px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+    .toc-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    @media (max-width: 800px) { .toc-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .toc-grid { grid-template-columns: 1fr; } }
+    .toc-cell {
+      padding: 22px 24px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background 0.2s;
+    }
+    .toc-cell:hover { background: rgba(255,255,255,0.02); }
+    .toc-cell .num { font-family: var(--f-mono); font-size: 0.7rem; color: var(--fg-dim); letter-spacing: 0.08em; margin-bottom: 8px; }
+    .toc-cell .title { font-family: var(--f-display); font-size: 1.1rem; letter-spacing: -0.01em; line-height: 1.15; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-mark"><img src="logo.png" alt="Crafted Edge Solutions" class="logo-mark" />Crafted Edge<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Index</a></li>
+      <li><a href="services.html">Capabilities</a></li>
+      <li><a href="solutions.html">Work</a></li>
+      <li><a href="about.html">Studio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Start a project →</a>
+    <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Index</a>
+    <a href="services.html">Capabilities</a>
+    <a href="solutions.html">Work</a>
+    <a href="about.html">Studio</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html">→ Start a project</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="pb-hero">
+    <div class="pb-hero-inner">
+      <div class="eyebrow">— Internal Document · v1.0</div>
+      <h1>Design <em>Playbook.</em><br/>How we make<br/>websites feel premium.</h1>
+      <p class="lead">A transferable set of principles — not templates — that we apply across every brand we work on. The same ideology that shapes craftededgesolutions.africa can produce a completely different result for a wellness brand, a fintech, or a law firm. The DNA travels; the surface adapts.</p>
+
+      <div class="meta-row">
+        <div class="meta-item">— Author<strong>Crafted Edge Studio</strong></div>
+        <div class="meta-item">— Use case<strong>Internal &amp; client work</strong></div>
+        <div class="meta-item">— Stack-agnostic<strong>HTML · Wagtail · Next.js · WP</strong></div>
+        <div class="meta-item">— Status<strong>Living document</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDEX -->
+  <section class="toc">
+    <div class="toc-inner">
+      <div class="eyebrow" style="margin-bottom:24px">— The principles</div>
+      <div class="toc-grid">
+        <a href="#p1" class="toc-cell"><div class="num">— 01</div><div class="title">Lead with capability, not geography.</div></a>
+        <a href="#p2" class="toc-cell"><div class="num">— 02</div><div class="title">One brand, one accent.</div></a>
+        <a href="#p3" class="toc-cell"><div class="num">— 03</div><div class="title">Editorial scale.</div></a>
+        <a href="#p4" class="toc-cell"><div class="num">— 04</div><div class="title">Three type families, three roles.</div></a>
+        <a href="#p5" class="toc-cell"><div class="num">— 05</div><div class="title">Numbers, not icons.</div></a>
+        <a href="#p6" class="toc-cell"><div class="num">— 06</div><div class="title">Borders over cards.</div></a>
+        <a href="#p7" class="toc-cell"><div class="num">— 07</div><div class="title">Frame positively.</div></a>
+        <a href="#p8" class="toc-cell"><div class="num">— 08</div><div class="title">Motion with restraint.</div></a>
+        <a href="#p9" class="toc-cell"><div class="num">— 09</div><div class="title">Hierarchy through spacing.</div></a>
+        <a href="#p10" class="toc-cell"><div class="num">— 10</div><div class="title">Earn every element.</div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 01 -->
+  <section class="principle" id="p1">
+    <div class="principle-inner">
+      <div class="principle-num">— 01</div>
+      <div>
+        <h2 class="principle-title">Lead with capability, <em>not geography.</em></h2>
+        <div class="principle-body">
+          <p>Where you're based goes near the bottom — not the headline. Strong positioning anchors the reader in <strong>what you do</strong> before locating where you are.</p>
+          <p>This isn't about hiding origin. It's about ordering perception correctly. Reader thinks "what can they do for me?" before "where are they?" — every time.</p>
+          <div class="pair">
+            <div class="pair-cell">
+              <div class="pair-label bad">— Defensive</div>
+              <div class="pair-content muted">"Nairobi-based technology consultancy offering end-to-end solutions for businesses across Africa."</div>
+            </div>
+            <div class="pair-cell">
+              <div class="pair-label good">— Confident</div>
+              <div class="pair-content">"A product engineering studio building software, AI systems, and infrastructure. Operating globally. Built in East Africa."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 02 -->
+  <section class="principle" id="p2">
+    <div class="principle-inner">
+      <div class="principle-num">— 02</div>
+      <div>
+        <h2 class="principle-title">One brand. <em>One accent.</em></h2>
+        <div class="principle-body">
+          <p>Every premium brand commits to <strong>one accent colour</strong> and uses it sparingly — for emphasis, status, and the occasional italic. Everything else lives in a monochrome family: one neutral, three text tones, two surface tones, two line tones.</p>
+          <p>The accent is a highlighter, not a paint roller. Used 4–6 times per page, max. The eye is drawn exactly where you want it.</p>
+          <p>Wellness brands choose sage or terracotta. Fintech picks one electric blue. We picked the orange in our logo. Same principle — different colour.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 03 -->
+  <section class="principle" id="p3">
+    <div class="principle-inner">
+      <div class="principle-num">— 03</div>
+      <div>
+        <h2 class="principle-title">Editorial <em>scale.</em></h2>
+        <div class="principle-body">
+          <p>Hero text breaks past 6rem. Section heads land at 3–4rem. Body sits at 1rem. The leap between display and body is intentional — it's what makes the page feel like a magazine, not a brochure.</p>
+          <p>Small type is fine in service of large type. Mono labels at 0.7rem read as captions when the heading above them is at 4rem. The ratio is the rhythm.</p>
+          <p><strong>Rule:</strong> if your h1 looks like your h2, both are wrong.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 04 -->
+  <section class="principle" id="p4">
+    <div class="principle-inner">
+      <div class="principle-num">— 04</div>
+      <div>
+        <h2 class="principle-title">Three type families.<br/><em>Three roles.</em></h2>
+        <div class="principle-body">
+          <p>The system is always three voices:</p>
+          <div class="pair" style="grid-template-columns: 1fr 1fr 1fr; margin-top: 14px;">
+            <div class="pair-cell">
+              <div class="pair-label good">— Display</div>
+              <div class="pair-content" style="font-family:var(--f-display);font-size:1.4rem;letter-spacing:-0.02em">Serif. Editorial.</div>
+              <div class="pair-content muted" style="margin-top:6px;font-size:0.78rem">Heads, hero, italic emphasis. Instrument Serif here. Fraunces / Cormorant elsewhere.</div>
+            </div>
+            <div class="pair-cell">
+              <div class="pair-label good">— Body</div>
+              <div class="pair-content" style="font-size:1.05rem">Sans. Neutral. Inter.</div>
+              <div class="pair-content muted" style="margin-top:6px;font-size:0.78rem">Paragraphs, descriptions. Should disappear. Inter, DM Sans, Geist all work.</div>
+            </div>
+            <div class="pair-cell">
+              <div class="pair-label good">— Label</div>
+              <div class="pair-content mono" style="font-family:var(--f-mono);font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase">— Mono. Caps.</div>
+              <div class="pair-content muted" style="margin-top:6px;font-size:0.78rem">Eyebrows, stat labels, nav, status. Adds technical texture.</div>
+            </div>
+          </div>
+          <p style="margin-top:18px">Each one has a job. Don't make body do display work, don't make mono do body work.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 05 -->
+  <section class="principle" id="p5">
+    <div class="principle-inner">
+      <div class="principle-num">— 05</div>
+      <div>
+        <h2 class="principle-title">Numbers. <em>Not icons.</em></h2>
+        <div class="principle-body">
+          <p>Numbered sections (<code style="font-family:var(--f-mono);font-size:0.85rem;background:rgba(255,255,255,0.04);padding:2px 8px;border-radius:4px">— 01</code>, <code style="font-family:var(--f-mono);font-size:0.85rem;background:rgba(255,255,255,0.04);padding:2px 8px;border-radius:4px">— 02</code>) signal order, hierarchy, and seriousness. Icons signal mood. Most B2B work needs the former and gets sabotaged by the latter.</p>
+          <p>Emoji feel cheerful. Coloured icons feel templated. Numbers feel like a document — something considered. Whoever is reading came for substance; give them structure.</p>
+          <p><strong>Exception:</strong> when the brand IS playful (a kids' product, a creative agency, a music app), icons earn their place. For anything that wants to feel like infrastructure, premium service, or professional craft — use numbers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 06 -->
+  <section class="principle" id="p6">
+    <div class="principle-inner">
+      <div class="principle-num">— 06</div>
+      <div>
+        <h2 class="principle-title">Borders over <em>cards.</em></h2>
+        <div class="principle-body">
+          <p>Most websites use raised cards (drop shadow, rounded corner, background colour) to group content. That instinct is correct but the execution is heavy. <strong>Lines do the same job with one-tenth the visual weight.</strong></p>
+          <p>A 1px line between cells reads as a grid. A floating card with shadow reads as a Bootstrap site. Same hierarchy, completely different feel.</p>
+          <p>Use cards sparingly — only when content needs to be lifted (a CTA, a form, a quote). Everything else: lines.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 07 -->
+  <section class="principle" id="p7">
+    <div class="principle-inner">
+      <div class="principle-num">— 07</div>
+      <div>
+        <h2 class="principle-title">Frame <em>positively.</em></h2>
+        <div class="principle-body">
+          <p>Telling readers what you're <em>not</em> still anchors them on the thing you don't want them thinking about. The brain registers "we don't do generic agency work" as "agency work" — then "not". You've made them think about agency work.</p>
+          <p>Lead with the affirmative. Let the reader infer the contrast.</p>
+          <div class="pair">
+            <div class="pair-cell">
+              <div class="pair-label bad">— Negative anchor</div>
+              <div class="pair-content muted">"We don't sell you one product. We map out what your business needs and build the right combination of tools that actually solve your problem."</div>
+            </div>
+            <div class="pair-cell">
+              <div class="pair-label good">— Positive frame</div>
+              <div class="pair-content">"Every engagement starts in the same place — your business — and ends with a complete operating system built around it."</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 08 -->
+  <section class="principle" id="p8">
+    <div class="principle-inner">
+      <div class="principle-num">— 08</div>
+      <div>
+        <h2 class="principle-title">Motion with <em>restraint.</em></h2>
+        <div class="principle-body">
+          <p>Smooth scroll, fade-ups, hero reveals, magnetic buttons, soft cursor — all of these add a sense of being made by people. But they only work when used <strong>once per page section, no more</strong>. Motion fatigues fast.</p>
+          <p>The rules:</p>
+          <ul style="list-style:none;padding-left:0;margin-top:14px">
+            <li style="padding:10px 0;border-top:1px solid var(--line);color:var(--fg-mid);font-size:0.95rem">— Animations should feel like a fade, not a performance.</li>
+            <li style="padding:10px 0;border-top:1px solid var(--line);color:var(--fg-mid);font-size:0.95rem">— Easing matters more than duration. Use <code style="font-family:var(--f-mono);font-size:0.82rem;background:rgba(255,255,255,0.04);padding:2px 7px;border-radius:4px">cubic-bezier(0.22, 1, 0.36, 1)</code> for almost everything.</li>
+            <li style="padding:10px 0;border-top:1px solid var(--line);color:var(--fg-mid);font-size:0.95rem">— Honor <code style="font-family:var(--f-mono);font-size:0.82rem;background:rgba(255,255,255,0.04);padding:2px 7px;border-radius:4px">prefers-reduced-motion</code>. Always.</li>
+            <li style="padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);color:var(--fg-mid);font-size:0.95rem">— If you can't tell whether motion is needed, it isn't.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 09 -->
+  <section class="principle" id="p9">
+    <div class="principle-inner">
+      <div class="principle-num">— 09</div>
+      <div>
+        <h2 class="principle-title">Hierarchy through <em>spacing.</em></h2>
+        <div class="principle-body">
+          <p>Generous space tells the reader "this matters, slow down." Compressed space says "form filling, get through it fast." Most websites are too dense because designers fear empty space.</p>
+          <p><strong>Our defaults:</strong> sections breathe at 100–160px vertical padding. Between heading and body: 24px. Between sub-points: 18px. Inside a card: 24–32px. Outside on mobile: 22–32px. Outside on desktop: 32–48px.</p>
+          <p>White (or dark) space is content. It's saying something. Use it deliberately.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLE 10 -->
+  <section class="principle" id="p10">
+    <div class="principle-inner">
+      <div class="principle-num">— 10</div>
+      <div>
+        <h2 class="principle-title">Earn <em>every element.</em></h2>
+        <div class="principle-body">
+          <p>The hardest principle to follow. Most websites are bloated because every team member added "one more thing" — an FAQ section, a testimonials row, a coming-soon banner, a newsletter strip. Each one diluted the page.</p>
+          <p>Before any element ships, ask: <strong>"What does this earn?"</strong> If the answer is "it fills space," cut it. A page with five things that matter is more valuable than ten things that almost matter.</p>
+          <p>This is why this playbook has ten principles and not fifty. Most rules are nuance under these ten.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADAPTATION SECTION -->
+  <section class="adapt">
+    <div class="adapt-inner">
+      <div class="adapt-head">
+        <div>
+          <div class="eyebrow" style="margin-bottom:20px">— Adaptation</div>
+          <h2>Same DNA.<br/><em>Different brand.</em></h2>
+        </div>
+        <p class="lead">How the same ten principles produce two completely different sites — one for a software studio, one for a wellness brand. The execution shifts. The discipline doesn't.</p>
+      </div>
+
+      <div class="adapt-grid">
+
+        <div class="adapt-cell">
+          <h4>— Background</h4>
+          <div class="ces"><span class="lbl">Crafted Edge</span>Warm near-black <code>#0a0a0b</code> — engineered, focused, premium-tech</div>
+          <div class="wellness"><span class="lbl">Wellness Solutions</span>Warm cream <code>#f5f1ea</code> — calm, natural, grounded</div>
+        </div>
+
+        <div class="adapt-cell">
+          <h4>— Accent</h4>
+          <div class="ces"><span class="lbl">Crafted Edge</span>Logo orange <code>#e89240</code> — warm, alive, but technical</div>
+          <div class="wellness"><span class="lbl">Wellness Solutions</span>Sage green <code>#7a9472</code> or terracotta <code>#c87560</code></div>
+        </div>
+
+        <div class="adapt-cell">
+          <h4>— Display type</h4>
+          <div class="ces"><span class="lbl">Crafted Edge</span>Instrument Serif — sharp, modern, editorial</div>
+          <div class="wellness"><span class="lbl">Wellness Solutions</span>Fraunces or Cormorant Infant — soft serif, classical</div>
+        </div>
+
+        <div class="adapt-cell">
+          <h4>— Body type</h4>
+          <div class="ces"><span class="lbl">Crafted Edge</span>Inter — clean, technical, neutral</div>
+          <div class="wellness"><span class="lbl">Wellness Solutions</span>DM Sans or Outfit — round, warm, human</div>
+        </div>
+
+        <div class="adapt-cell">
+          <h4>— Photography</h4>
+          <div class="ces"><span class="lbl">Crafted Edge</span>None — pure typography, no imagery. The work is the demo.</div>
+          <div class="wellness"><span class="lbl">Wellness Solutions</span>Editorial photography of practitioners, light-filled rooms, hands, plants. Imagery is the brand.</div>
+        </div>
+
+        <div class="adapt-cell">
+          <h4>— Pace</h4>
+          <div class="ces"><span class="lbl">Crafted Edge</span>Quick, sharp transitions. Smooth scroll but tight reveals.</div>
+          <div class="wellness"><span class="lbl">Wellness Solutions</span>Slower easing. Longer holds. The site should feel like breath.</div>
+        </div>
+
+        <div class="adapt-cell">
+          <h4>— Copy voice</h4>
+          <div class="ces"><span class="lbl">Crafted Edge</span>Direct, opinionated, technical. "Engineering that ships."</div>
+          <div class="wellness"><span class="lbl">Wellness Solutions</span>Warm, considered, sensory. "Care that's actually felt."</div>
+        </div>
+
+        <div class="adapt-cell">
+          <h4>— What stays the same</h4>
+          <div class="ces"><span class="lbl">Both sites</span>Numbered sections. Em-dash eyebrows. Three type families. One accent. Editorial scale. Borders over cards. Positive framing. Generous space.</div>
+          <div class="wellness" style="background:rgba(232,146,64,0.06);border-color:rgba(232,146,64,0.2)"><span class="lbl">↑ The DNA</span>That's the playbook.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TOKEN SYSTEMS -->
+  <section class="tokens-section">
+    <div class="tokens-inner">
+      <div class="eyebrow">— Token systems</div>
+      <h2>Two palettes.<br/><em>Same structure.</em></h2>
+
+      <div class="tokens-grid">
+
+        <div class="token-card ces">
+          <div class="token-card-head">
+            <h3>Crafted Edge</h3>
+            <span class="badge">Dark · Tech</span>
+          </div>
+          <div class="token-body">
+            <div class="token-row"><div class="key">--bg</div><div class="val"><div class="swatch" style="background:#0a0a0b"></div>#0a0a0b</div></div>
+            <div class="token-row"><div class="key">--bg-card</div><div class="val"><div class="swatch" style="background:#131316"></div>#131316</div></div>
+            <div class="token-row"><div class="key">--fg</div><div class="val"><div class="swatch" style="background:#f4f4ef"></div>#f4f4ef</div></div>
+            <div class="token-row"><div class="key">--fg-mid</div><div class="val"><div class="swatch" style="background:#a8a8a3"></div>#a8a8a3</div></div>
+            <div class="token-row"><div class="key">--accent</div><div class="val"><div class="swatch" style="background:#e89240"></div>#e89240</div></div>
+            <div class="token-row"><div class="key">--line</div><div class="val"><div class="swatch" style="background:rgba(245,245,240,0.07);border:1px solid var(--line-strong)"></div>rgba(245,245,240,0.07)</div></div>
+          </div>
+        </div>
+
+        <div class="token-card wellness">
+          <div class="token-card-head">
+            <h3>Wellness Solutions</h3>
+            <span class="badge">Light · Natural</span>
+          </div>
+          <div class="token-body">
+            <div class="token-row"><div class="key">--bg</div><div class="val"><div class="swatch" style="background:#f5f1ea"></div>#f5f1ea</div></div>
+            <div class="token-row"><div class="key">--bg-card</div><div class="val"><div class="swatch" style="background:#ece7dd"></div>#ece7dd</div></div>
+            <div class="token-row"><div class="key">--fg</div><div class="val"><div class="swatch" style="background:#2a2620"></div>#2a2620</div></div>
+            <div class="token-row"><div class="key">--fg-mid</div><div class="val"><div class="swatch" style="background:#6a6356"></div>#6a6356</div></div>
+            <div class="token-row"><div class="key">--accent</div><div class="val"><div class="swatch" style="background:#7a9472"></div>#7a9472</div></div>
+            <div class="token-row"><div class="key">--line</div><div class="val"><div class="swatch" style="background:rgba(42,38,32,0.12);border:1px solid var(--line-strong)"></div>rgba(42,38,32,0.12)</div></div>
+          </div>
+        </div>
+
+      </div>
+
+      <p style="margin-top:32px;font-size:0.9rem;color:var(--fg-mid);line-height:1.65;max-width:60ch">Notice: the <strong style="color:var(--fg)">variable names are identical</strong>. <code style="font-family:var(--f-mono);font-size:0.82rem;background:rgba(255,255,255,0.04);padding:2px 7px;border-radius:4px">--bg</code>, <code style="font-family:var(--f-mono);font-size:0.82rem;background:rgba(255,255,255,0.04);padding:2px 7px;border-radius:4px">--fg</code>, <code style="font-family:var(--f-mono);font-size:0.82rem;background:rgba(255,255,255,0.04);padding:2px 7px;border-radius:4px">--accent</code>, <code style="font-family:var(--f-mono);font-size:0.82rem;background:rgba(255,255,255,0.04);padding:2px 7px;border-radius:4px">--line</code>. Only the values change. That's how the same component library produces different brands.</p>
+    </div>
+  </section>
+
+  <!-- WAGTAIL IMPLEMENTATION -->
+  <section class="impl">
+    <div class="impl-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px">— Implementation</div>
+        <h2>Wagtail<br/>+ Django<br/><em>specifics.</em></h2>
+      </div>
+      <div>
+        <ul class="impl-list">
+
+          <li class="impl-item">
+            <h4>— 01 · Lock the palette in <code>base.html</code></h4>
+            <p>Define CSS custom properties at <code>:root</code> in your base template. Every page extends from this. The CMS shouldn't be able to override colours — that's how brand consistency dies.</p>
+          </li>
+
+          <li class="impl-item">
+            <h4>— 02 · Build StreamField blocks that enforce the system</h4>
+            <p>Don't give editors a <code>RichTextBlock</code> with full HTML access. Build typed blocks: <code>HeroBlock</code>, <code>NumberedListBlock</code>, <code>StatGridBlock</code>, <code>PullQuoteBlock</code>. Each one renders to the design system. Editors can't break the design because they can't access it.</p>
+          </li>
+
+          <li class="impl-item">
+            <h4>— 03 · One template per block — and that's the law</h4>
+            <p><code>templates/blocks/hero.html</code>, <code>templates/blocks/numbered_list.html</code>, etc. Each template is the design — it can't be overridden by content. The CMS controls <strong>what</strong> appears, not <strong>how</strong>.</p>
+          </li>
+
+          <li class="impl-item">
+            <h4>— 04 · Restrict image uploads with editorial guidance</h4>
+            <p>Add help_text to image fields telling editors what kind of photo to use ("Editorial portraits, soft natural light, single subject"). Crop them with Wagtail's focal point. Keep aspect ratios consistent. A bad photo is worse than no photo.</p>
+          </li>
+
+          <li class="impl-item">
+            <h4>— 05 · Static motion layer, CMS-independent</h4>
+            <p>Smooth scroll, reveals, magnetic buttons, custom cursor — these live in <code>static/js/motion.js</code> and apply globally. The CMS doesn't touch them. Editors get the polish for free.</p>
+          </li>
+
+          <li class="impl-item">
+            <h4>— 06 · Performance is part of the design</h4>
+            <p>Use <code>{% image %}</code> for responsive images with <code>format-webp</code>. Lazy-load below the fold. Inline critical CSS. A slow site doesn't feel premium no matter how it's designed.</p>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="pb-cta">
+    <div class="pb-cta-inner">
+      <h2>Build with us, or<br/>build <em>from this.</em></h2>
+      <div class="pb-cta-actions">
+        <a href="contact.html" class="btn btn-primary">Start a project →</a>
+        <a href="index.html" class="btn btn-secondary">See the live example</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-mark"><img src="logo.png" alt="Crafted Edge Solutions" class="logo-mark" />Crafted Edge<span>.</span></div>
+        <p>A product engineering studio building software, AI systems, and infrastructure for ambitious businesses.</p>
+        <div class="footer-contact">
+          <a href="mailto:hello@craftededgesolutions.africa">hello@craftededgesolutions.africa</a>
+          <a href="tel:+254769071925">+254 769 071 925</a>
+        </div>
+      </div>
+      <div class="footer-col"><h5>— Studio</h5><ul><li><a href="about.html">About</a></li><li><a href="about.html#process">Process</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>— Capabilities</h5><ul><li><a href="services.html">Software</a></li><li><a href="services.html">AI Systems</a></li><li><a href="services.html">Automation</a></li><li><a href="services.html">Infrastructure</a></li></ul></div>
+      <div class="footer-col"><h5>— Elsewhere</h5><ul><li><a href="https://meshack.craftededgesolutions.africa" target="_blank">Founder</a></li><li><a href="https://github.com/Crafted-Edge-Solutions" target="_blank">GitHub</a></li><li><a href="#">Privacy</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Crafted Edge Solutions</p>
+      <p>Nairobi · EAT · Operating globally</p>
+    </div>
+  </footer>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis/dist/lenis.min.js"></script>
+  <!-- Motion layer -->
+  <script src="motion.js"></script>
+</body>
+</html>

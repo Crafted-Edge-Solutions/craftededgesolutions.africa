@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design Handoff — Wellness Solutions Africa</title>
+  <meta name="description" content="Implementation handoff for the wellness-solutions.africa redesign. Tokens, components, Wagtail blocks, and acceptance criteria." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* HANDOFF DOC LAYOUT */
+    .doc-shell {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+
+    @media (max-width: 1000px) {
+      .doc-shell { grid-template-columns: 1fr; }
+      .doc-sidebar { display: none; }
+    }
+
+    /* SIDEBAR */
+    .doc-sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      border-right: 1px solid var(--line);
+      padding: 110px 0 32px;
+      overflow-y: auto;
+      background: var(--bg);
+    }
+
+    .doc-sidebar-inner {
+      padding: 0 28px;
+    }
+
+    .doc-sidebar h5 {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin: 28px 0 14px;
+      font-weight: 400;
+    }
+
+    .doc-sidebar h5:first-child { margin-top: 0; }
+
+    .doc-sidebar nav ul,
+    .doc-sidebar > nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .doc-sidebar a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--fg-mid);
+      padding: 6px 0;
+      transition: color 0.15s;
+    }
+    .doc-sidebar a::before {
+      content: '';
+      width: 12px; height: 1px;
+      background: var(--line-strong);
+      flex-shrink: 0;
+      transition: background 0.15s, width 0.2s;
+    }
+    .doc-sidebar a:hover { color: var(--fg); }
+    .doc-sidebar a:hover::before { background: var(--accent); width: 18px; }
+
+    .doc-sidebar .num {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      color: var(--fg-dim);
+      margin-right: 2px;
+    }
+
+    /* SIDEBAR — TOP META */
+    .doc-meta {
+      padding: 0 28px 24px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 24px;
+    }
+
+    .doc-meta .label {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 4px;
+    }
+    .doc-meta .value {
+      font-family: var(--f-display);
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      margin-bottom: 12px;
+    }
+    .doc-meta .value em { color: var(--accent); font-style: italic; }
+
+    /* MAIN CONTENT */
+    .doc-main {
+      padding: 100px 0 80px;
+      min-width: 0;
+    }
+
+    .doc-section {
+      padding: 70px 56px;
+      border-bottom: 1px solid var(--line);
+      max-width: 1000px;
+    }
+
+    @media (max-width: 700px) { .doc-section { padding: 60px 32px; } }
+
+    .doc-section h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+      margin-bottom: 14px;
+      scroll-margin-top: 32px;
+    }
+    .doc-section h2 em { font-style: italic; color: var(--accent); }
+
+    .doc-section h3 {
+      font-family: var(--f-display);
+      font-size: 1.5rem;
+      letter-spacing: -0.015em;
+      font-weight: 400;
+      margin-bottom: 14px;
+      margin-top: 36px;
+    }
+
+    .doc-section h4 {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 28px;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .doc-section p {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: var(--fg-mid);
+      margin-bottom: 16px;
+    }
+
+    .doc-section p strong { color: var(--fg); font-weight: 500; }
+    .doc-section p code { font-family: var(--f-mono); font-size: 0.85rem; background: rgba(255,255,255,0.04); padding: 2px 7px; border-radius: 4px; color: var(--fg); border: 1px solid var(--line); }
+
+    .doc-section ul {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+    .doc-section ul li {
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      font-size: 0.92rem;
+      color: var(--fg-mid);
+      line-height: 1.55;
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .doc-section ul li:last-child { border-bottom: 1px solid var(--line); }
+    .doc-section ul li::before {
+      content: '→';
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      color: var(--accent);
+      padding-top: 3px;
+    }
+    .doc-section ul li strong { color: var(--fg); font-weight: 500; }
+
+    .doc-eyebrow {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 20px;
+    }
+
+    /* CODE BLOCKS */
+    pre {
+      background: #08080a;
+      border: 1px solid var(--line-strong);
+      border-radius: 10px;
+      padding: 22px 24px;
+      overflow-x: auto;
+      font-family: var(--f-mono);
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: #d8d8d3;
+      margin: 18px 0 28px;
+      position: relative;
+    }
+
+    pre::before {
+      content: attr(data-label);
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+
+    pre .c { color: #6a6a64; font-style: italic; }
+    pre .k { color: #e89240; }
+    pre .s { color: #95b485; }
+    pre .v { color: #7eb8d6; }
+    pre .n { color: #d8d8d3; }
+
+    /* TOKEN GRID */
+    .tokens {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0 28px;
+    }
+
+    @media (max-width: 600px) { .tokens { grid-template-columns: 1fr; } }
+
+    .tk {
+      padding: 18px 22px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+    .tk:nth-child(2n) { border-right: none; }
+    @media (max-width: 600px) {
+      .tk { border-right: none; }
+      .tk:last-child { border-bottom: none; }
+    }
+
+    .tk .sw {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .tk .name {
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      color: var(--fg);
+    }
+
+    .tk .hex {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      color: var(--fg-dim);
+    }
+
+    /* TYPE SPEC TABLE */
+    .type-spec {
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0 28px;
+    }
+
+    .ts-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+      align-items: center;
+      gap: 18px;
+    }
+
+    .ts-row:last-child { border-bottom: none; }
+    .ts-row.header { background: rgba(255,255,255,0.025); font-family: var(--f-mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--fg-dim); }
+
+    .ts-sample { font-weight: 400; }
+
+    @media (max-width: 700px) {
+      .ts-row { grid-template-columns: 1fr; gap: 8px; }
+      .ts-row.header { display: none; }
+    }
+
+    /* COMPONENT CATALOG */
+    .comp-card {
+      border: 1px solid var(--line-strong);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 24px 0 32px;
+    }
+
+    .comp-card-head {
+      padding: 18px 24px;
+      background: rgba(255,255,255,0.025);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .comp-card-head h4 {
+      margin: 0;
+      font-family: var(--f-display);
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      font-weight: 400;
+      text-transform: none;
+    }
+
+    .comp-card-head .tag {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 3px 10px;
+      border: 1px solid var(--accent);
+      border-radius: 100px;
+    }
+
+    .comp-card-body { padding: 24px; }
+    .comp-card-body p:last-child { margin-bottom: 0; }
+
+    /* MIGRATION TABLE */
+    .mig-table {
+      display: grid;
+      grid-template-columns: 60px 2fr 1fr 1fr;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      overflow: hidden;
+      margin: 20px 0 28px;
+    }
+
+    @media (max-width: 700px) {
+      .mig-table { grid-template-columns: 1fr; }
+    }
+
+    .mig-cell {
+      padding: 14px 18px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      font-size: 0.85rem;
+      color: var(--fg-mid);
+    }
+
+    .mig-cell.header {
+      background: rgba(255,255,255,0.025);
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+
+    .mig-cell.num { color: var(--accent); font-family: var(--f-mono); font-size: 0.75rem; }
+    .mig-cell strong { color: var(--fg); }
+
+    .mig-cell:nth-child(4n) { border-right: none; }
+
+    @media (max-width: 700px) {
+      .mig-cell { border-right: none; }
+      .mig-cell.header { display: none; }
+    }
+
+    /* STATUS PILLS */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+    .pill.p1 { background: rgba(232,146,64,0.12); color: var(--accent); border: 1px solid rgba(232,146,64,0.3); }
+    .pill.p2 { background: rgba(122,148,114,0.12); color: #9ab592; border: 1px solid rgba(122,148,114,0.3); }
+    .pill.p3 { background: rgba(126,184,214,0.08); color: #7eb8d6; border: 1px solid rgba(126,184,214,0.25); }
+
+    /* CHECKLIST */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin: 18px 0 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .checklist-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 12px;
+      align-items: start;
+      font-size: 0.92rem;
+      color: var(--fg-mid);
+      line-height: 1.55;
+    }
+
+    .checklist-item::before {
+      content: '';
+      width: 18px;
+      height: 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      margin-top: 1px;
+      transition: all 0.2s;
+    }
+
+    .checklist-item:hover::before { border-color: var(--accent); }
+
+    .checklist-item strong { color: var(--fg); display: block; margin-bottom: 2px; font-weight: 500; }
+
+    /* HERO INTRO */
+    .doc-hero {
+      padding: 110px 56px 60px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    @media (max-width: 700px) { .doc-hero { padding: 100px 32px 50px; } }
+
+    .doc-hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+      margin: 24px 0 28px;
+      max-width: 18ch;
+    }
+    .doc-hero h1 em { font-style: italic; color: var(--accent); }
+
+    .doc-hero .lead {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--fg-mid);
+      max-width: 60ch;
+    }
+
+    .doc-hero .quick-meta {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .qm {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+    .qm strong {
+      color: var(--fg);
+      display: block;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-mark"><img src="logo.png" alt="Crafted Edge Solutions" class="logo-mark" />Crafted Edge<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Index</a></li>
+      <li><a href="services.html">Capabilities</a></li>
+      <li><a href="solutions.html">Work</a></li>
+      <li><a href="about.html">Studio</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <a href="playbook.html" class="nav-cta">View playbook →</a>
+  </nav>
+
+  <div class="doc-shell">
+
+    <!-- SIDEBAR -->
+    <aside class="doc-sidebar">
+      <div class="doc-sidebar-inner">
+        <div class="doc-meta">
+          <div class="label">— Document</div>
+          <div class="value">Wellness Solutions <em>Africa</em></div>
+          <div class="label" style="margin-top:14px">— Type</div>
+          <div class="value" style="font-size:0.95rem">Design handoff</div>
+          <div class="label" style="margin-top:14px">— Version</div>
+          <div class="value" style="font-size:0.95rem">v1.0 · 2026</div>
+        </div>
+
+        <h5>— Overview</h5>
+        <nav><ul>
+          <li><a href="#brief"><span class="num">00</span>Brief</a></li>
+          <li><a href="#scope"><span class="num">01</span>Scope &amp; phases</a></li>
+        </ul></nav>
+
+        <h5>— Foundation</h5>
+        <nav><ul>
+          <li><a href="#tokens"><span class="num">02</span>Design tokens</a></li>
+          <li><a href="#typography"><span class="num">03</span>Typography</a></li>
+          <li><a href="#spacing"><span class="num">04</span>Spacing &amp; rhythm</a></li>
+        </ul></nav>
+
+        <h5>— Components</h5>
+        <nav><ul>
+          <li><a href="#components"><span class="num">05</span>Component catalog</a></li>
+          <li><a href="#wagtail"><span class="num">06</span>Wagtail blocks</a></li>
+          <li><a href="#templates"><span class="num">07</span>Template structure</a></li>
+        </ul></nav>
+
+        <h5>— Pages</h5>
+        <nav><ul>
+          <li><a href="#pages"><span class="num">08</span>Page-by-page plan</a></li>
+          <li><a href="#imagery"><span class="num">09</span>Imagery direction</a></li>
+        </ul></nav>
+
+        <h5>— Delivery</h5>
+        <nav><ul>
+          <li><a href="#motion"><span class="num">10</span>Motion layer</a></li>
+          <li><a href="#performance"><span class="num">11</span>Performance</a></li>
+          <li><a href="#acceptance"><span class="num">12</span>Acceptance criteria</a></li>
+        </ul></nav>
+
+        <h5>— Reference</h5>
+        <nav><ul>
+          <li><a href="playbook.html">→ Design playbook</a></li>
+          <li><a href="wellness-concept.html">→ Visual concept</a></li>
+          <li><a href="index.html">→ Crafted Edge (live)</a></li>
+        </ul></nav>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="doc-main">
+
+      <!-- HERO -->
+      <section class="doc-hero">
+        <div class="doc-eyebrow">— Design handoff · For the engineering team</div>
+        <h1>Wellness Solutions <em>Africa</em><br/>redesign brief.</h1>
+        <p class="lead">Everything needed to bring wellness-solutions.africa to the same craft level as craftededgesolutions.africa — adapted to wellness aesthetics, implemented in Django + Wagtail. Pair this document with the <a href="playbook.html" style="color:var(--accent);text-decoration:underline">design playbook</a> and the <a href="wellness-concept.html" style="color:var(--accent);text-decoration:underline">visual concept</a>.</p>
+        <div class="quick-meta">
+          <div class="qm">— Stack<strong>Django · Wagtail · PostgreSQL</strong></div>
+          <div class="qm">— Timeline<strong>4–6 weeks (3 phases)</strong></div>
+          <div class="qm">— Reference<strong>Crafted Edge site + playbook</strong></div>
+          <div class="qm">— Owner<strong>Crafted Edge Studio</strong></div>
+        </div>
+      </section>
+
+      <!-- 00 BRIEF -->
+      <section class="doc-section" id="brief">
+        <div class="doc-eyebrow">— 00 / Brief</div>
+        <h2>Why we're<br/><em>doing this.</em></h2>
+        <p>Wellness Solutions Africa is operationally strong but visually under-positioned. The current site reads like a generic wellness directory — when the practice is, in fact, a senior, slow-medicine clinic with serious clinical depth. The redesign is a positioning move first, a visual one second.</p>
+
+        <h4>— Goals</h4>
+        <ul>
+          <li><strong>Reposition</strong> from "wellness centre" to "considered medical practice"</li>
+          <li><strong>Reflect</strong> the slowness, sensory care, and senior practitioner team</li>
+          <li><strong>Convert</strong> qualified clients via clearer booking and pre-consultation flows</li>
+          <li><strong>Unify</strong> across services — currently each modality reads as its own brand</li>
+          <li><strong>Establish</strong> a design system the in-house team can extend without dilution</li>
+        </ul>
+
+        <h4>— Non-goals</h4>
+        <ul>
+          <li>Copying craftededgesolutions.africa — the DNA transfers, not the surface</li>
+          <li>Adding emoji, illustrated icons, or generic wellness imagery</li>
+          <li>Building a "wellness commerce" experience (no product shop in v1)</li>
+          <li>Migrating off Wagtail or away from Django</li>
+        </ul>
+      </section>
+
+      <!-- 01 SCOPE -->
+      <section class="doc-section" id="scope">
+        <div class="doc-eyebrow">— 01 / Scope</div>
+        <h2>Three phases.<br/><em>Shipping incrementally.</em></h2>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>Phase 01 · Foundation</h4>
+            <span class="tag">Weeks 1–2</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Lock the design tokens, type system, and reusable Wagtail blocks. No public-facing pages migrate yet — but everything needed to build them does. Engineering can start touching production code.</p>
+            <ul style="margin-top:6px">
+              <li>Design tokens in <code>static/css/tokens.css</code></li>
+              <li>Base templates with sticky nav, footer, page shell</li>
+              <li>StreamField block library (hero, numbered list, stat grid, practitioner card, CTA band)</li>
+              <li>Motion layer (<code>static/js/motion.js</code>) wired globally</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>Phase 02 · Pages</h4>
+            <span class="tag">Weeks 3–4</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Migrate the core public pages onto the new system. Pages built from blocks, content edited via Wagtail admin. Live preview enabled; non-public until full sign-off.</p>
+            <ul style="margin-top:6px">
+              <li>Home · Approach · Practitioners · Offerings · Contact</li>
+              <li>Booking flow re-styled (existing logic preserved)</li>
+              <li>Image content audit — replace stock imagery with editorial</li>
+              <li>SEO + analytics parity with current site</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>Phase 03 · Polish &amp; launch</h4>
+            <span class="tag">Weeks 5–6</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Final motion tuning, image optimisation, performance pass, and content review. DNS swap and launch. Two weeks of post-launch monitoring included.</p>
+            <ul style="margin-top:6px">
+              <li>Performance: Lighthouse ≥ 95 across all metrics</li>
+              <li>WCAG AA accessibility audit</li>
+              <li>Cross-browser testing (Chromium, WebKit, Firefox)</li>
+              <li>Editorial training session with practice manager</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 02 TOKENS -->
+      <section class="doc-section" id="tokens">
+        <div class="doc-eyebrow">— 02 / Foundation</div>
+        <h2>Design <em>tokens.</em></h2>
+        <p>Lock these as CSS custom properties in <code>:root</code> at the top of <code>base.html</code> or a dedicated <code>tokens.css</code>. They are <strong>not editable through the Wagtail admin</strong>. Brand consistency lives here.</p>
+
+        <h4>— Colour palette</h4>
+        <div class="tokens">
+          <div class="tk"><div class="sw" style="background:#f5f1ea;border-color:rgba(0,0,0,0.1)"></div><div class="name">--bg</div><div class="hex">#f5f1ea</div></div>
+          <div class="tk"><div class="sw" style="background:#ece7dd;border-color:rgba(0,0,0,0.1)"></div><div class="name">--bg-card</div><div class="hex">#ece7dd</div></div>
+          <div class="tk"><div class="sw" style="background:#2a2620"></div><div class="name">--fg</div><div class="hex">#2a2620</div></div>
+          <div class="tk"><div class="sw" style="background:#6a6356"></div><div class="name">--fg-mid</div><div class="hex">#6a6356</div></div>
+          <div class="tk"><div class="sw" style="background:#908778"></div><div class="name">--fg-dim</div><div class="hex">#908778</div></div>
+          <div class="tk"><div class="sw" style="background:rgba(42,38,32,0.10);border:1px solid var(--line-strong)"></div><div class="name">--line</div><div class="hex">rgba(42,38,32,0.10)</div></div>
+          <div class="tk"><div class="sw" style="background:#7a9472"></div><div class="name">--accent (sage)</div><div class="hex">#7a9472</div></div>
+          <div class="tk"><div class="sw" style="background:#c87560"></div><div class="name">--accent-warm</div><div class="hex">#c87560</div></div>
+        </div>
+
+        <h4>— Where each colour goes</h4>
+        <ul>
+          <li><strong>--accent (sage):</strong> primary emphasis — italic display text, status dots, hover states, active nav links, primary button hover. Use <strong>4–6 times per page max</strong>.</li>
+          <li><strong>--accent-warm (terracotta):</strong> secondary emphasis — error states, calendar 'today' marker, occasional pull-quote. Use 1–2 times per page max.</li>
+          <li><strong>--fg (charcoal):</strong> all primary headings and body. Never pure black.</li>
+          <li><strong>--bg-card:</strong> raised surfaces — practitioner cards, lifted CTAs, the form wrap. Use sparingly; lines are still preferred.</li>
+        </ul>
+
+        <pre data-label="tokens.css"><span class="c">/* Wellness Solutions — Design Tokens */</span>
+<span class="k">:root</span> {
+  <span class="c">/* Surfaces */</span>
+  <span class="v">--bg</span>: <span class="s">#f5f1ea</span>;
+  <span class="v">--bg-card</span>: <span class="s">#ece7dd</span>;
+
+  <span class="c">/* Type */</span>
+  <span class="v">--fg</span>: <span class="s">#2a2620</span>;
+  <span class="v">--fg-mid</span>: <span class="s">#6a6356</span>;
+  <span class="v">--fg-dim</span>: <span class="s">#908778</span>;
+
+  <span class="c">/* Lines */</span>
+  <span class="v">--line</span>: <span class="s">rgba(42,38,32,0.10)</span>;
+  <span class="v">--line-strong</span>: <span class="s">rgba(42,38,32,0.20)</span>;
+
+  <span class="c">/* Accent — used sparingly */</span>
+  <span class="v">--accent</span>: <span class="s">#7a9472</span>;
+  <span class="v">--accent-warm</span>: <span class="s">#c87560</span>;
+
+  <span class="c">/* Type families */</span>
+  <span class="v">--f-display</span>: <span class="s">"Fraunces", "Times New Roman", serif</span>;
+  <span class="v">--f-sans</span>: <span class="s">"DM Sans", system-ui, sans-serif</span>;
+  <span class="v">--f-mono</span>: <span class="s">"JetBrains Mono", monospace</span>;
+
+  <span class="c">/* Layout */</span>
+  <span class="v">--container</span>: <span class="s">1240px</span>;
+  <span class="v">--radius</span>: <span class="s">4px</span>;       <span class="c">/* tight, organic */</span>
+}</pre>
+      </section>
+
+      <!-- 03 TYPOGRAPHY -->
+      <section class="doc-section" id="typography">
+        <div class="doc-eyebrow">— 03 / Foundation</div>
+        <h2>Typography <em>spec.</em></h2>
+        <p>Three families, three jobs. Fraunces for display (warm, classical serif, optical size variable), DM Sans for body (rounded, humanistic), JetBrains Mono for labels (technical accent in small doses).</p>
+
+        <h4>— Hierarchy</h4>
+        <div class="type-spec">
+          <div class="ts-row header">
+            <div>Role</div>
+            <div>Family · Size · Weight</div>
+            <div>Usage</div>
+          </div>
+          <div class="ts-row">
+            <div class="ts-sample" style="font-family:var(--f-display);font-size:2.2rem;line-height:1;letter-spacing:-0.03em">Display XL</div>
+            <div style="font-family:var(--f-mono);font-size:0.78rem;color:var(--fg-dim)">Fraunces · clamp(3rem, 8vw, 7rem) · 400</div>
+            <div style="font-size:0.85rem;color:var(--fg-mid)">Hero only. Once per page.</div>
+          </div>
+          <div class="ts-row">
+            <div class="ts-sample" style="font-family:var(--f-display);font-size:1.6rem;line-height:1;letter-spacing:-0.025em">Display L</div>
+            <div style="font-family:var(--f-mono);font-size:0.78rem;color:var(--fg-dim)">Fraunces · clamp(2.4rem, 5vw, 4rem) · 400</div>
+            <div style="font-size:0.85rem;color:var(--fg-mid)">Section h2.</div>
+          </div>
+          <div class="ts-row">
+            <div class="ts-sample" style="font-family:var(--f-display);font-size:1.25rem;line-height:1.1;letter-spacing:-0.02em">Display M</div>
+            <div style="font-family:var(--f-mono);font-size:0.78rem;color:var(--fg-dim)">Fraunces · clamp(1.6rem, 3vw, 2.4rem) · 400</div>
+            <div style="font-size:0.85rem;color:var(--fg-mid)">Card/row headings.</div>
+          </div>
+          <div class="ts-row">
+            <div class="ts-sample" style="font-size:1.05rem;line-height:1.7">Body lead</div>
+            <div style="font-family:var(--f-mono);font-size:0.78rem;color:var(--fg-dim)">DM Sans · 1.05–1.15rem · 300</div>
+            <div style="font-size:0.85rem;color:var(--fg-mid)">Intro paragraphs, leads.</div>
+          </div>
+          <div class="ts-row">
+            <div class="ts-sample" style="font-size:0.95rem;line-height:1.7">Body</div>
+            <div style="font-family:var(--f-mono);font-size:0.78rem;color:var(--fg-dim)">DM Sans · 0.95rem · 300</div>
+            <div style="font-size:0.85rem;color:var(--fg-mid)">Standard paragraphs.</div>
+          </div>
+          <div class="ts-row">
+            <div class="ts-sample" style="font-family:var(--f-mono);font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--fg-dim)">— LABEL</div>
+            <div style="font-family:var(--f-mono);font-size:0.78rem;color:var(--fg-dim)">JetBrains Mono · 0.7rem · 400</div>
+            <div style="font-size:0.85rem;color:var(--fg-mid)">Eyebrows, stat labels, nav.</div>
+          </div>
+        </div>
+
+        <h4>— Italic emphasis pattern</h4>
+        <p>Every display heading on the site has <strong>one italic word or phrase</strong> in <code>--accent</code>. This is the rhythm of the type system. Examples:</p>
+        <ul>
+          <li>"Care that's <em style="color:var(--accent);font-style:italic">actually felt</em>."</li>
+          <li>"Slow, considered, <em style="color:var(--accent);font-style:italic">specific</em>."</li>
+          <li>"Six disciplines. <em style="color:var(--accent);font-style:italic">One philosophy</em>."</li>
+        </ul>
+        <p>Always one italic moment per heading — never two, never zero on a hero heading.</p>
+      </section>
+
+      <!-- 04 SPACING -->
+      <section class="doc-section" id="spacing">
+        <div class="doc-eyebrow">— 04 / Foundation</div>
+        <h2>Spacing <em>&amp; rhythm.</em></h2>
+        <p>Generous space is part of the brand. Practice this rule: <strong>when unsure, add more space, not less.</strong></p>
+
+        <h4>— Vertical rhythm</h4>
+        <ul>
+          <li><strong>Section padding:</strong> <code>120px</code> top/bottom on desktop, <code>80px</code> on mobile</li>
+          <li><strong>Within sections:</strong> <code>56px</code> between section head and content body</li>
+          <li><strong>Between paragraphs:</strong> <code>20px</code></li>
+          <li><strong>Between heading + first paragraph:</strong> <code>24px</code></li>
+          <li><strong>Card internal padding:</strong> <code>24–32px</code> depending on density</li>
+        </ul>
+
+        <h4>— Horizontal</h4>
+        <ul>
+          <li><strong>Container max-width:</strong> <code>1240px</code></li>
+          <li><strong>Edge gutter:</strong> <code>32px</code> desktop, <code>22px</code> mobile</li>
+          <li><strong>Grid gap (cards):</strong> <code>28px</code></li>
+          <li><strong>Grid gap (text columns):</strong> <code>80px</code></li>
+        </ul>
+      </section>
+
+      <!-- 05 COMPONENTS -->
+      <section class="doc-section" id="components">
+        <div class="doc-eyebrow">— 05 / Components</div>
+        <h2>Component <em>catalog.</em></h2>
+        <p>The component library is intentionally small. Twelve pieces compose the entire site. Build them once, well, and reuse everywhere.</p>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>01 · Nav (sticky)</h4>
+            <span class="tag">Global</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Fixed top bar. Logo mark + sage circle on the left, mono nav links centred-right, primary CTA on the right. Tightens on scroll. Backdrop blur over the cream background.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>02 · Hero block</h4>
+            <span class="tag">Page template</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Two-column on desktop, stacked mobile. Left: eyebrow → display heading with italic moment → lead paragraph. Right: editorial photograph (3:4 aspect ratio). Meta strip beneath shows founded/location/practitioner count.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>03 · Numbered row list</h4>
+            <span class="tag">StreamField</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Three-column grid: number, heading, body. Hover state shifts content right and reveals arrow. Used for offerings, principles, process steps. <strong>Replaces every icon-and-card layout</strong> in the current site.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>04 · Practitioner card</h4>
+            <span class="tag">StreamField</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Vertical card: 4:5 portrait photo on top, name (with italic surname accent) + mono role label + 1-sentence bio. Hover lifts the card 4px. Group in 3-up grid.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>05 · Stat grid</h4>
+            <span class="tag">StreamField</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Four cells in a horizontal row separated by 1px lines. Each cell: large display number (with italic suffix), mono label, one-sentence description. Numbers animate from 0 on scroll into view.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>06 · Pull section (philosophy / approach)</h4>
+            <span class="tag">StreamField</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Two-column: 1fr / 2fr. Left: eyebrow + display heading. Right: 2–4 paragraphs of body. Used for "Our approach", "Why we built this", and editorial copy moments.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>07 · CTA band</h4>
+            <span class="tag">Page template</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Two-column footer-band: big display headline left, contact details + buttons right. Each contact row separated by 1px line with hover underline animation. Appears at the bottom of most pages.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>08 · Form wrap</h4>
+            <span class="tag">Booking + contact</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Single raised card (<code>--bg-card</code>), 18px radius, 40px padding. Mono labels above each field. Inputs transparent with 1px line under. Focus state changes border to <code>--accent</code>. Primary submit at full width.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>09 · Booking calendar</h4>
+            <span class="tag">Existing logic</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Re-style only — preserve booking backend logic. Wrap in form-wrap container. Selected date in <code>--accent</code>, today's date in <code>--accent-warm</code>. Time slots as mono pills.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>10 · Footer</h4>
+            <span class="tag">Global</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Four columns: brand block (logo + tagline + contact), studio/practice links, offerings links, contact info. Bottom strip with © and "By appointment only · Westlands, Nairobi".</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>11 · Image block</h4>
+            <span class="tag">StreamField</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Single editorial image, full-bleed within container, with optional caption in mono. <strong>Constrained to specific aspect ratios</strong> (3:4 portrait, 16:9 landscape, 1:1 square). Lazy-loaded.</p>
+          </div>
+        </div>
+
+        <div class="comp-card">
+          <div class="comp-card-head">
+            <h4>12 · Quote / testimonial</h4>
+            <span class="tag">StreamField</span>
+          </div>
+          <div class="comp-card-body">
+            <p>Single quote on its own band. Display-size italic text in <code>--fg</code> (not accent — quotes should feel grounded), 60ch max-width, centred. Attribution in mono caps beneath.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 06 WAGTAIL BLOCKS -->
+      <section class="doc-section" id="wagtail">
+        <div class="doc-eyebrow">— 06 / Components</div>
+        <h2>Wagtail <em>blocks.</em></h2>
+        <p>Build each component above as a typed StreamField block. <strong>No <code>RichTextBlock</code> with full HTML access.</strong> Every block has a specific template; editors choose content, never markup.</p>
+
+        <pre data-label="blocks.py"><span class="c"># wellness/blocks.py</span>
+<span class="k">from</span> wagtail <span class="k">import</span> blocks
+<span class="k">from</span> wagtail.images.blocks <span class="k">import</span> ImageChooserBlock
+
+
+<span class="k">class</span> <span class="v">HeroBlock</span>(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(required=False, max_length=80,
+        help_text=<span class="s">"Mono label above heading. Lowercase, em-dash prefix added automatically."</span>)
+    heading = blocks.CharBlock(max_length=120,
+        help_text=<span class="s">"Use ALL CAPS for emphasis on hero. Italic word marked with *asterisks*."</span>)
+    lead = blocks.TextBlock(max_length=400)
+    image = ImageChooserBlock(required=False,
+        help_text=<span class="s">"3:4 ratio. Editorial portrait, soft natural light, single subject."</span>)
+
+    <span class="k">class</span> <span class="v">Meta</span>:
+        template = <span class="s">"blocks/hero.html"</span>
+        icon = <span class="s">"openquote"</span>
+        label = <span class="s">"Hero"</span>
+
+
+<span class="k">class</span> <span class="v">NumberedRowBlock</span>(blocks.StructBlock):
+    heading = blocks.CharBlock(max_length=60,
+        help_text=<span class="s">"Use *asterisks* around the italic word."</span>)
+    body = blocks.TextBlock(max_length=400)
+
+
+<span class="k">class</span> <span class="v">NumberedListBlock</span>(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(required=False, max_length=80)
+    heading = blocks.CharBlock(max_length=120)
+    lead = blocks.TextBlock(required=False, max_length=300)
+    rows = blocks.ListBlock(NumberedRowBlock(),
+        help_text=<span class="s">"Numbered automatically — 01, 02, 03..."</span>)
+
+    <span class="k">class</span> <span class="v">Meta</span>:
+        template = <span class="s">"blocks/numbered_list.html"</span>
+        icon = <span class="s">"list-ol"</span>
+
+
+<span class="k">class</span> <span class="v">PractitionerCardBlock</span>(blocks.StructBlock):
+    first_name = blocks.CharBlock(max_length=40)
+    surname = blocks.CharBlock(max_length=40,
+        help_text=<span class="s">"Will appear in italic accent colour."</span>)
+    role = blocks.CharBlock(max_length=80,
+        help_text=<span class="s">"Mono label. Use · between role parts."</span>)
+    bio = blocks.CharBlock(max_length=180,
+        help_text=<span class="s">"One short sentence. Strict 180 char limit."</span>)
+    portrait = ImageChooserBlock(
+        help_text=<span class="s">"4:5 ratio. Natural light, single subject, neutral background."</span>)
+
+
+<span class="k">class</span> <span class="v">StatCellBlock</span>(blocks.StructBlock):
+    value = blocks.CharBlock(max_length=8,
+        help_text=<span class="s">"Numeric prefix, e.g. '90'. Italic suffix below."</span>)
+    suffix = blocks.CharBlock(required=False, max_length=8,
+        help_text=<span class="s">"e.g. 'min', '+', '/7' — italic in accent colour."</span>)
+    label = blocks.CharBlock(max_length=40,
+        help_text=<span class="s">"Mono label below number."</span>)
+    description = blocks.CharBlock(required=False, max_length=80)
+
+
+<span class="k">class</span> <span class="v">StatGridBlock</span>(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(required=False, max_length=80)
+    heading = blocks.CharBlock(required=False, max_length=120)
+    cells = blocks.ListBlock(StatCellBlock(), min_num=2, max_num=4)
+
+    <span class="k">class</span> <span class="v">Meta</span>:
+        template = <span class="s">"blocks/stat_grid.html"</span>
+
+
+<span class="k">class</span> <span class="v">CTABandBlock</span>(blocks.StructBlock):
+    heading = blocks.CharBlock(max_length=120)
+    email = blocks.EmailBlock(default=<span class="s">"hello@wellness-solutions.africa"</span>)
+    phone = blocks.CharBlock(default=<span class="s">"+254 7XX XXX XXX"</span>)
+    primary_cta_label = blocks.CharBlock(default=<span class="s">"Book a consultation"</span>)
+    primary_cta_url = blocks.URLBlock(required=False)
+
+    <span class="k">class</span> <span class="v">Meta</span>:
+        template = <span class="s">"blocks/cta_band.html"</span>
+
+
+<span class="c"># Master StreamField — what every page can use</span>
+<span class="k">class</span> <span class="v">WellnessStreamBlock</span>(blocks.StreamBlock):
+    hero = HeroBlock()
+    numbered_list = NumberedListBlock()
+    pull_section = PullSectionBlock()
+    practitioner_grid = PractitionerGridBlock()
+    stat_grid = StatGridBlock()
+    image = ImageBlock()
+    quote = QuoteBlock()
+    cta_band = CTABandBlock()</pre>
+
+        <h4>— Why typed blocks matter</h4>
+        <p>The current site likely uses RichTextBlock liberally. That's how every wellness site looks the same — editors paste raw HTML, fonts shift, headings drift, the design dies in three months.</p>
+        <p><strong>Typed blocks make the design system uneditable.</strong> Editors can change words and images, never markup. The site looks pristine six months after launch because it has to.</p>
+      </section>
+
+      <!-- 07 TEMPLATE STRUCTURE -->
+      <section class="doc-section" id="templates">
+        <div class="doc-eyebrow">— 07 / Components</div>
+        <h2>Template <em>structure.</em></h2>
+        <p>One template per block. The template <strong>is</strong> the design — it can't be overridden by content.</p>
+
+        <pre data-label="directory"><span class="n">wellness/templates/</span>
+├── base.html              <span class="c"># Shell — nav, footer, head, motion.js</span>
+├── pages/
+│   ├── home_page.html      <span class="c"># {% include_block %} StreamField</span>
+│   ├── practitioners.html
+│   ├── offerings.html
+│   ├── contact.html
+│   └── booking.html
+├── blocks/
+│   ├── hero.html
+│   ├── numbered_list.html
+│   ├── practitioner_grid.html
+│   ├── stat_grid.html
+│   ├── cta_band.html
+│   ├── pull_section.html
+│   ├── image_block.html
+│   └── quote.html
+└── partials/
+    ├── nav.html            <span class="c"># Sticky top nav</span>
+    ├── footer.html
+    └── meta.html           <span class="c"># Schema.org, OG tags</span></pre>
+
+        <h4>— Italic emphasis helper</h4>
+        <p>Editors mark italic phrases with <code>*asterisks*</code>. Template filter renders them with the accent colour.</p>
+
+        <pre data-label="templatetags/wellness_filters.py"><span class="k">from</span> django <span class="k">import</span> template
+<span class="k">from</span> django.utils.safestring <span class="k">import</span> mark_safe
+<span class="k">import</span> re
+
+register = template.Library()
+
+
+<span class="k">@register</span>.filter
+<span class="k">def</span> <span class="v">italic_emphasis</span>(value):
+    <span class="s">"""Wraps *text* in &lt;em&gt; with accent colour."""</span>
+    <span class="k">return</span> mark_safe(
+        re.sub(
+            r<span class="s">'\*([^\*]+)\*'</span>,
+            r<span class="s">'&lt;em class="accent"&gt;\1&lt;/em&gt;'</span>,
+            value
+        )
+    )</pre>
+
+        <p>Used in templates: <code>{{ block.value.heading|italic_emphasis }}</code></p>
+      </section>
+
+      <!-- 08 PAGES -->
+      <section class="doc-section" id="pages">
+        <div class="doc-eyebrow">— 08 / Pages</div>
+        <h2>Page-by-page <em>plan.</em></h2>
+        <p>Five pages compose v1 of the new site. Booking flow stays at the existing route — only re-styled.</p>
+
+        <div class="mig-table">
+          <div class="mig-cell header">№</div>
+          <div class="mig-cell header">Page</div>
+          <div class="mig-cell header">Blocks used</div>
+          <div class="mig-cell header">Status</div>
+
+          <div class="mig-cell num">— 01</div>
+          <div class="mig-cell"><strong>Home</strong><br/><span style="font-size:0.78rem;color:var(--fg-dim)">Primary entry point. Hero, philosophy, offerings preview, practitioners, CTA</span></div>
+          <div class="mig-cell">Hero · Pull · Numbered list · Practitioner grid · Stat grid · CTA band</div>
+          <div class="mig-cell"><span class="pill p1">Phase 02</span></div>
+
+          <div class="mig-cell num">— 02</div>
+          <div class="mig-cell"><strong>Approach</strong><br/><span style="font-size:0.78rem;color:var(--fg-dim)">Philosophy + process. Slow-medicine positioning.</span></div>
+          <div class="mig-cell">Hero · Pull · Numbered list (principles) · Quote · CTA</div>
+          <div class="mig-cell"><span class="pill p1">Phase 02</span></div>
+
+          <div class="mig-cell num">— 03</div>
+          <div class="mig-cell"><strong>Offerings</strong><br/><span style="font-size:0.78rem;color:var(--fg-dim)">All 6 modalities, deep dive on each.</span></div>
+          <div class="mig-cell">Hero · Numbered list (deep) · Image · CTA</div>
+          <div class="mig-cell"><span class="pill p1">Phase 02</span></div>
+
+          <div class="mig-cell num">— 04</div>
+          <div class="mig-cell"><strong>Practitioners</strong><br/><span style="font-size:0.78rem;color:var(--fg-dim)">Team page. One card per practitioner with depth.</span></div>
+          <div class="mig-cell">Hero · Practitioner grid · Stat grid · CTA</div>
+          <div class="mig-cell"><span class="pill p1">Phase 02</span></div>
+
+          <div class="mig-cell num">— 05</div>
+          <div class="mig-cell"><strong>Contact / Book</strong><br/><span style="font-size:0.78rem;color:var(--fg-dim)">Form + booking calendar (existing logic preserved).</span></div>
+          <div class="mig-cell">Hero · Form wrap · Booking calendar (re-styled)</div>
+          <div class="mig-cell"><span class="pill p1">Phase 02</span></div>
+
+          <div class="mig-cell num">— 06</div>
+          <div class="mig-cell"><strong>Blog/Journal</strong><br/><span style="font-size:0.78rem;color:var(--fg-dim)">Optional Phase 3. Practice journal — slow content.</span></div>
+          <div class="mig-cell">Hero · Article list · Article detail · CTA</div>
+          <div class="mig-cell"><span class="pill p2">Phase 03</span></div>
+        </div>
+      </section>
+
+      <!-- 09 IMAGERY -->
+      <section class="doc-section" id="imagery">
+        <div class="doc-eyebrow">— 09 / Pages</div>
+        <h2>Imagery <em>direction.</em></h2>
+        <p><strong>Photography is the brand here.</strong> Bad images will sabotage everything. We strongly recommend a half-day editorial shoot before launch.</p>
+
+        <h4>— What to shoot</h4>
+        <ul>
+          <li><strong>Practitioner portraits</strong> (3 minimum, in clinic space, natural light). 4:5 ratio.</li>
+          <li><strong>Treatment room interiors</strong> — empty, calm, no people. Highlights wood, light, plants. 3:4 and 16:9 ratios.</li>
+          <li><strong>Detail shots</strong> — hands working, herbs, a single open notebook, plant against light. 1:1 square.</li>
+          <li><strong>One hero portrait</strong> — practitioner with client (or alone) in consultation. 3:4 ratio. The home page hero.</li>
+        </ul>
+
+        <h4>— What NOT to use</h4>
+        <ul>
+          <li>Stock photography of yoga poses, smiling families, or generic "wellness"</li>
+          <li>Heavy filters or oversaturated colour grading</li>
+          <li>Multiple people in studio-lit "team photo" setups</li>
+          <li>Equipment-focused product shots</li>
+        </ul>
+
+        <h4>— Technical specs</h4>
+        <ul>
+          <li>Use Wagtail's <code>{% image %}</code> tag with format-webp + format-avif fallback</li>
+          <li>Required focal point set in admin for every image</li>
+          <li>Lazy load below the fold (<code>loading="lazy"</code>)</li>
+          <li>Maximum upload 5MB; Wagtail handles responsive variants</li>
+        </ul>
+      </section>
+
+      <!-- 10 MOTION -->
+      <section class="doc-section" id="motion">
+        <div class="doc-eyebrow">— 10 / Delivery</div>
+        <h2>Motion <em>layer.</em></h2>
+        <p>The motion library is portable from the Crafted Edge site. Drop it in, retune for the wellness pace.</p>
+
+        <h4>— What transfers as-is</h4>
+        <ul>
+          <li><strong>Lenis smooth scroll</strong> — same library, same config</li>
+          <li><strong>Scroll-reveal Intersection Observer</strong> — fade-up on enter</li>
+          <li><strong>Stat counter</strong> — number animates from 0</li>
+          <li><strong>Nav scroll state</strong> — tightens on scroll</li>
+          <li><strong>Magnetic primary buttons</strong> — subtle cursor pull</li>
+        </ul>
+
+        <h4>— What to retune</h4>
+        <ul>
+          <li><strong>Easing:</strong> use <code>cubic-bezier(0.32, 0.72, 0, 1)</code> instead of (0.22, 1, 0.36, 1) — slower start, gentler finish</li>
+          <li><strong>Duration:</strong> 1.4s reveals instead of 1s. Wellness should feel like exhale.</li>
+          <li><strong>Cursor:</strong> change ring colour to <code>--accent</code>, increase ring size to 44px</li>
+          <li><strong>Skip on:</strong> booking flow, form interactions (always feels snappy)</li>
+        </ul>
+
+        <p>The full <code>motion.js</code> from this project is the starting point. Wellness team adjusts the easing constants and ships it.</p>
+      </section>
+
+      <!-- 11 PERFORMANCE -->
+      <section class="doc-section" id="performance">
+        <div class="doc-eyebrow">— 11 / Delivery</div>
+        <h2>Performance <em>budget.</em></h2>
+
+        <h4>— Lighthouse targets (production)</h4>
+        <ul>
+          <li><strong>Performance:</strong> ≥ 95 on home + practitioners + booking</li>
+          <li><strong>Accessibility:</strong> ≥ 95 site-wide</li>
+          <li><strong>Best practices:</strong> ≥ 95 site-wide</li>
+          <li><strong>SEO:</strong> 100 across all public pages</li>
+        </ul>
+
+        <h4>— Specific budgets</h4>
+        <ul>
+          <li><strong>LCP:</strong> &lt; 2.0s on 4G mobile</li>
+          <li><strong>CLS:</strong> &lt; 0.05</li>
+          <li><strong>JS bundle:</strong> &lt; 80kb gzipped (lenis + motion.js + Wagtail boot)</li>
+          <li><strong>CSS:</strong> &lt; 30kb gzipped (single file, no purge needed at this scale)</li>
+          <li><strong>Hero image:</strong> &lt; 120kb webp at 1.5x density</li>
+        </ul>
+
+        <h4>— Implementation notes</h4>
+        <ul>
+          <li>Inline critical CSS in <code>&lt;head&gt;</code></li>
+          <li>Self-host Fraunces + DM Sans (Google Fonts adds latency)</li>
+          <li>Cloudflare in front of Django for static asset caching</li>
+          <li>WhiteNoise or S3 for media in production</li>
+        </ul>
+      </section>
+
+      <!-- 12 ACCEPTANCE -->
+      <section class="doc-section" id="acceptance">
+        <div class="doc-eyebrow">— 12 / Delivery</div>
+        <h2>Acceptance <em>criteria.</em></h2>
+        <p>Before launch, each item below must be verified. Sign-off requires all checked.</p>
+
+        <h4>— Design fidelity</h4>
+        <div class="checklist">
+          <div class="checklist-item"><div><strong>Token system locked.</strong> Tokens.css in production; no hardcoded colours anywhere.</div></div>
+          <div class="checklist-item"><div><strong>Typography parity.</strong> Fraunces, DM Sans, JetBrains Mono self-hosted with proper fallbacks.</div></div>
+          <div class="checklist-item"><div><strong>Italic emphasis pattern applied.</strong> Every hero heading has one accent-italic phrase.</div></div>
+          <div class="checklist-item"><div><strong>No icons or emoji</strong> on the public site. Numbers replace icons.</div></div>
+          <div class="checklist-item"><div><strong>Borders over cards.</strong> No drop-shadow card patterns; lines define grids.</div></div>
+        </div>
+
+        <h4>— Functional</h4>
+        <div class="checklist">
+          <div class="checklist-item"><div><strong>Booking flow preserved.</strong> All existing payment + calendar logic working unchanged.</div></div>
+          <div class="checklist-item"><div><strong>Forms submit successfully.</strong> Contact form lands in practice manager inbox; autoresponder sent.</div></div>
+          <div class="checklist-item"><div><strong>Wagtail admin documented.</strong> Practice manager can edit every page block independently.</div></div>
+          <div class="checklist-item"><div><strong>SEO not regressed.</strong> All current URLs return 200 or 301; meta tags + schema in place.</div></div>
+        </div>
+
+        <h4>— Technical</h4>
+        <div class="checklist">
+          <div class="checklist-item"><div><strong>Lighthouse ≥ 95</strong> on home, practitioners, booking pages.</div></div>
+          <div class="checklist-item"><div><strong>WCAG AA</strong> verified with axe-core. All interactive elements keyboard-accessible.</div></div>
+          <div class="checklist-item"><div><strong>Cross-browser tested.</strong> Chromium, WebKit, Firefox; iOS Safari + Android Chrome.</div></div>
+          <div class="checklist-item"><div><strong>prefers-reduced-motion honoured.</strong> All motion disables cleanly when set.</div></div>
+        </div>
+
+        <h4>— Brand</h4>
+        <div class="checklist">
+          <div class="checklist-item"><div><strong>Imagery shot or sourced editorially.</strong> No stock wellness photography.</div></div>
+          <div class="checklist-item"><div><strong>Copy reviewed for positive framing.</strong> No "we don't / we're not" phrasing.</div></div>
+          <div class="checklist-item"><div><strong>Accent used sparingly.</strong> Maximum 6 accent instances per page audit.</div></div>
+          <div class="checklist-item"><div><strong>Practitioner content approved</strong> by each practitioner before going live.</div></div>
+        </div>
+
+        <p style="margin-top:32px"><strong>Sign-off:</strong> Practice owner + Crafted Edge lead engineer + practice manager (admin training complete). All three sign before DNS swap.</p>
+      </section>
+
+      <!-- FOOTER -->
+      <footer style="padding: 80px 56px 32px; border-bottom: none; border-top: 1px solid var(--line);">
+        <div style="max-width:1000px">
+          <div class="doc-eyebrow">— Document</div>
+          <p style="font-family:var(--f-display); font-size:1.8rem; line-height:1.1; letter-spacing:-0.02em; color:var(--fg); margin-bottom:24px; font-weight:400;">End of handoff. <em style="color:var(--accent);font-style:italic">Time to build.</em></p>
+          <p style="font-size:0.9rem; color:var(--fg-mid);">Pair this document with the <a href="playbook.html" style="color:var(--accent)">design playbook</a> and the <a href="wellness-concept.html" style="color:var(--accent)">visual concept</a>. Questions during implementation → <a href="mailto:hello@craftededgesolutions.africa" style="color:var(--accent)">hello@craftededgesolutions.africa</a>.</p>
+          <p style="margin-top:24px; font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-dim);">© 2026 Crafted Edge Solutions · Wellness Solutions Africa · v1.0</p>
+        </div>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis/dist/lenis.min.js"></script>
+  <!-- Motion layer -->
+  <script src="motion.js"></script>
+</body>
+</html>

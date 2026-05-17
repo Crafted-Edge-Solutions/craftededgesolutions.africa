@@ -3,376 +3,472 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Solutions for Kenya Businesses | Fitness, E-commerce, WhatsApp Automation | Crafted Edge Solutions</title>
-  <meta name="description" content="Digital systems tailored for fitness studios, service businesses, e-commerce stores, and operations teams in Kenya — including WhatsApp automation, AI concierge, and admin dashboards." />
-  <meta name="keywords" content="WhatsApp automation Kenya, fitness studio software, e-commerce Kenya, AI concierge, admin dashboard Kenya, digital systems Nairobi" />
-  <meta property="og:site_name" content="Crafted Edge Solutions" />
-  <meta property="og:title" content="Digital Solutions for Kenya Businesses | Fitness, E-commerce, WhatsApp Automation" />
-  <meta property="og:description" content="Digital systems for fitness studios, service businesses, e-commerce, and operations teams in Kenya — WhatsApp automation, AI concierge, dashboards." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://craftededgesolutions.africa/solutions.html" />
-  <meta property="og:image" content="https://craftededgesolutions.africa/og-image.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Digital Solutions for Kenya Businesses | WhatsApp Automation & AI" />
-  <meta name="twitter:description" content="Tailored digital systems for fitness studios, service businesses, e-commerce, and operations teams in Kenya." />
-  <meta name="twitter:image" content="https://craftededgesolutions.africa/og-image.png" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <title>Work — Crafted Edge Solutions</title>
+  <meta name="description" content="Selected work — software platforms, AI systems, and infrastructure we've built for real businesses." />
   <link rel="canonical" href="https://craftededgesolutions.africa/solutions.html" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
   <style>
-    .sol-hero { padding: 140px 5% 72px; position: relative; overflow: hidden; }
-    .sol-hero-glow { position:absolute; top:-150px; left:50%; transform:translateX(-50%); width:700px; height:600px; background:radial-gradient(ellipse,rgba(25,194,255,0.09) 0%,transparent 70%); pointer-events:none; }
-
-    .sol-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      transition: border-color 0.25s, transform 0.2s, background 0.25s;
-      display: flex;
-      flex-direction: column;
+    .page-hero {
+      padding: 180px 32px 100px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .sol-card:hover { border-color: var(--border-hover); transform: translateY(-3px); background: var(--bg-card-hover); }
-
-    .sol-card-header {
-      padding: 28px 28px 22px;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sol-card-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.04;
-    }
-
-    .header-blue::before { background: radial-gradient(circle at 70% 30%, var(--blue), transparent 60%); }
-    .header-cyan::before { background: radial-gradient(circle at 70% 30%, var(--cyan), transparent 60%); }
-    .header-purple::before { background: radial-gradient(circle at 70% 30%, #a855f7, transparent 60%); }
-    .header-green::before { background: radial-gradient(circle at 70% 30%, #4ade80, transparent 60%); }
-    .header-orange::before { background: radial-gradient(circle at 70% 30%, #fb923c, transparent 60%); }
-    .header-pink::before { background: radial-gradient(circle at 70% 30%, #f472b6, transparent 60%); }
-
-    .sol-card-icon { font-size: 2rem; margin-bottom: 14px; }
-    .sol-card-header h3 { margin-bottom: 8px; }
-    .sol-card-header p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.7; font-weight: 300; }
-
-    .sol-card-body { padding: 22px 28px; flex: 1; }
-    .sol-card-body h4 { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
-    .sol-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .sol-features li { display: flex; align-items: center; gap: 9px; font-size: 0.85rem; color: var(--text-secondary); font-weight: 300; }
-    .sol-features li::before { content: '→'; color: var(--blue-bright); font-size: 0.75rem; flex-shrink: 0; }
-
-    .sol-card-footer { padding: 18px 28px; border-top: 1px solid var(--border); }
-    .sol-card-footer a { font-size: 0.85rem; color: var(--blue-bright); font-weight: 500; display: flex; align-items: center; gap: 6px; transition: gap 0.2s; }
-    .sol-card-footer a:hover { gap: 10px; }
-
-    .industry-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-top: 12px;
-    }
-
-    .approach-grid {
+    .page-hero-inner {
+      max-width: var(--container);
+      margin: 0 auto;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 80px;
+      align-items: end;
+    }
+
+    @media (max-width: 800px) {
+      .page-hero-inner { grid-template-columns: 1fr; gap: 32px; }
+      .page-hero { padding: 130px 32px 60px; }
+    }
+
+    .page-hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.045em;
+      font-weight: 400;
+    }
+    .page-hero h1 em { font-style: italic; color: var(--accent); }
+
+    .page-hero .lead {
+      font-size: 1.1rem;
+      color: var(--fg-mid);
+      max-width: 44ch;
+    }
+
+    /* Project rows */
+    .work-list {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 60px 32px 100px;
+    }
+
+    .work-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1.5fr auto;
+      gap: 48px;
+      padding: 56px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+      transition: padding 0.3s;
+    }
+
+    .work-row:first-child { border-top: 1px solid var(--line); }
+    .work-row:hover { padding-left: 12px; }
+
+    .work-row .wr-num {
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--fg-dim);
+      padding-top: 6px;
+    }
+
+    .work-row h3 {
+      font-family: var(--f-display);
+      font-size: clamp(1.7rem, 3vw, 2.6rem);
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .work-row .wr-meta {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      display: flex;
+      gap: 16px;
       align-items: center;
-      margin-top: 60px;
     }
 
-    @media (max-width: 768px) { .approach-grid { grid-template-columns: 1fr; } }
-
-    .approach-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 32px;
+    .wr-status {
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .approach-box h3 { margin-bottom: 12px; }
-    .approach-box p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.75; font-weight: 300; }
-    .approach-list { margin-top: 16px; list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .approach-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.875rem; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
-    .approach-list li span:first-child { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .wr-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .wr-status.prototype { color: var(--fg-mid); }
+    .wr-status.prototype::before { background: var(--fg-mid); box-shadow: none; }
+
+    .work-row p {
+      font-size: 0.96rem;
+      line-height: 1.65;
+      color: var(--fg-mid);
+      max-width: 50ch;
+      margin-bottom: 16px;
+    }
+
+    .work-row .wr-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .wr-stack-tag {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      color: var(--fg-mid);
+      padding: 4px 10px;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+    }
+
+    .work-row .wr-action {
+      padding-top: 6px;
+    }
+
+    @media (max-width: 1000px) {
+      .work-row { grid-template-columns: 60px 1fr; gap: 16px 28px; }
+      .work-row > div:nth-child(3),
+      .work-row > div:nth-child(4) { grid-column: 2 / 3; }
+      .work-row > div:nth-child(4) { margin-top: -8px; }
+    }
+
+    /* SECTORS */
+    .sectors {
+      padding: 120px 32px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sectors-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+
+    .sectors h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+      max-width: 18ch;
+      margin: 16px 0 56px;
+    }
+    .sectors h2 em { font-style: italic; color: var(--accent); }
+
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    @media (max-width: 800px) { .sector-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .sector-grid { grid-template-columns: 1fr; } }
+
+    .sector-cell {
+      padding: 32px 28px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .sector-cell .sc-num {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--fg-dim);
+      margin-bottom: 12px;
+    }
+
+    .sector-cell h4 {
+      font-family: var(--f-display);
+      font-size: 1.4rem;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .sector-cell p {
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--fg-mid);
+    }
+
+    /* CTA */
+    #cta-band { padding: 140px 32px; }
+
+    .cta-band-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    @media (max-width: 800px) { .cta-band-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    .cta-band-inner h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      font-weight: 400;
+    }
+    .cta-band-inner h2 em { font-style: italic; color: var(--accent); }
+
+    .cta-band-actions { display: flex; gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 800px) { .cta-band-actions { justify-content: flex-start; } }
   </style>
 </head>
 <body>
-  <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
-  <div class="curtain" id="curtain"></div>
 
   <nav>
-    <a href="index.html" class="nav-logo">
-      <img src="logo-primary.png" alt="Crafted Edge Solutions" class="nav-logo-img">
-    </a>
+    <a href="index.html" class="nav-mark"><img src="logo.png" alt="Crafted Edge Solutions" class="logo-mark" />Crafted Edge<span>.</span></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="services.html">Services</a></li>
-      <li><a href="solutions.html" class="active">Solutions</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="index.html">Index</a></li>
+      <li><a href="services.html">Capabilities</a></li>
+      <li><a href="solutions.html" class="active">Work</a></li>
+      <li><a href="about.html">Studio</a></li>
       <li><a href="contact.html">Contact</a></li>
-      <li><a href="https://newsletter.craftededgesolutions.africa" target="_blank" style="color:#4ade80;font-weight:600">Portal ✦</a></li>
-      <li><a href="builder.html" style="color:#c084fc;font-weight:600">Builder ✦</a></li>
     </ul>
-    <a href="contact.html" class="nav-cta">Book a Consultation</a>
-    <button class="nav-hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <a href="contact.html" class="nav-cta">Start a project →</a>
+    <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
-    <a href="services.html">Services</a>
-    <a href="solutions.html" class="active">Solutions</a>
-    <a href="about.html">About</a>
+    <a href="index.html">Index</a>
+    <a href="services.html">Capabilities</a>
+    <a href="solutions.html">Work</a>
+    <a href="about.html">Studio</a>
     <a href="contact.html">Contact</a>
-    <a href="https://newsletter.craftededgesolutions.africa" target="_blank" style="color:#4ade80;font-weight:600">Portal ✦</a>
-    <a href="contact.html" style="color:var(--blue-bright)">→ Book a Consultation</a>
+    <a href="contact.html">→ Start a project</a>
   </div>
 
-  <div class="sol-hero">
-    <div class="sol-hero-glow"></div>
-    <div class="section-inner">
-      <div class="section-label">Solutions</div>
-      <h1 class="fade-up">Built for your industry,<br/><span class="accent-cyan">not just your inbox</span></h1>
-      <p class="fade-up fade-up-1" style="font-size:1.05rem;color:var(--text-secondary);max-width:580px;line-height:1.8;margin-top:18px;font-weight:300">We've built platforms for businesses across multiple sectors. Below are the systems we specialise in — each one battle-tested with real businesses.</p>
-    </div>
-  </div>
-
-  <section style="padding:0 5% 100px">
-    <div class="section-inner">
-      <div class="cards-grid-3" style="gap:24px">
-
-        <div class="sol-card fade-up">
-          <div class="sol-card-header header-cyan">
-            <div class="sol-card-icon">🏋️</div>
-            <h3>Fitness &amp; Wellness Platforms</h3>
-            <p>Complete digital operations for gyms, studios, and wellness centres — bookings, memberships, and client management in one place.</p>
-            <div class="industry-tag">🏢 Gyms · Studios · Spas · Clinics</div>
-          </div>
-          <div class="sol-card-body">
-            <h4>System includes</h4>
-            <ul class="sol-features">
-              <li>Class scheduling with capacity limits</li>
-              <li>Membership management &amp; recurring billing</li>
-              <li>Trainer assignment and session tracking</li>
-              <li>Automated session reminders via SMS/WhatsApp</li>
-              <li>Client progress tracking portal</li>
-              <li>Revenue and attendance dashboard</li>
-            </ul>
-          </div>
-          <div class="sol-card-footer">
-            <a href="contact.html">Discuss this solution →</a>
-          </div>
-        </div>
-
-        <div class="sol-card fade-up fade-up-1">
-          <div class="sol-card-header header-blue">
-            <div class="sol-card-icon">🛎️</div>
-            <h3>Service Business Booking Systems</h3>
-            <p>For consultants, clinics, salons, and home services — professional online booking with payments, intake, and automated follow-ups.</p>
-            <div class="industry-tag">🏢 Consultants · Salons · Clinics · Home Services</div>
-          </div>
-          <div class="sol-card-body">
-            <h4>System includes</h4>
-            <ul class="sol-features">
-              <li>Online booking with calendar sync (Google, Outlook)</li>
-              <li>Deposit or full payment at booking</li>
-              <li>Client intake forms &amp; pre-appointment checklists</li>
-              <li>Automated reminders, confirmations, follow-ups</li>
-              <li>No-show and cancellation management</li>
-              <li>Multi-staff and multi-location support</li>
-            </ul>
-          </div>
-          <div class="sol-card-footer">
-            <a href="contact.html">Discuss this solution →</a>
-          </div>
-        </div>
-
-        <div class="sol-card fade-up fade-up-2">
-          <div class="sol-card-header header-green">
-            <div class="sol-card-icon">🛒</div>
-            <h3>E-commerce &amp; Payment Workflows</h3>
-            <p>Online stores with M-Pesa and card payments, automated order processing, fulfilment triggers, and real-time business tracking.</p>
-            <div class="industry-tag">🏢 Retail · Food &amp; Beverage · Subscription Businesses</div>
-          </div>
-          <div class="sol-card-body">
-            <h4>System includes</h4>
-            <ul class="sol-features">
-              <li>M-Pesa STK Push &amp; card payments at checkout</li>
-              <li>Automated order confirmation &amp; fulfilment</li>
-              <li>Inventory tracking and low-stock alerts</li>
-              <li>Subscription &amp; repeat order management</li>
-              <li>Delivery status notifications to customers</li>
-              <li>Sales and revenue analytics dashboard</li>
-            </ul>
-          </div>
-          <div class="sol-card-footer">
-            <a href="contact.html">Discuss this solution →</a>
-          </div>
-        </div>
-
-        <div class="sol-card fade-up fade-up-1">
-          <div class="sol-card-header header-purple">
-            <div class="sol-card-icon">🗂️</div>
-            <h3>Internal Admin Dashboards</h3>
-            <p>Custom internal tools for managing teams, projects, and client data — built for how your business actually works, not a generic SaaS template.</p>
-            <div class="industry-tag">🏢 Agencies · SMEs · Operations Teams</div>
-          </div>
-          <div class="sol-card-body">
-            <h4>System includes</h4>
-            <ul class="sol-features">
-              <li>Team and task management with role-based access</li>
-              <li>Client and project tracking in one view</li>
-              <li>Custom approval and sign-off workflows</li>
-              <li>HR leave requests, timesheets, and payroll data</li>
-              <li>Weekly automated reporting by email</li>
-              <li>Integration with your existing tools</li>
-            </ul>
-          </div>
-          <div class="sol-card-footer">
-            <a href="contact.html">Discuss this solution →</a>
-          </div>
-        </div>
-
-        <div class="sol-card fade-up fade-up-2">
-          <div class="sol-card-header header-orange">
-            <div class="sol-card-icon">💬</div>
-            <h3>WhatsApp Automation</h3>
-            <p>Automated WhatsApp flows for client onboarding, order updates, appointment confirmations, and lead qualification — your business active 24/7.</p>
-            <div class="industry-tag">🏢 Any business using WhatsApp for client communication</div>
-          </div>
-          <div class="sol-card-body">
-            <h4>System includes</h4>
-            <ul class="sol-features">
-              <li>WhatsApp Business API integration</li>
-              <li>Automated welcome messages and lead qualification</li>
-              <li>Order and appointment status updates</li>
-              <li>FAQ bot trained on your business</li>
-              <li>Human handoff when the bot can't answer</li>
-              <li>Broadcast campaigns to opted-in contacts</li>
-            </ul>
-          </div>
-          <div class="sol-card-footer">
-            <a href="contact.html">Discuss this solution →</a>
-          </div>
-        </div>
-
-        <div class="sol-card fade-up fade-up-3">
-          <div class="sol-card-header header-cyan">
-            <div class="sol-card-icon">✉️</div>
-            <h3>Managed Newsletter Systems</h3>
-            <p>Private, high-performance email platforms (Listmonk) that you own and control — no monthly subscriber fees, full deliverability, and custom branding.</p>
-            <div class="industry-tag">🏢 Content Creators · Agencies · Retail · SaaS</div>
-          </div>
-          <div class="sol-card-body">
-            <h4>System includes</h4>
-            <ul class="sol-features">
-              <li>Self-hosted Listmonk installation &amp; management</li>
-              <li>Unlimited subscribers and campaigns</li>
-              <li>Custom HTML email templates (branded)</li>
-              <li>Automated drip sequences and auto-responders</li>
-              <li>Detailed click and open-rate analytics</li>
-              <li>Privacy-first, GDPR-compliant list management</li>
-            </ul>
-          </div>
-          <div class="sol-card-footer">
-            <a href="contact.html">Discuss this solution →</a>
-          </div>
-        </div>
-
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom:32px">— Selected work</div>
+        <h1>Software<br/>that runs<br/><em>real businesses.</em></h1>
       </div>
-
-      <!-- OUR APPROACH -->
-      <div style="margin-top:80px">
-        <div class="section-label">Our Approach</div>
-        <h2>Every solution starts with understanding<br/>your business — not our product catalogue</h2>
-        <div class="approach-grid">
-          <div class="approach-box">
-            <h3>We don't sell off-the-shelf</h3>
-            <p>We don't have packages where you pick a tier and we hand you a template. Every engagement starts with a discovery session where we understand your operations, your clients, and your specific bottlenecks.</p>
-            <ul class="approach-list">
-              <li><span>✓</span><span>Custom-built for your workflow, not generic</span></li>
-              <li><span>✓</span><span>Integrated with tools you already use</span></li>
-              <li><span>✓</span><span>Priced based on scope, not arbitrary tiers</span></li>
-            </ul>
-          </div>
-          <div class="approach-box">
-            <h3>You own everything</h3>
-            <p>Unlike SaaS products where you rent access, we build systems you own outright. Your data, your code, your infrastructure. We hand everything over and train your team to manage it.</p>
-            <ul class="approach-list">
-              <li><span>✓</span><span>Full source code ownership</span></li>
-              <li><span>✓</span><span>No vendor lock-in or monthly licence fees</span></li>
-              <li><span>✓</span><span>Team training and documentation included</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
+      <p class="lead">Selected projects we've built and continue to operate. Live infrastructure, real customers, real revenue. The systems behind the brand names.</p>
     </div>
   </section>
 
-  <div class="cta-band">
-    <div class="cta-band-glow"></div>
-    <div class="cta-band-inner">
-      <div class="section-label" style="justify-content:center">Start Here</div>
-      <h2>See your business in one of these?</h2>
-      <p>Book a free discovery call and let's map out the exact system your business needs to operate more efficiently.</p>
-      <div class="cta-band-actions">
-        <a href="contact.html" class="btn-primary" style="padding:15px 34px;font-size:1rem">Book a Free Call</a>
-        <a href="services.html" class="btn-secondary" style="padding:15px 28px;font-size:1rem">View all services →</a>
+  <div class="work-list">
+
+    <div class="work-row">
+      <div class="wr-num">— 01</div>
+      <div>
+        <h3>Wellness Solutions Africa</h3>
+        <div class="wr-meta">
+          <span class="wr-status">Live</span>
+          <span>2025 — Present</span>
+        </div>
+      </div>
+      <div>
+        <p>Revenue generation platform for a multi-location wellness brand. Booking flows, member portals, payment automation, and operational dashboards — engineered end-to-end. Running 24/7 in production.</p>
+        <div class="wr-stack">
+          <span class="wr-stack-tag">Django</span>
+          <span class="wr-stack-tag">React</span>
+          <span class="wr-stack-tag">M-Pesa</span>
+          <span class="wr-stack-tag">Postgres</span>
+          <span class="wr-stack-tag">Self-hosted</span>
+        </div>
+      </div>
+      <div class="wr-action">
+        <a href="contact.html" class="btn-arrow">Build something similar <span>→</span></a>
       </div>
     </div>
+
+    <div class="work-row">
+      <div class="wr-num">— 02</div>
+      <div>
+        <h3>Shopify Marketing AI</h3>
+        <div class="wr-meta">
+          <span class="wr-status prototype">Prototype</span>
+          <span>2025</span>
+        </div>
+      </div>
+      <div>
+        <p>Multi-agent AI system that runs Shopify marketing campaigns autonomously — content generation, audience segmentation, campaign deployment, performance analysis. Built on the MCP protocol with local and cloud LLM support.</p>
+        <div class="wr-stack">
+          <span class="wr-stack-tag">Python</span>
+          <span class="wr-stack-tag">Claude API</span>
+          <span class="wr-stack-tag">MCP Protocol</span>
+          <span class="wr-stack-tag">Shopify API</span>
+          <span class="wr-stack-tag">n8n</span>
+        </div>
+      </div>
+      <div class="wr-action">
+        <a href="contact.html" class="btn-arrow">Build something similar <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="work-row">
+      <div class="wr-num">— 03</div>
+      <div>
+        <h3>Music CES Roaming</h3>
+        <div class="wr-meta">
+          <span class="wr-status">Live</span>
+          <span>2025</span>
+        </div>
+      </div>
+      <div>
+        <p>Internal media management and content distribution platform — a roaming media library with intelligent routing, automated transcoding, and multi-device sync. Self-hosted, designed for high availability on commodity hardware.</p>
+        <div class="wr-stack">
+          <span class="wr-stack-tag">Python</span>
+          <span class="wr-stack-tag">FastAPI</span>
+          <span class="wr-stack-tag">Docker</span>
+          <span class="wr-stack-tag">Linux</span>
+        </div>
+      </div>
+      <div class="wr-action">
+        <a href="contact.html" class="btn-arrow">Build something similar <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="work-row">
+      <div class="wr-num">— 04</div>
+      <div>
+        <h3>Newsletter Infrastructure</h3>
+        <div class="wr-meta">
+          <span class="wr-status">Live</span>
+          <span>2026</span>
+        </div>
+      </div>
+      <div>
+        <p>Self-hosted Listmonk deployment with custom subscriber flows, double opt-in, automated transactional pipelines, and deliverability monitoring. Powers email for both Crafted Edge and partner brands at scale.</p>
+        <div class="wr-stack">
+          <span class="wr-stack-tag">Listmonk</span>
+          <span class="wr-stack-tag">Postgres</span>
+          <span class="wr-stack-tag">Cloudflare</span>
+          <span class="wr-stack-tag">Self-hosted</span>
+        </div>
+      </div>
+      <div class="wr-action">
+        <a href="contact.html" class="btn-arrow">Build something similar <span>→</span></a>
+      </div>
+    </div>
+
+    <div class="work-row">
+      <div class="wr-num">— 05</div>
+      <div>
+        <h3>Crafted Edge — This site</h3>
+        <div class="wr-meta">
+          <span class="wr-status">Live</span>
+          <span>2026</span>
+        </div>
+      </div>
+      <div>
+        <p>The studio's own digital presence — designed and engineered as a reference point for the editorial direction we bring to client work. Static-first, edge-deployed, sub-100ms response times globally.</p>
+        <div class="wr-stack">
+          <span class="wr-stack-tag">Cloudflare Pages</span>
+          <span class="wr-stack-tag">Edge Functions</span>
+          <span class="wr-stack-tag">Resend</span>
+        </div>
+      </div>
+      <div class="wr-action">
+        <a href="contact.html" class="btn-arrow">Build something similar <span>→</span></a>
+      </div>
+    </div>
+
   </div>
+
+  <!-- SECTORS -->
+  <section class="sectors">
+    <div class="sectors-inner">
+      <div class="eyebrow">— Sectors we've worked in</div>
+      <h2>Different industries.<br/><em>Same engineering discipline.</em></h2>
+      <div class="sector-grid">
+        <div class="sector-cell">
+          <div class="sc-num">— 01</div>
+          <h4>Wellness &amp; Fitness</h4>
+          <p>Booking platforms, member portals, recurring billing, class management.</p>
+        </div>
+        <div class="sector-cell">
+          <div class="sc-num">— 02</div>
+          <h4>Professional Services</h4>
+          <p>Client portals, intake flows, automated follow-up, scheduling at scale.</p>
+        </div>
+        <div class="sector-cell">
+          <div class="sc-num">— 03</div>
+          <h4>E-commerce</h4>
+          <p>M-Pesa checkout, order automation, inventory sync, multi-channel selling.</p>
+        </div>
+        <div class="sector-cell">
+          <div class="sc-num">— 04</div>
+          <h4>Internal Operations</h4>
+          <p>Custom admin tools, dashboards, approval workflows, role-based access.</p>
+        </div>
+        <div class="sector-cell">
+          <div class="sc-num">— 05</div>
+          <h4>Real Estate &amp; Property</h4>
+          <p>Listing platforms, viewing schedules, tenant portals, document automation.</p>
+        </div>
+        <div class="sector-cell">
+          <div class="sc-num">— 06</div>
+          <h4>Hospitality &amp; F&amp;B</h4>
+          <p>Reservation systems, online ordering, kitchen displays, loyalty programs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta-band">
+    <div class="cta-band-inner">
+      <h2>Your sector<br/>not listed? <em>It still fits.</em></h2>
+      <div class="cta-band-actions">
+        <a href="contact.html" class="btn btn-primary">Start a project →</a>
+        <a href="services.html" class="btn btn-secondary">View capabilities</a>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <a href="index.html" class="nav-logo" style="margin-bottom: 20px;">
-          <img src="logo-primary.png" alt="Crafted Edge Solutions" class="nav-logo-img">
-        </a>
-        <p>Practical software systems for businesses ready to move beyond manual work. Nairobi, Kenya.</p>
+        <div class="nav-mark"><img src="logo.png" alt="Crafted Edge Solutions" class="logo-mark" />Crafted Edge<span>.</span></div>
+        <p>A product engineering studio building software, AI systems, and infrastructure for ambitious businesses.</p>
         <div class="footer-contact">
-          <a href="mailto:admin@craftededgesolutions.africa">admin@craftededgesolutions.africa</a>
+          <a href="mailto:hello@craftededgesolutions.africa">hello@craftededgesolutions.africa</a>
           <a href="tel:+254769071925">+254 769 071 925</a>
         </div>
       </div>
-      <div class="footer-col"><h5>Services</h5><ul><li><a href="services.html">Professional Websites</a></li><li><a href="services.html">Booking Systems</a></li><li><a href="services.html">Workflow Automation</a></li><li><a href="services.html">AI Assistants</a></li><li><a href="services.html">Payment Systems</a></li><li><a href="services.html">Managed Newsletters</a></li></ul></div>
-      <div class="footer-col"><h5>Solutions</h5><ul><li><a href="solutions.html">Fitness &amp; Wellness</a></li><li><a href="solutions.html">Service Businesses</a></li><li><a href="solutions.html">E-commerce</a></li><li><a href="solutions.html">Admin Dashboards</a></li><li><a href="solutions.html">WhatsApp Automation</a></li><li><a href="solutions.html">AI Concierge</a></li></ul></div>
-      <div class="footer-col"><h5>Company</h5><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="https://newsletter.craftededgesolutions.africa" target="_blank">Client Portal</a></li><li><a href="#">Privacy Policy</a></li></ul></div>
+      <div class="footer-col"><h5>— Studio</h5><ul><li><a href="about.html">About</a></li><li><a href="about.html#process">Process</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="footer-col"><h5>— Capabilities</h5><ul><li><a href="services.html">Software</a></li><li><a href="services.html">AI Systems</a></li><li><a href="services.html">Automation</a></li><li><a href="services.html">Infrastructure</a></li></ul></div>
+      <div class="footer-col"><h5>— Elsewhere</h5><ul><li><a href="https://meshack.craftededgesolutions.africa" target="_blank">Founder</a></li><li><a href="https://github.com/Crafted-Edge-Solutions" target="_blank">GitHub</a></li><li><a href="#">Privacy</a></li></ul></div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Crafted Edge Solutions. All rights reserved.</p>
-      <div class="footer-tags"><span class="footer-tag">Software</span><span class="footer-tag">Automation</span><span class="footer-tag">AI</span><span class="footer-tag">Nairobi, Kenya</span></div>
+      <p>© 2026 Crafted Edge Solutions</p>
+      <p>Nairobi · EAT · Operating globally</p>
     </div>
   </footer>
 
-  <a href="https://wa.me/254769071925" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  </a>
 
-  <div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({ duration: 700, once: true, offset: 80 });</script>
-  <script src="main.js"></script>
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis/dist/lenis.min.js"></script>
+  <!-- Motion layer -->
+  <script src="motion.js"></script>
 </body>
 </html>

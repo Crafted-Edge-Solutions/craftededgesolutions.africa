@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wellness Solutions — Concept · Built from the playbook</title>
+  <meta name="description" content="Concept design for wellness-solutions.africa applying the same design ideology as Crafted Edge — different brand, different palette, same discipline." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <style>
+    /* ===== WELLNESS DESIGN SYSTEM =====
+       Same variable names, different values.
+       Same principles, different brand. */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Surfaces — warm cream paper */
+      --bg: #f5f1ea;
+      --bg-elev: #ece7dd;
+      --bg-card: #ece7dd;
+      --bg-card-hover: #e3dcd0;
+
+      /* Lines — soft earth */
+      --line: rgba(42, 38, 32, 0.10);
+      --line-strong: rgba(42, 38, 32, 0.20);
+
+      /* Type — warm charcoal */
+      --fg: #2a2620;
+      --fg-mid: #6a6356;
+      --fg-dim: #908778;
+      --fg-faint: #b6ad9d;
+
+      /* Accent — sage green */
+      --accent: #7a9472;
+      --accent-soft: rgba(122, 148, 114, 0.12);
+      --accent-warm: #c87560;  /* secondary, used very rarely */
+
+      /* Type system — same three roles, softer voices */
+      --f-display: "Fraunces", "Times New Roman", serif;
+      --f-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+      --f-mono: "JetBrains Mono", "SF Mono", monospace;
+
+      --container: 1240px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--f-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+      font-weight: 300;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; outline: none; background: none; }
+    img { display: block; max-width: 100%; }
+
+    ::selection { background: var(--accent); color: var(--bg); }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 32px;
+      background: rgba(245, 241, 234, 0.85);
+      backdrop-filter: blur(18px) saturate(140%);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--f-display);
+      font-size: 1.2rem;
+      letter-spacing: -0.015em;
+      color: var(--fg);
+      font-weight: 400;
+    }
+
+    .nav-mark .leaf {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-mark .leaf::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+
+    .nav-mark .leaf::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent-warm);
+      clip-path: polygon(50% 50%, 100% 0%, 100% 100%);
+    }
+
+    .nav-mark span { font-style: italic; color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg-mid);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--fg); }
+
+    .nav-cta {
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg);
+      padding: 10px 18px;
+      border: 1px solid var(--line-strong);
+      border-radius: 100px;
+      transition: all 0.2s;
+    }
+
+    .nav-cta:hover { border-color: var(--fg); background: rgba(42,38,32,0.05); }
+
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+    }
+
+    /* ===== TOP BANNER NOTE ===== */
+    .concept-banner {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 201;
+      background: var(--fg);
+      color: var(--bg);
+      padding: 10px 32px;
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .concept-banner a { color: var(--accent); }
+    .concept-banner span { opacity: 0.6; }
+
+    nav { top: 36px; }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 180px 32px 100px;
+      min-height: 95vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 32px;
+    }
+
+    .hero h1 {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -0.025em;
+      font-weight: 400;
+      margin-bottom: 36px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .hero .lead {
+      font-size: 1.15rem;
+      line-height: 1.7;
+      color: var(--fg-mid);
+      max-width: 48ch;
+      font-weight: 300;
+    }
+
+    .hero-visual {
+      aspect-ratio: 3 / 4;
+      background: var(--bg-card);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(122,148,114,0.18) 0%, rgba(200,117,96,0.08) 100%);
+    }
+
+    .hero-visual-label {
+      position: relative;
+      z-index: 1;
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-mid);
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-visual-label strong {
+      display: block;
+      font-family: var(--f-display);
+      font-style: italic;
+      font-size: 1.4rem;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      margin-top: 10px;
+      font-weight: 400;
+      text-transform: none;
+    }
+
+    .hero-meta {
+      max-width: var(--container);
+      margin: 80px auto 0;
+      width: 100%;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      gap: 40px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta .mi {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+
+    .hero-meta .mi strong {
+      color: var(--fg);
+      display: block;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    /* ===== SECTION SHARED ===== */
+    section {
+      padding: 120px 32px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-family: var(--f-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1;
+      letter-spacing: -0.025em;
+      font-weight: 400;
+    }
+
+    h2 em { font-style: italic; color: var(--accent); }
+
+    /* ===== INTRO / PHILOSOPHY ===== */
+    .philosophy-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    @media (max-width: 800px) { .philosophy-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+    .philosophy-body p {
+      font-size: 1.15rem;
+      line-height: 1.75;
+      color: var(--fg-mid);
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .philosophy-body p:last-child { margin-bottom: 0; }
+    .philosophy-body strong { color: var(--fg); font-weight: 400; }
+
+    /* ===== OFFERINGS — NUMBERED ROWS ===== */
+    .offerings-head {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+
+    @media (max-width: 800px) { .offerings-head { grid-template-columns: 1fr; gap: 24px; } }
+
+    .offerings-head .lead {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: var(--fg-mid);
+      font-weight: 300;
+    }
+
+    .offering-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1.4fr;
+      gap: 48px;
+      padding: 44px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+      transition: padding 0.4s ease;
+      position: relative;
+    }
+
+    .offering-row:last-child { border-bottom: 1px solid var(--line); }
+    .offering-row:hover { padding-left: 16px; }
+
+    .offering-row::after {
+      content: '→';
+      position: absolute;
+      right: 0;
+      top: 48px;
+      font-family: var(--f-mono);
+      font-size: 1.2rem;
+      color: var(--fg-dim);
+      opacity: 0;
+      transform: translateX(-12px);
+      transition: opacity 0.3s, transform 0.3s, color 0.3s;
+    }
+    .offering-row:hover::after { opacity: 1; transform: translateX(0); color: var(--accent); }
+
+    .offering-row .num {
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--fg-dim);
+      padding-top: 8px;
+    }
+
+    .offering-row h3 {
+      font-family: var(--f-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+    }
+
+    .offering-row p {
+      font-size: 0.98rem;
+      line-height: 1.75;
+      color: var(--fg-mid);
+      max-width: 48ch;
+      font-weight: 300;
+    }
+
+    @media (max-width: 800px) {
+      .offering-row { grid-template-columns: 50px 1fr; gap: 16px 28px; }
+      .offering-row p { grid-column: 2 / 3; }
+      .offering-row::after { display: none; }
+    }
+
+    /* ===== PRACTITIONER GRID ===== */
+    .pract-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    @media (max-width: 800px) { .pract-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 500px) { .pract-grid { grid-template-columns: 1fr; } }
+
+    .pract-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+
+    .pract-card:hover { transform: translateY(-4px); }
+
+    .pract-photo {
+      aspect-ratio: 4 / 5;
+      background: linear-gradient(160deg, rgba(122,148,114,0.18) 0%, rgba(200,117,96,0.1) 100%);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .pract-photo-label {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-mid);
+      text-align: center;
+    }
+
+    .pract-info {
+      padding: 22px 24px;
+    }
+
+    .pract-info h4 {
+      font-family: var(--f-display);
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .pract-info h4 em { font-style: italic; color: var(--accent); }
+
+    .pract-info .pract-role {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 14px;
+    }
+
+    .pract-info p {
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: var(--fg-mid);
+      font-weight: 300;
+    }
+
+    /* ===== STATS ===== */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-top: 56px;
+    }
+
+    @media (max-width: 800px) {
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat-cell {
+      padding: 40px 28px;
+      border-right: 1px solid var(--line);
+    }
+    .stat-cell:last-child { border-right: none; }
+
+    @media (max-width: 800px) {
+      .stat-cell:nth-child(2) { border-right: none; }
+      .stat-cell:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    }
+
+    .stat-num {
+      font-family: var(--f-display);
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--fg);
+      font-weight: 400;
+    }
+
+    .stat-num em { font-style: italic; color: var(--accent); }
+
+    .stat-label {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-top: 16px;
+    }
+
+    .stat-desc {
+      font-size: 0.84rem;
+      color: var(--fg-mid);
+      line-height: 1.5;
+      margin-top: 8px;
+      font-weight: 300;
+    }
+
+    /* ===== CTA BAND ===== */
+    .cta-band {
+      padding: 140px 32px;
+    }
+
+    .cta-band-inner {
+      max-width: var(--container);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+    }
+
+    @media (max-width: 800px) { .cta-band-inner { grid-template-columns: 1fr; gap: 40px; } }
+
+    .cta-band h2 {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      font-weight: 400;
+    }
+    .cta-band h2 em { font-style: italic; color: var(--accent); }
+
+    .cta-meta { display: flex; flex-direction: column; gap: 0; }
+
+    .cta-meta-item {
+      padding: 20px 0;
+      border-top: 1px solid var(--line);
+    }
+    .cta-meta-item:last-child { border-bottom: 1px solid var(--line); }
+
+    .cta-meta-label {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 6px;
+    }
+    .cta-meta-value {
+      font-family: var(--f-display);
+      font-size: 1.35rem;
+      letter-spacing: -0.01em;
+      color: var(--fg);
+      transition: color 0.2s;
+    }
+    .cta-meta-value:hover { color: var(--accent); }
+
+    .cta-actions {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border-radius: 100px;
+      font-family: var(--f-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.3s;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--fg);
+      color: var(--bg);
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); }
+
+    .btn-secondary {
+      border-color: var(--line-strong);
+      color: var(--fg);
+    }
+    .btn-secondary:hover { border-color: var(--fg); background: rgba(42,38,32,0.04); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 80px 32px 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-grid {
+      max-width: var(--container);
+      margin: 0 auto 60px;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+    }
+
+    @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+
+    .footer-brand .nav-mark { font-size: 1.45rem; }
+    .footer-brand .leaf { width: 32px; height: 32px; }
+    .footer-brand p {
+      font-size: 0.92rem;
+      color: var(--fg-mid);
+      line-height: 1.65;
+      max-width: 320px;
+      margin-top: 16px;
+      font-weight: 300;
+    }
+
+    .footer-col h5 {
+      font-family: var(--f-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.92rem; color: var(--fg-mid); font-weight: 300; transition: color 0.2s; }
+    .footer-col ul li a:hover { color: var(--fg); }
+
+    .footer-bottom {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-bottom p {
+      font-family: var(--f-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--fg-dim);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="concept-banner">
+    <span>— Concept · Built from the Crafted Edge playbook</span>
+    <a href="playbook.html">View the playbook →</a>
+    <a href="index.html">See Crafted Edge for contrast →</a>
+  </div>
+
+  <nav>
+    <a href="#" class="nav-mark">
+      <span class="leaf"></span>
+      Wellness Solutions<span>.</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#offerings">Offerings</a></li>
+      <li><a href="#team">Practitioners</a></li>
+      <li><a href="#contact">Book</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book a session →</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">— Holistic care · Nairobi, Kenya</div>
+        <h1>Care<br/>that's <em>actually<br/>felt.</em></h1>
+        <p class="lead">A wellness practice rooted in slow medicine, sensory care, and the kind of attention modern healthcare rarely makes time for. We work one-on-one, by appointment, in a space designed for stillness.</p>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-visual-label">— Image placeholder<strong>Editorial natural-light portrait of practitioner with client</strong></div>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <div class="mi">— Founded<strong>2024</strong></div>
+      <div class="mi">— Location<strong>Westlands · Nairobi</strong></div>
+      <div class="mi">— Practitioners<strong>04 Senior</strong></div>
+      <div class="mi">— Modalities<strong>10+ Disciplines</strong></div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section id="approach">
+    <div class="section-inner">
+      <div class="philosophy-grid">
+        <div>
+          <div class="eyebrow">— Approach</div>
+          <h2>Slow, considered,<br/><em>specific.</em></h2>
+        </div>
+        <div class="philosophy-body">
+          <p>Wellness Solutions is not a chain, not a franchise, and not a "wellness centre" in the way that phrase has been diluted. We're a <strong>small practice that treats the person, not the symptom</strong>.</p>
+          <p>Our work happens slowly. First consultations run 90 minutes. Treatment plans take their time. We turn down clients we can't help, and we tell you that honestly.</p>
+          <p>If you've been everywhere else and felt unseen — this is where the listening starts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERINGS (numbered list — same structure as CES capabilities) -->
+  <section id="offerings">
+    <div class="section-inner">
+      <div class="offerings-head">
+        <div>
+          <div class="eyebrow">— Offerings</div>
+          <h2>Six disciplines.<br/><em>One philosophy.</em></h2>
+        </div>
+        <p class="lead">Each modality stands alone or composes with the others — what we recommend depends entirely on you. Sessions are individual, never group, and always with the same practitioner across a treatment arc.</p>
+      </div>
+
+      <div>
+        <div class="offering-row">
+          <div class="num">— 01</div>
+          <h3>Functional<br/>Medicine</h3>
+          <p>Root-cause analysis informed by lab work, history, and lived experience. Treatment plans built around the body's actual systems — not symptom suppression. For long-running concerns that haven't responded to conventional care.</p>
+        </div>
+
+        <div class="offering-row">
+          <div class="num">— 02</div>
+          <h3>Somatic<br/>Therapy</h3>
+          <p>Body-led work for stress, trauma response, and the kinds of nervous-system dysregulation that talk therapy alone rarely resolves. Gentle, sensory, and grounded in modern polyvagal theory.</p>
+        </div>
+
+        <div class="offering-row">
+          <div class="num">— 03</div>
+          <h3>Movement<br/>&amp; Posture</h3>
+          <p>One-on-one corrective movement for pain, alignment, breath, and resilience. Drawn from Pilates, yoga therapy, and physical-therapy fundamentals. Designed for the body you actually live in, not a generic "wellness" template.</p>
+        </div>
+
+        <div class="offering-row">
+          <div class="num">— 04</div>
+          <h3>Nutritional<br/>Practice</h3>
+          <p>Food as medicine, treated specifically. We work from your bloodwork and your kitchen, not from internet protocols. Practical, sustainable, and culturally appropriate to East African pantries.</p>
+        </div>
+
+        <div class="offering-row">
+          <div class="num">— 05</div>
+          <h3>Manual<br/>Therapy</h3>
+          <p>Therapeutic massage, myofascial release, and structural body work. Quiet rooms, senior practitioners, and 75-minute sessions. Restorative, not transactional.</p>
+        </div>
+
+        <div class="offering-row">
+          <div class="num">— 06</div>
+          <h3>Integrative<br/>Plans</h3>
+          <p>For complex cases — chronic illness, recovery, perinatal care — we coordinate across disciplines and stay involved across months. One practitioner leads; the rest support. You always know who's holding the plan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRACTITIONERS -->
+  <section id="team">
+    <div class="section-inner">
+      <div class="eyebrow">— Practitioners</div>
+      <h2>Senior. Long-tenured.<br/><em>Yours by name.</em></h2>
+      <p style="font-size:1.05rem; color:var(--fg-mid); max-width:54ch; margin-top:18px; font-weight:300;">You see the same practitioner across your treatment. No rotating staff, no rushed follow-ups. This is who you'll be working with.</p>
+
+      <div class="pract-grid">
+        <div class="pract-card">
+          <div class="pract-photo">
+            <div class="pract-photo-label">— Editorial portrait<br/>natural light, single subject</div>
+          </div>
+          <div class="pract-info">
+            <h4>Dr. Amina <em>Kioko</em></h4>
+            <div class="pract-role">— Functional Medicine · Lead Practitioner</div>
+            <p>15 years across functional, integrative, and chronic illness care. Trained at IFM Seattle.</p>
+          </div>
+        </div>
+
+        <div class="pract-card">
+          <div class="pract-photo">
+            <div class="pract-photo-label">— Editorial portrait<br/>natural light, single subject</div>
+          </div>
+          <div class="pract-info">
+            <h4>James <em>Mwangi</em></h4>
+            <div class="pract-role">— Somatic Therapy · Movement</div>
+            <p>Polyvagal-informed somatic practitioner. Background in clinical psychology and movement therapy.</p>
+          </div>
+        </div>
+
+        <div class="pract-card">
+          <div class="pract-photo">
+            <div class="pract-photo-label">— Editorial portrait<br/>natural light, single subject</div>
+          </div>
+          <div class="pract-info">
+            <h4>Grace <em>Otieno</em></h4>
+            <div class="pract-role">— Nutrition · Manual Therapy</div>
+            <p>Registered nutritionist + senior manual therapist. Specialises in perinatal and recovery work.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <div class="stat-grid">
+        <div class="stat-cell">
+          <div class="stat-num">90<em>min</em></div>
+          <div class="stat-label">First consultation</div>
+          <div class="stat-desc">Slow listening, no rush.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">04<em>+</em></div>
+          <div class="stat-label">Senior practitioners</div>
+          <div class="stat-desc">15+ years experience each.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">01</div>
+          <div class="stat-label">Lead practitioner</div>
+          <div class="stat-desc">Same person every visit.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">10<em>+</em></div>
+          <div class="stat-label">Modalities</div>
+          <div class="stat-desc">Composed for your case.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band" id="contact">
+    <div class="cta-band-inner">
+      <h2>Ready to<br/>be <em>heard?</em></h2>
+      <div class="cta-meta">
+        <div class="cta-meta-item">
+          <div class="cta-meta-label">— Book a consultation</div>
+          <a href="#" class="cta-meta-value">hello@wellness-solutions.africa</a>
+        </div>
+        <div class="cta-meta-item">
+          <div class="cta-meta-label">— Phone / WhatsApp</div>
+          <a href="#" class="cta-meta-value">+254 7XX XXX XXX</a>
+        </div>
+        <div class="cta-meta-item">
+          <div class="cta-meta-label">— Visit</div>
+          <span class="cta-meta-value">Westlands, Nairobi · By appointment</span>
+        </div>
+        <div class="cta-actions">
+          <a href="#" class="btn btn-primary">Book a consultation →</a>
+          <a href="#" class="btn btn-secondary">Speak with the team</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-mark"><span class="leaf"></span>Wellness Solutions<span>.</span></div>
+        <p>A small practice rooted in slow medicine, sensory care, and the kind of attention modern healthcare rarely makes time for.</p>
+      </div>
+      <div class="footer-col"><h5>— Practice</h5><ul><li><a href="#approach">Approach</a></li><li><a href="#team">Practitioners</a></li><li><a href="#">Press</a></li></ul></div>
+      <div class="footer-col"><h5>— Offerings</h5><ul><li><a href="#offerings">Functional Medicine</a></li><li><a href="#offerings">Somatic Therapy</a></li><li><a href="#offerings">Movement</a></li><li><a href="#offerings">Nutrition</a></li></ul></div>
+      <div class="footer-col"><h5>— Contact</h5><ul><li><a href="#contact">Book</a></li><li><a href="#">Westlands · Nairobi</a></li><li><a href="mailto:hello@wellness-solutions.africa">hello@wellness-solutions.africa</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Wellness Solutions Africa</p>
+      <p>Built from the Crafted Edge playbook</p>
+    </div>
+  </footer>
+
+</body>
+</html>
