@@ -28,28 +28,61 @@
   <style>
     /* HOME-SPECIFIC */
     #hero {
-      min-height: 100vh;
-      padding: 130px 5% 100px;
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
+      min-height: 100vh; display: flex; align-items: flex-end;
+      padding: 0 5% 64px; position: relative; overflow: hidden;
     }
+    .hero-bg-grid {
+      position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+      display: grid; grid-template-columns: repeat(6, 1fr);
+    }
+    .hero-bg-grid span { border-right: 1px solid var(--border); }
     .hero-glow-1, .hero-glow-2 { display: none; }
-    .hero-inner {
-      max-width: var(--max-w); margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 64px; align-items: center; position: relative; z-index: 1;
+    /* Old hero elements — hidden, replaced */
+    .hero-inner, .hero-content, .hero-visual { display: none !important; }
+
+    .ces-hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(5rem, 16vw, 14rem);
+      font-weight: 800; line-height: 0.88;
+      letter-spacing: -0.04em; position: relative; z-index: 1;
+      color: var(--text-primary); margin: 0;
     }
-    @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
+    .ces-hero-line2 { display: block; padding-left: 8vw; }
+    .ces-dot { color: var(--accent); }
+
+    .ces-rotating-badge {
+      position: absolute; top: 120px; right: 5%;
+      width: 140px; height: 140px; z-index: 1;
+      animation: ces-spin 16s linear infinite; color: var(--text-secondary);
     }
-    .hero-content h1 { margin-bottom: 22px; }
-    .hero-content .hero-sub {
-      font-size: 1.05rem; color: var(--text-secondary); line-height: 1.8;
-      max-width: 520px; margin-bottom: 38px; font-weight: 300;
+    .ces-rotating-badge svg { width: 100%; height: 100%; }
+    @keyframes ces-spin { to { transform: rotate(360deg); } }
+
+    .ces-hero-bottom {
+      position: absolute; bottom: 64px; right: 5%;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 16px; z-index: 1;
+    }
+    .ces-hero-avail {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-display); font-size: 0.78rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);
+    }
+    .ces-pulse {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e;
+      animation: pulse 2s ease-in-out infinite; flex-shrink: 0;
+    }
+    .ces-hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+    .ces-hero-rule {
+      position: absolute; left: 5%; right: 5%; bottom: 0;
+      height: 1px; background: var(--border); z-index: 1;
     }
 
-    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    @media (max-width: 768px) {
+      #hero { padding: 0 5% 56px; }
+      .ces-rotating-badge { display: none; }
+      .ces-hero-bottom { position: static; align-items: flex-start; margin-top: 32px; }
+      .ces-hero-name { font-size: clamp(4rem, 18vw, 8rem); }
+    }
 
     /* DASHBOARD MOCKUP */
     .dashboard-frame {
@@ -195,100 +228,49 @@
     <a href="contact.html">Contact</a>
     <a href="https://newsletter.craftededgesolutions.africa" target="_blank" style="color:#4ade80;font-weight:600">Portal ✦</a>
     <a href="builder.html" style="color:#c084fc;font-weight:600">Builder ✦ Coming Soon</a>
-    <a href="contact.html" style="color:var(--blue-bright)">→ Book a Consultation</a>
+    <a href="contact.html" style="color:var(--accent)">→ Book a Consultation</a>
   </div>
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-glow-1"></div>
-    <div class="hero-glow-2"></div>
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="badge fade-up">
-          <span class="badge-dot"></span>
-          Kenya-based · Globally capable
-        </div>
-        <h1 class="fade-up fade-up-1">Digital systems built for businesses <span class="accent">ready to scale.</span></h1>
-        <p class="hero-sub fade-up fade-up-2">Crafted Edge Solutions designs websites, automations, dashboards, and AI-powered workflows that help businesses operate smarter, serve clients better, and grow with confidence.</p>
-        <div class="hero-actions fade-up fade-up-3">
-          <a href="contact.html" class="btn-primary">
-            Book a Consultation
-            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5h10M8.5 4l3.5 3.5L8.5 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a href="solutions.html" class="btn-secondary">
-            View Solutions
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-        </div>
+    <div class="hero-bg-grid">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="ces-rotating-badge">
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="rp" d="M 100,100 m -72,0 a 72,72 0 1,1 144,0 a 72,72 0 1,1 -144,0"/>
+        </defs>
+        <text fill="currentColor" font-family="Syne, sans-serif" font-size="11" font-weight="700" letter-spacing="2.8">
+          <textPath href="#rp">KENYA · WORLDWIDE · AI · AUTOMATION · </textPath>
+        </text>
+        <circle cx="100" cy="100" r="5" fill="#ff5c00"/>
+      </svg>
+    </div>
+
+    <div>
+      <h1 class="ces-hero-name" id="cesHeroName">
+        CRAFTED
+        <span class="ces-hero-line2">EDGE<span class="ces-dot">.</span></span>
+      </h1>
+    </div>
+
+    <div class="ces-hero-bottom">
+      <div class="ces-hero-avail">
+        <span class="ces-pulse"></span>
+        Taking projects · Nairobi, Kenya
       </div>
-      <div class="hero-visual fade-up fade-up-2">
-        <div class="dashboard-frame">
-          <div class="dash-bar">
-            <div class="dash-dots">
-              <div class="dash-dot dot-r"></div>
-              <div class="dash-dot dot-y"></div>
-              <div class="dash-dot dot-g"></div>
-            </div>
-            <span class="dash-bar-title">Business Dashboard · Live</span>
-            <div style="width:40px"></div>
-          </div>
-          <div class="dash-body">
-            <div class="dash-stats">
-              <div class="d-stat">
-                <div class="d-stat-lbl">Revenue</div>
-                <div class="d-stat-val">KSh 284K</div>
-                <div class="d-stat-delta">↑ 18% this month</div>
-              </div>
-              <div class="d-stat">
-                <div class="d-stat-lbl">Bookings</div>
-                <div class="d-stat-val">142</div>
-                <div class="d-stat-delta">↑ 24 new today</div>
-              </div>
-              <div class="d-stat">
-                <div class="d-stat-lbl">Automations</div>
-                <div class="d-stat-val">37</div>
-                <div class="d-stat-delta">Active flows</div>
-              </div>
-            </div>
-            <div class="dash-row">
-              <div class="d-box">
-                <div class="d-box-title">Revenue · 6 months</div>
-                <div class="chart-bars">
-                  <div class="c-bar" style="height:42%"></div>
-                  <div class="c-bar c" style="height:58%"></div>
-                  <div class="c-bar" style="height:47%"></div>
-                  <div class="c-bar c" style="height:72%"></div>
-                  <div class="c-bar" style="height:63%"></div>
-                  <div class="c-bar c" style="height:82%"></div>
-                  <div class="c-bar" style="height:91%"></div>
-                  <div class="c-bar c" style="height:100%"></div>
-                </div>
-              </div>
-              <div class="d-box">
-                <div class="d-box-title">Upcoming Bookings</div>
-                <div class="booking-row"><div class="b-dot"></div><div class="b-name">Grace M. — Consult</div><div class="b-time">10:00</div></div>
-                <div class="booking-row"><div class="b-dot c"></div><div class="b-name">David K. — Demo</div><div class="b-time">11:30</div></div>
-                <div class="booking-row"><div class="b-dot g"></div><div class="b-name">Aisha O. — Onboard</div><div class="b-time">14:00</div></div>
-              </div>
-            </div>
-            <div class="dash-bottom">
-              <div class="ai-card">
-                <div class="ai-lbl">AI Assistant</div>
-                <div class="ai-text">Summarising 3 new leads and drafting follow-up emails…<span class="ai-cur"></span></div>
-              </div>
-              <div class="wf-card">
-                <div class="wf-lbl">Active Workflow</div>
-                <div class="wf-step"><div class="wf-ico wi-b">📥</div><div class="wf-t">Form submitted</div></div>
-                <div class="wf-line"></div>
-                <div class="wf-step"><div class="wf-ico wi-c">✉️</div><div class="wf-t">Email sent</div></div>
-                <div class="wf-line"></div>
-                <div class="wf-step"><div class="wf-ico wi-g">✅</div><div class="wf-t">CRM updated</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="ces-hero-ctas">
+        <a href="contact.html" class="btn-primary">
+          Start a Project
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2 6.5h9M7.5 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="solutions.html" class="btn-secondary">View Solutions</a>
       </div>
     </div>
+
+    <div class="ces-hero-rule"></div>
   </section>
 
   <!-- TRUST STRIP / MARQUEE -->
@@ -712,7 +694,10 @@
       });
     }
 
-    gsap.from('.hero-content > *', { opacity: 0, y: 40, stagger: 0.12, duration: 0.9, ease: 'power3.out', delay: 0.3 });
+    const htl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    htl.from('#cesHeroName', { opacity: 0, y: 80, duration: 1.1 }, 0.2)
+       .from('.ces-rotating-badge', { opacity: 0, scale: 0.7, duration: 0.9, ease: 'back.out(1.4)' }, 0.5)
+       .from('.ces-hero-bottom', { opacity: 0, x: 30, duration: 0.8 }, 0.6);
   </script>
   <script src="main.js"></script>
 </body>
