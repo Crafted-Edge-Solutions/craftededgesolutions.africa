@@ -48,16 +48,17 @@ services:
       - LISTMONK_app__address=0.0.0.0:9000
     volumes:
       - ./listmonk/config.toml:/listmonk/config.toml
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:9000/health | grep -q 'true' || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
     depends_on:
       db:
         condition: service_healthy
       app-init:
         condition: service_completed_successfully
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
 volumes:
   listmonk_data:

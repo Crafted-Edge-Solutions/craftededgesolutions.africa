@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Stack Cheatsheet — Crafted Edge</title>
+<style>
+  :root { --bg: #0f1117; --surface: #1a1d27; --border: #2a2d3a; --text: #e2e8f0; --muted: #94a3b8; --accent: #7c3aed; --green: #10b981; --blue: #3b82f6; --yellow: #f59e0b; --red: #ef4444; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 15px; line-height: 1.7; padding: 2rem 1rem; }
+  .container { max-width: 860px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; color: #fff; border-bottom: 2px solid var(--accent); padding-bottom: .5rem; margin-bottom: .5rem; }
+  h1 + blockquote { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; border: none; padding: 0; }
+  h2 { font-size: 1.15rem; color: var(--green); margin: 2rem 0 .75rem; padding: .4rem .8rem; background: rgba(16,185,129,.08); border-left: 3px solid var(--green); border-radius: 0 4px 4px 0; }
+  h3 { font-size: 1rem; color: var(--blue); margin: 1.5rem 0 .5rem; }
+  p { margin-bottom: .75rem; color: var(--text); }
+  pre { background: #0a0c14; border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.2rem; overflow-x: auto; margin: .75rem 0 1rem; }
+  code { font-family: 'Cascadia Code', 'Fira Code', 'Consolas', monospace; font-size: .85rem; }
+  p code, li code { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: .1em .4em; color: #a5f3fc; font-size: .85rem; }
+  pre code { color: #93c5fd; background: none; border: none; padding: 0; }
+  blockquote { border-left: 3px solid var(--accent); padding: .5rem 1rem; background: rgba(124,58,237,.08); border-radius: 0 6px 6px 0; margin: .75rem 0; color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .9rem; }
+  th { background: var(--surface); color: var(--accent); padding: .6rem .9rem; text-align: left; border-bottom: 2px solid var(--border); }
+  td { padding: .55rem .9rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:hover td { background: rgba(255,255,255,.03); }
+  ul, ol { padding-left: 1.5rem; margin-bottom: .75rem; }
+  li { margin-bottom: .3rem; }
+  hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+  strong { color: #fff; }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .updated { text-align: center; color: var(--muted); font-size: .8rem; margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Meshack&#39;s AI Stack — Cheatsheet</h1>
+<blockquote>
+<p>Crafted Edge Solutions &amp; Wellness Solutions Africa<br>Updated: May 2026 | GTX 960 4GB · Ollama 0.23.2 · Groq free · OpenRouter backup</p>
+</blockquote>
+<hr>
+<h2>Quick Decision: What to Use</h2>
+<pre><code>Need it in 2 seconds, good quality?   →  groq &quot;...&quot;         (Llama 70B, free)
+Private data / offline / instant?     →  ask &quot;...&quot;          (local 3B GPU)
+Best local quality, still private?    →  gemma (interactive) (4B GPU)
+Coding session with file access?      →  p  or  pask &quot;...&quot;  (Pi + Groq)
+Spotify / scheduling / web search?    →  h  or  hask &quot;...&quot;  (Hermes + Groq)
+Browse &amp; chat with history?           →  localhost:3000      (OpenWebUI)
+</code></pre>
+<hr>
+<h2>groq — Your Workhorse (Llama 3.3 70B, 2 sec, free)</h2>
+<pre><code class="language-bash"># Direct prompts
+groq &quot;write a blog post about X&quot;
+groq &quot;proposal email to [client] for [project]&quot;
+groq &quot;5 LinkedIn posts about web design for Kenyan SMEs&quot;
+groq &quot;reply to this client complaint professionally: [paste]&quot;
+
+# Pipe content in (for analysis / review)
+cat file.txt | groq &quot;summarise this&quot;
+head -50 index.html | groq-review &quot;review meta tags for SEO&quot;
+cat contract.txt | groq &quot;what are the key risks in this?&quot;
+
+# Save directly to file
+groq &quot;write SEO post about mobile websites in Kenya&quot; &gt; ~/content/draft.md
+groq &quot;write 10 email subject lines for a website launch offer&quot; &gt;&gt; ~/content/subjects.txt
+
+# Fast model (lighter tasks, even quicker)
+groq-fast &quot;give me 3 tagline options for a web agency&quot;
+</code></pre>
+<p><strong>Limits:</strong> 14,400 req/day · ~30 req/min · No system prompt overhead</p>
+<hr>
+<h2>ask / askbig — Local GPU (Private, No Internet)</h2>
+<pre><code class="language-bash">ask &quot;write a WhatsApp follow-up for a client who went quiet&quot;
+ask &quot;translate this to Swahili: We&#39;d love to work with you&quot;
+askcode &quot;write a JavaScript contact form validator&quot;
+askbig &quot;explain this contract clause: [paste]&quot;    # gemma3 4B, better quality
+
+# Interactive sessions
+qwen       # qwen2.5 3B — general chat, 30 tok/s
+gemma      # gemma3 4B — best local quality, ~15 tok/s
+coder      # qwen-coder 3B — code, 30 tok/s
+think      # deepseek-r1 1.5B — step-by-step reasoning
+</code></pre>
+<hr>
+<h2>p — Pi Coding Agent (reads/edits/runs files on your system)</h2>
+<pre><code class="language-bash"># Interactive session (Groq Llama 70B by default)
+p                                    # start in current dir
+cd ~/craftededgesolutions.africa &amp;&amp; p   # coding session on your site
+
+# One-shot
+pask &quot;add a WhatsApp floating button to index.html&quot;
+pask &quot;fix the mobile nav menu in style.css&quot;
+pask &quot;write a Python script to batch-rename files in ~/content/&quot;
+
+# Model variants
+p70b     # Llama 3.3 70B (default, best)
+pfast    # Llama 3.1 8B (faster, lighter tasks)
+pcode    # Qwen3 32B (code-focused)
+pscout   # Llama 4 Scout (newest)
+p-or     # OpenRouter backup (when Groq is busy)
+
+# Pipe-in shortcuts
+cat buggy.js | fixme
+cat code.py  | explain
+cat code.js  | review
+</code></pre>
+<blockquote>
+<p>Pi reads/edits actual files on your machine. Use <code>cd</code> into your project first.</p>
+</blockquote>
+<hr>
+<h2>h — Hermes Agent (Spotify, Web Search, Scheduling)</h2>
+<pre><code class="language-bash"># Interactive
+h                           # Groq Llama 70B, full toolset
+
+# One-shot
+hask &quot;search for top web design trends in Kenya 2026&quot;
+hask &quot;create a cron job that emails me a weekly content idea every Monday 9am&quot;
+
+# Spotify
+play &quot;qing madi say ole&quot;
+play &quot;afrobeats mix&quot;
+pause  /  skip  /  nowplaying
+spotify-refresh             # when token expires (401 error)
+
+# Model options
+h70b          # Llama 3.3 70B via Groq (default)
+hfast-groq    # Llama 3.1 8B via Groq (lighter)
+hthink        # DeepSeek R1 70B via Groq (reasoning)
+hgemma        # Gemma 4 31B via OpenRouter (backup)
+hlocal        # gemma3 4B local (offline/private)
+</code></pre>
+<blockquote>
+<p>Hermes needs 64K+ context — local 3B models won&#39;t work as Hermes providers.</p>
+</blockquote>
+<hr>
+<h2>OpenWebUI — Browser Chat Interface</h2>
+<p><strong>URL:</strong> <a href="http://localhost:3000">http://localhost:3000</a> (also <a href="http://100.124.18.6:3000">http://100.124.18.6:3000</a> via Tailscale)</p>
+<ul>
+<li>All local Ollama models in the model picker</li>
+<li>Add Groq: Settings → Connections → <code>https://api.groq.com/openai/v1</code> + API key</li>
+<li>Good for: long conversations, document uploads, image inputs, chat history</li>
+</ul>
+<pre><code class="language-bash">services    # check container status
+docker restart open-webui
+</code></pre>
+<hr>
+<h2>Local Models Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Alias</th>
+<th>Model</th>
+<th>Speed</th>
+<th>VRAM</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>qwen</code></td>
+<td>qwen2.5:3b</td>
+<td>30 tok/s</td>
+<td>2 GB</td>
+<td>General fast chat</td>
+</tr>
+<tr>
+<td><code>coder</code></td>
+<td>qwen2.5-coder:3b</td>
+<td>30 tok/s</td>
+<td>2 GB</td>
+<td>Code snippets</td>
+</tr>
+<tr>
+<td><code>think</code></td>
+<td>deepseek-r1:1.5b</td>
+<td>32 tok/s</td>
+<td>1.3 GB</td>
+<td>Step-by-step reasoning</td>
+</tr>
+<tr>
+<td><code>phi</code></td>
+<td>phi3:mini</td>
+<td>25 tok/s</td>
+<td>2.4 GB</td>
+<td>Instructions</td>
+</tr>
+<tr>
+<td><code>gemma</code></td>
+<td>gemma3:4b</td>
+<td>~15 tok/s</td>
+<td>3.5 GB</td>
+<td>Best local quality</td>
+</tr>
+<tr>
+<td><code>qwen7</code></td>
+<td>qwen2.5:7b</td>
+<td>0.7 tok/s</td>
+<td>CPU only</td>
+<td>Batch / overnight</td>
+</tr>
+<tr>
+<td><code>coder7</code></td>
+<td>qwen2.5-coder:7b</td>
+<td>0.7 tok/s</td>
+<td>CPU only</td>
+<td>Complex code offline</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>GTX 960 Maxwell: 7B models CUDA-incompatible. Use cloud or CPU.</p>
+</blockquote>
+<hr>
+<h2>Cloud Models Reference</h2>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>Model</th>
+<th>Context</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Groq</td>
+<td>Llama 3.3 70B</td>
+<td>128K</td>
+<td>Everything — default</td>
+</tr>
+<tr>
+<td>Groq</td>
+<td>Llama 3.1 8B</td>
+<td>128K</td>
+<td>Fast/lightweight tasks</td>
+</tr>
+<tr>
+<td>Groq</td>
+<td>Qwen3 32B</td>
+<td>32K</td>
+<td>Code-heavy work</td>
+</tr>
+<tr>
+<td>Groq</td>
+<td>Llama 4 Scout</td>
+<td>10M</td>
+<td>Very long documents</td>
+</tr>
+<tr>
+<td>Groq</td>
+<td>DeepSeek R1 70B</td>
+<td>64K</td>
+<td>Reasoning / analysis</td>
+</tr>
+<tr>
+<td>OpenRouter</td>
+<td>Gemma 4 31B</td>
+<td>128K</td>
+<td>Backup, rate-limited</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Money Workflows</h2>
+<h3>Blog / SEO Content</h3>
+<pre><code class="language-bash">groq &quot;Write a 400-word SEO post for craftededgesolutions.africa about [topic].
+Hook, 3 H2 sections with East Africa stats, CTA for free website audit.&quot; \
+&gt; ~/content/blog-$(date +%Y-%m-%d).md
+</code></pre>
+<h3>Client Proposal Email</h3>
+<pre><code class="language-bash">groq &quot;Professional proposal to [client] for [project].
+Budget KES [X]. Deliverables: [list]. Timeline: [X] weeks.
+Sign off as Meshack, Crafted Edge Solutions.&quot;
+</code></pre>
+<h3>LinkedIn Batch (5 posts, 10 min work)</h3>
+<pre><code class="language-bash">groq &quot;5 LinkedIn posts for a Kenyan web agency. Topics: [list].
+Each under 150 words, hook + value + soft CTA. Separate with ---&quot;
+</code></pre>
+<h3>Wellness Programme Content</h3>
+<pre><code class="language-bash">groq &quot;4-week online physiotherapy programme for corporate workers with lower back pain.
+Weekly goals, home exercises, progress checkpoints. For wellness-solutions.africa.&quot;
+</code></pre>
+<h3>Website Audit / SEO Fix</h3>
+<pre><code class="language-bash">head -60 ~/craftededgesolutions.africa/index.html | \
+  groq-review &quot;review meta tags for SEO — what to add, what to fix&quot;
+</code></pre>
+<h3>Code Edit (Pi)</h3>
+<pre><code class="language-bash">cd ~/craftededgesolutions.africa
+pask &quot;add Schema.org LocalBusiness structured data to index.html&quot;
+pask &quot;make the hero section load 30% faster — check for render-blocking resources&quot;
+</code></pre>
+<hr>
+<h2>System &amp; Monitoring</h2>
+<pre><code class="language-bash">gpu          # GPU stats (VRAM, utilization, temp)
+gpuwatch     # Live GPU monitor (Ctrl+C to exit)
+models       # All Ollama models installed
+loaded       # Currently loaded models (VRAM usage)
+services     # Docker containers status
+df -h        # Disk space
+free -h      # RAM usage
+</code></pre>
+<hr>
+<h2>Services Map</h2>
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>URL</th>
+<th>Start</th>
+<th>Config</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>OpenWebUI</td>
+<td>localhost:3000</td>
+<td>auto (Docker)</td>
+<td><code>docker restart open-webui</code></td>
+</tr>
+<tr>
+<td>Ollama API</td>
+<td>localhost:11434</td>
+<td>auto (systemd)</td>
+<td><code>/etc/systemd/system/ollama.service</code></td>
+</tr>
+<tr>
+<td>Listmonk</td>
+<td>localhost:9000</td>
+<td><code>docker start listmonk_app</code></td>
+<td><code>~/craftededgesolutions.africa/listmonk/config.toml</code></td>
+</tr>
+<tr>
+<td>Website (dev)</td>
+<td>localhost:8000</td>
+<td>auto (systemd user)</td>
+<td><code>~/craftededgesolutions.africa/</code></td>
+</tr>
+<tr>
+<td>Tailscale</td>
+<td>100.124.18.6</td>
+<td>auto</td>
+<td><code>sudo tailscale status</code></td>
+</tr>
+</tbody></table>
+<p><strong>All above accessible remotely via Tailscale at 100.124.18.6:PORT</strong></p>
+<hr>
+<h2>Key File Locations</h2>
+<pre><code>~/.bashrc                          ← API keys (top of file, loads always)
+~/.bash_aliases                    ← All aliases + groq/ask functions
+~/.hermes/config.yaml              ← Hermes: model, provider, Groq config
+~/.hermes/auth.json                ← Spotify token
+~/.pi/agent/settings.json          ← Pi: default Groq/Llama 70B
+~/.ollama/modelfiles/              ← Custom model definitions
+~/.ollama/register-fast-models.sh  ← Re-register models after update
+~/cheatsheet.md                    ← This file
+~/cheatsheet.html                  ← Browser version (localhost:8000/cheatsheet.html)
+~/craftededgesolutions.africa/SYSTEM_STATE.md  ← Full system state doc
+~/ai-stack-guide.md                ← Detailed guide with use cases
+</code></pre>
+<hr>
+<h2>Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Problem</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>groq</code> returns nothing</td>
+<td><code>echo $GROQ_API_KEY</code> — if empty, open new terminal</td>
+</tr>
+<tr>
+<td>Spotify 401</td>
+<td><code>spotify-refresh</code></td>
+</tr>
+<tr>
+<td>No Spotify device</td>
+<td>Open Spotify app on phone first</td>
+</tr>
+<tr>
+<td>OpenWebUI blank</td>
+<td><code>docker restart open-webui</code></td>
+</tr>
+<tr>
+<td>Ollama not responding</td>
+<td><code>sudo systemctl restart ollama</code></td>
+</tr>
+<tr>
+<td>7B model crashes</td>
+<td>Expected — use <code>qwen7</code> (CPU) or <code>groq</code> (cloud)</td>
+</tr>
+<tr>
+<td>Listmonk down</td>
+<td><code>docker start listmonk_app</code></td>
+</tr>
+<tr>
+<td>Website 8000 down</td>
+<td><code>cd ~/craftededgesolutions.africa &amp;&amp; python3 -m http.server 8000 &amp;</code></td>
+</tr>
+<tr>
+<td>Pi TPM error (413)</td>
+<td>Pipe targeted content instead of letting Pi read full files</td>
+</tr>
+<tr>
+<td>Hermes TPM error</td>
+<td>Its system prompt is large — Groq free tier handles normal use fine</td>
+</tr>
+<tr>
+<td>Keys not loading</td>
+<td>Put them at TOP of <code>~/.bashrc</code> before <code>case $-</code> block ✓ already done</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>Startup After WSL Restart</h2>
+<pre><code class="language-bash"># Everything auto-starts except listmonk_app (restart policy fixed)
+# Verify all is up:
+services             # Docker containers
+curl localhost:11434/api/version  # Ollama
+curl -s -o /dev/null -w &quot;%{http_code}&quot; localhost:8000  # Website
+sudo tailscale status
+</code></pre>
+<hr>
+<p><em>Last updated: May 2026 — open browser version: <a href="http://localhost:8000/cheatsheet.html">http://localhost:8000/cheatsheet.html</a></em></p>
+</div>
+</body>
+</html>
