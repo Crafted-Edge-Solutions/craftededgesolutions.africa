@@ -181,6 +181,61 @@
     </div>
   </section>
 
+  <!-- NEWSLETTER -->
+  <section style="padding:100px 32px; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+    <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px">— Insights Newsletter</div>
+        <h2 style="font-family:var(--f-display); font-size:clamp(2rem,4vw,3.4rem); font-weight:400; letter-spacing:-0.04em; line-height:1; margin-bottom:20px;">
+          Engineering briefs,<br/><em>no noise.</em>
+        </h2>
+        <p style="color:var(--fg-mid); font-size:0.95rem; line-height:1.7; max-width:44ch;">
+          Practical notes on building software in Africa — M-Pesa integrations, Django patterns, AI systems, infrastructure. Free. No fluff.
+        </p>
+      </div>
+      <div>
+        <form id="newsletter-form" style="display:flex; flex-direction:column; gap:14px;">
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <input type="email" id="nl-email" placeholder="your@email.com" required
+              style="flex:1; min-width:200px; background:var(--bg-elev); border:1px solid var(--line-strong); border-radius:4px; padding:13px 16px; color:var(--fg); font-family:var(--f-sans); font-size:0.95rem;" />
+            <button type="submit" class="btn btn-primary" style="white-space:nowrap;">Subscribe →</button>
+          </div>
+          <p id="nl-msg" style="font-size:0.8rem; color:var(--fg-dim); display:none;"></p>
+          <p style="font-size:0.78rem; color:var(--fg-faint);">No spam. Unsubscribe any time.</p>
+        </form>
+        <script>
+        document.getElementById('newsletter-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var email = document.getElementById('nl-email').value;
+          var btn = this.querySelector('button');
+          var msg = document.getElementById('nl-msg');
+          btn.disabled = true; btn.textContent = '…';
+          fetch('/newsletter/signup/', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email: email}),
+          }).then(function(r) { return r.json(); }).then(function(d) {
+            msg.style.display = 'block';
+            if (d.ok) {
+              msg.style.color = 'var(--accent)';
+              msg.textContent = 'You\'re in. Expect good things.';
+              document.getElementById('nl-email').value = '';
+            } else {
+              msg.style.color = '#e55';
+              msg.textContent = d.error || 'Something went wrong. Try again.';
+            }
+            btn.disabled = false; btn.textContent = 'Subscribe →';
+          }).catch(function() {
+            msg.style.display = 'block'; msg.style.color = '#e55';
+            msg.textContent = 'Could not connect. Try again.';
+            btn.disabled = false; btn.textContent = 'Subscribe →';
+          });
+        });
+        </script>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT BAND -->
   <section id="cta">
     <div class="cta-inner container">

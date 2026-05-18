@@ -1,6 +1,12 @@
-from django.http import HttpResponse
+import json
+
+from django.conf import settings
+from django.core.mail import send_mail
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.cache import cache_control
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 
 INSIGHTS_PERKS = [
@@ -95,6 +101,51 @@ def careers(request):
         "how_we_work": HOW_WE_WORK,
         "values": VALUES,
     })
+
+
+@csrf_exempt
+@require_POST
+def contact_api(request):
+    try:
+        data = json.loads(request.body)
+    except (json.JSONDecodeError, ValueError):
+        data = {}
+
+    if data.get("_gotcha"):
+        return JsonResponse({"ok": True})
+
+    name = f"{data.get('firstName', '')} {data.get('lastName', '')}".strip()
+    email = data.get("email", "").strip()
+    phone = data.get("phone", "").strip()
+    business = data.get("business", "").strip()
+    service = data.get("service", "").strip()
+    message = data.get("message", "").strip()
+    timeline = data.get("timeline", "").strip()
+
+    if not email:
+        return JsonResponse({"ok": False, "error": "Email required."}, status=400)
+
+    body = f"""New project enquiry — craftededgesolutions.africa
+
+Name:     {name}
+Email:    {email}
+Phone:    {phone}
+Business: {business}
+Service:  {service}
+Timeline: {timeline}
+
+Message:
+{message}
+"""
+    send_mail(
+        subject=f"Enquiry: {service or 'General'} — {name or email}",
+        message=body,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=["hello@craftededgesolutions.africa"],
+        fail_silently=True,
+    )
+
+    return JsonResponse({"ok": True})
 
 
 @cache_control(max_age=86400)
