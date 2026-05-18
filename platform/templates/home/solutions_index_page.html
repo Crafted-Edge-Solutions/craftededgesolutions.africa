@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Selected Work — Crafted Edge Solutions{% endblock %}
+{% block meta_description %}Case studies from the studio — software platforms, AI systems, automation, and infrastructure built for real businesses.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="eyebrow">— Selected Work</div>
+    <h1>Problems solved.<br/><em>Systems built.</em></h1>
+  </div>
+</section>
+
+<section style="padding:80px 32px 120px; border-top:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto;">
+
+    {% for study in case_studies %}
+    <article class="case-study-row" style="display:grid; grid-template-columns:1fr 2fr; gap:60px; padding:60px 0; border-bottom:1px solid var(--line); align-items:start;">
+      <div>
+        <div class="eyebrow" style="margin-bottom:16px">— {{ study.get_outcome_tag_display }}</div>
+        <h2 style="font-family:var(--f-display); font-size:clamp(1.8rem,3vw,2.6rem); font-weight:400; letter-spacing:-0.03em; line-height:1.1; margin-bottom:16px;">{{ study.title }}</h2>
+        <div style="font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:8px;">{{ study.sector }}</div>
+        {% if study.timeline %}<div style="font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-faint);">{{ study.timeline }}</div>{% endif %}
+        {% if study.stack_items %}
+        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top:20px;">
+          {% for item in study.stack_items %}<span class="cap-tag">{{ item }}</span>{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <div>
+        <p style="font-size:1.05rem; line-height:1.75; color:var(--fg-mid); margin-bottom:32px;">{{ study.summary }}</p>
+        {% if study.results %}
+        <div style="padding:24px; background:var(--bg-elev); border:1px solid var(--line); border-radius:2px;">
+          <div class="eyebrow" style="margin-bottom:12px">— Outcome</div>
+          <div style="color:var(--fg-mid); line-height:1.7; font-size:0.95rem;">{{ study.results|richtext }}</div>
+        </div>
+        {% endif %}
+        <div style="margin-top:24px;">
+          <a href="{{ study.url }}" class="btn-arrow">Read case study <span>→</span></a>
+        </div>
+      </div>
+    </article>
+    {% empty %}
+    <div style="padding:80px 0; text-align:center; color:var(--fg-dim);">
+      <p>Case studies coming soon.</p>
+    </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+<section id="cta" style="padding:120px 32px; border-top:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end;">
+    <h2 style="font-family:var(--f-display); font-size:clamp(2.4rem,5vw,4rem); line-height:1; letter-spacing:-0.035em; font-weight:400;">Have something<br/>serious to build? <em style="font-style:italic; color:var(--accent)">Let's talk.</em></h2>
+    <div style="display:flex; gap:14px; flex-wrap:wrap;">
+      <a href="/contact/" class="btn btn-primary">Start a project →</a>
+      <a href="/services/" class="btn btn-secondary">See capabilities</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

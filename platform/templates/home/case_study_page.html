@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} — Crafted Edge Solutions{% endblock %}
+{% block meta_description %}{{ page.summary }}{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="eyebrow">— {{ page.get_outcome_tag_display }} · {{ page.sector }}</div>
+    <h1>{{ page.title|linebreaksbr }}</h1>
+  </div>
+</section>
+
+<section style="padding:80px 32px 0; border-top:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:2fr 1fr; gap:80px; align-items:start;">
+    <div>
+      <p style="font-size:1.15rem; line-height:1.75; color:var(--fg-mid); margin-bottom:48px;">{{ page.summary }}</p>
+
+      {% if page.challenge %}
+      <div style="margin-bottom:48px;">
+        <div class="eyebrow" style="margin-bottom:16px">— The Challenge</div>
+        <div style="line-height:1.75; color:var(--fg-mid);">{{ page.challenge|richtext }}</div>
+      </div>
+      {% endif %}
+
+      {% if page.solution %}
+      <div style="margin-bottom:48px;">
+        <div class="eyebrow" style="margin-bottom:16px">— What We Built</div>
+        <div style="line-height:1.75; color:var(--fg-mid);">{{ page.solution|richtext }}</div>
+      </div>
+      {% endif %}
+
+      {% if page.results %}
+      <div style="padding:32px; background:var(--bg-elev); border:1px solid var(--line); border-radius:2px; margin-bottom:48px;">
+        <div class="eyebrow" style="margin-bottom:16px">— Results</div>
+        <div style="line-height:1.75; color:var(--fg-mid);">{{ page.results|richtext }}</div>
+      </div>
+      {% endif %}
+    </div>
+
+    <div style="position:sticky; top:100px;">
+      <div style="padding:32px; background:var(--bg-card); border:1px solid var(--line);">
+        <div class="eyebrow" style="margin-bottom:20px">— Project details</div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div><div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-faint); margin-bottom:4px;">Client</div><div style="color:var(--fg);">{{ page.client_name }}</div></div>
+          <div><div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-faint); margin-bottom:4px;">Sector</div><div style="color:var(--fg);">{{ page.sector }}</div></div>
+          {% if page.timeline %}<div><div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-faint); margin-bottom:4px;">Timeline</div><div style="color:var(--fg);">{{ page.timeline }}</div></div>{% endif %}
+          {% if page.stack_items %}
+          <div>
+            <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-faint); margin-bottom:8px;">Stack</div>
+            <div style="display:flex; flex-wrap:wrap; gap:6px;">
+              {% for item in page.stack_items %}<span class="cap-tag">{{ item }}</span>{% endfor %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <div style="margin-top:24px; display:flex; flex-direction:column; gap:10px;">
+        <a href="/contact/" class="btn btn-primary">Build something similar →</a>
+        <a href="/solutions/" class="btn btn-secondary">← All work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

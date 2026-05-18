@@ -3,6 +3,44 @@
    Everything visual lives in style.css (the real design system)
    ===================================================== */
 
+/* ===== Nav auth ===== */
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-auth-link {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+.nav-auth-link:hover { color: var(--fg); }
+.nav-upgrade {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: opacity 0.15s;
+}
+.nav-upgrade:hover { opacity: 0.8; }
+.nav-member-badge {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 3px 10px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+@media (max-width: 900px) { .nav-auth { display: none; } }
+
 /* ===== Auth pages ===== */
 .auth-section {
   min-height: 100vh;
@@ -1510,3 +1548,61 @@
       display: inline-flex;
     }
 
+
+/* ===== Insights pricing ===== */
+.insights-pricing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.insights-tier {
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+}
+
+.insights-tier--alt { border-color: var(--line-strong); }
+
+.insights-tier-label {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 12px;
+}
+
+.insights-tier-price {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.insights-tier-price strong { color: var(--accent); }
+.insights-tier-price span { font-size: 1rem; color: var(--fg-dim); }
+
+.insights-tier-desc {
+  font-size: 0.78rem;
+  color: var(--fg-faint);
+}
+
+.post-free-tag {
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4ade80;
+  border: 1px solid rgba(74,222,128,0.3);
+  padding: 2px 8px;
+  border-radius: 100px;
+}
+
+@media (max-width: 700px) {
+  .insights-pricing-grid { grid-template-columns: 1fr; }
+}
