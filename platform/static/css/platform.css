@@ -3,6 +3,10 @@
    Everything visual lives in style.css (the real design system)
    ===================================================== */
 
+/* ===== Nav active state ===== */
+.nav-links a.nav-active { color: var(--fg) !important; opacity: 1; }
+.nav-links a.nav-active::after { transform: scaleX(1) !important; }
+
 /* ===== Nav auth ===== */
 .nav-auth {
   display: flex;

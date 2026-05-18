@@ -1,0 +1,76 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Overview{% endblock %}
+{% block topbar_title %}Overview{% endblock %}
+{% block nav_home %}active{% endblock %}
+
+{% block content %}
+<div class="db-page-header">
+  <h1>Hello, <em>{{ request.user.first_name|default:request.user.email }}</em></h1>
+  <p>Here's your account at a glance.</p>
+</div>
+
+<div class="db-grid-2">
+  <!-- Insights membership -->
+  <div class="db-card">
+    <div class="db-card-title">— Insights Membership</div>
+    {% if request.user.is_insights_member %}
+      <div class="db-stat-val"><em>Active</em></div>
+      <p class="db-stat-label">Full access to all Insights reports</p>
+      <div style="margin-top:20px;">
+        <span class="db-badge db-badge--member">✦ Member</span>
+      </div>
+      {% if sub and sub.next_payment_date %}
+      <p style="margin-top:16px; font-size:0.82rem; color:var(--fg-dim);">
+        Next billing: {{ sub.next_payment_date|date:"M j, Y" }}
+        ({{ sub.currency }} {{ sub.amount }}/mo)
+      </p>
+      {% endif %}
+      <div style="margin-top:24px;">
+        <a href="/insights/" class="btn btn-secondary" style="font-size:0.82rem; padding:10px 20px;">Browse Reports →</a>
+      </div>
+    {% else %}
+      <div class="db-stat-val" style="color:var(--fg-dim);">Inactive</div>
+      <p class="db-stat-label">Subscribe to unlock all premium reports</p>
+      <div style="margin-top:24px; display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary" style="font-size:0.82rem; padding:10px 20px;">KES 499/mo →</a>
+        <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-secondary" style="font-size:0.82rem; padding:10px 20px;">USD 4.99/mo →</a>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Account -->
+  <div class="db-card">
+    <div class="db-card-title">— Account</div>
+    <div class="db-stat-val"><em>{{ request.user.email|truncatechars:22 }}</em></div>
+    <p class="db-stat-label">Member since {{ request.user.date_joined|date:"M Y" }}</p>
+    <div style="margin-top:24px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a href="{% url 'dashboard:profile' %}" class="btn btn-secondary" style="font-size:0.82rem; padding:10px 20px;">Edit Profile →</a>
+      <a href="{% url 'dashboard:billing' %}" class="btn btn-secondary" style="font-size:0.82rem; padding:10px 20px;">Billing →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Quick links -->
+<div class="db-card" style="margin-top:16px;">
+  <div class="db-card-title">— Quick Access</div>
+  <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px;">
+    <a href="/insights/" style="padding:16px; background:var(--bg-elev); border:1px solid var(--line); border-radius:6px; display:flex; flex-direction:column; gap:6px; text-decoration:none; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+      <span style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">Insights</span>
+      <span style="color:var(--fg); font-size:0.9rem;">Reports & Intelligence</span>
+    </a>
+    <a href="/solutions/" style="padding:16px; background:var(--bg-elev); border:1px solid var(--line); border-radius:6px; display:flex; flex-direction:column; gap:6px; text-decoration:none; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+      <span style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">Work</span>
+      <span style="color:var(--fg); font-size:0.9rem;">Case Studies</span>
+    </a>
+    <a href="/contact/" style="padding:16px; background:var(--bg-elev); border:1px solid var(--line); border-radius:6px; display:flex; flex-direction:column; gap:6px; text-decoration:none; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+      <span style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">Project</span>
+      <span style="color:var(--fg); font-size:0.9rem;">Start a project</span>
+    </a>
+    <a href="/pricing/" style="padding:16px; background:var(--bg-elev); border:1px solid var(--line); border-radius:6px; display:flex; flex-direction:column; gap:6px; text-decoration:none; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+      <span style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">Pricing</span>
+      <span style="color:var(--fg); font-size:0.9rem;">Plans & Tiers</span>
+    </a>
+  </div>
+</div>
+{% endblock %}

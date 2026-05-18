@@ -7,12 +7,16 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
+from core.views import pricing
+
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("accounts/", include("allauth.urls")),
     path("subscriptions/", include("subscriptions.urls")),
+    path("dashboard/", include("dashboard.urls")),
+    path("pricing/", pricing, name="pricing"),
     path("", include(wagtail_urls)),
 ]
 

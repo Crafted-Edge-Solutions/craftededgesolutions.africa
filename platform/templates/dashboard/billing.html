@@ -1,0 +1,104 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Billing{% endblock %}
+{% block topbar_title %}Billing{% endblock %}
+{% block nav_billing %}active{% endblock %}
+
+{% block content %}
+<div class="db-page-header">
+  <h1>Billing &amp; <em>subscription</em></h1>
+  <p>Manage your Insights membership and payment details.</p>
+</div>
+
+{% if request.user.is_insights_member and sub %}
+<!-- Active membership -->
+<div class="db-card" style="max-width:640px;">
+  <div class="db-card-title">— Insights Membership</div>
+  <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px; flex-wrap:wrap;">
+    <span class="db-badge db-badge--active">● Active</span>
+    <span style="font-size:0.85rem; color:var(--fg-dim);">Full access to all premium reports</span>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+    <div>
+      <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:6px;">Plan</div>
+      <div style="font-family:var(--f-display); font-size:1.4rem; letter-spacing:-0.02em; color:var(--fg);">Insights — {{ sub.currency }}</div>
+    </div>
+    <div>
+      <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:6px;">Amount</div>
+      <div style="font-family:var(--f-display); font-size:1.4rem; letter-spacing:-0.02em; color:var(--accent);">{{ sub.currency }} {{ sub.amount }}<span style="font-size:1rem; color:var(--fg-dim);">/mo</span></div>
+    </div>
+    {% if sub.next_payment_date %}
+    <div>
+      <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:6px;">Next billing date</div>
+      <div style="font-size:0.95rem; color:var(--fg);">{{ sub.next_payment_date|date:"N j, Y" }}</div>
+    </div>
+    {% endif %}
+    {% if sub.paid_at %}
+    <div>
+      <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:6px;">Active since</div>
+      <div style="font-size:0.95rem; color:var(--fg);">{{ sub.paid_at|date:"N j, Y" }}</div>
+    </div>
+    {% endif %}
+  </div>
+  <hr style="border:none; border-top:1px solid var(--line); margin-bottom:20px;" />
+  <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+    <a href="/insights/" class="btn btn-primary" style="font-size:0.82rem; padding:10px 20px;">Browse Reports →</a>
+    <div>
+      <p style="font-size:0.78rem; color:var(--fg-dim); line-height:1.5;">
+        To cancel or manage your subscription, email
+        <a href="mailto:hello@craftededgesolutions.africa" style="color:var(--accent);">hello@craftededgesolutions.africa</a>
+        or manage it via your Paystack account.
+      </p>
+    </div>
+  </div>
+</div>
+
+{% elif sub and sub.status == 'pending' %}
+<!-- Pending payment -->
+<div class="db-card" style="max-width:640px;">
+  <div class="db-card-title">— Insights Membership</div>
+  <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px; flex-wrap:wrap;">
+    <span class="db-badge db-badge--pending">⊙ Payment pending</span>
+    <span style="font-size:0.85rem; color:var(--fg-dim);">Your payment is being verified</span>
+  </div>
+  <p style="font-size:0.9rem; color:var(--fg-mid); line-height:1.6; margin-bottom:24px;">
+    If you completed payment and your subscription is not yet active, it may take a few minutes.
+    If the issue persists, email us at
+    <a href="mailto:hello@craftededgesolutions.africa" style="color:var(--accent);">hello@craftededgesolutions.africa</a>.
+  </p>
+  <div style="display:flex; gap:12px; flex-wrap:wrap;">
+    <a href="{% url 'subscriptions:subscribe' %}?currency={{ sub.currency }}" class="btn btn-primary" style="font-size:0.82rem; padding:10px 20px;">Retry payment →</a>
+  </div>
+</div>
+
+{% else %}
+<!-- No subscription -->
+<div class="db-card" style="max-width:640px;">
+  <div class="db-card-title">— Insights Membership</div>
+  <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
+    <span class="db-badge db-badge--inactive">No active plan</span>
+  </div>
+  <p style="font-size:1rem; color:var(--fg-mid); line-height:1.65; margin-bottom:28px;">
+    Subscribe to Insights for full access to premium engineering reports, business intelligence,
+    and implementation guides from the studio.
+  </p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; max-width:440px; margin-bottom:24px;">
+    <div style="padding:20px; background:var(--bg-elev); border:1px solid var(--line); border-radius:6px;">
+      <div style="font-family:var(--f-mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:8px;">— East Africa</div>
+      <div style="font-family:var(--f-display); font-size:1.8rem; letter-spacing:-0.02em; color:var(--fg); line-height:1; margin-bottom:4px;">KES <span style="color:var(--accent);">499</span><span style="font-size:0.9rem; color:var(--fg-dim);">/mo</span></div>
+      <div style="font-size:0.75rem; color:var(--fg-faint);">~$3.85 · Cancel any time</div>
+    </div>
+    <div style="padding:20px; background:var(--bg-elev); border:1px solid var(--line-strong); border-radius:6px;">
+      <div style="font-family:var(--f-mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:8px;">— International</div>
+      <div style="font-family:var(--f-display); font-size:1.8rem; letter-spacing:-0.02em; color:var(--fg); line-height:1; margin-bottom:4px;">USD <span style="color:var(--accent);">4.99</span><span style="font-size:0.9rem; color:var(--fg-dim);">/mo</span></div>
+      <div style="font-size:0.75rem; color:var(--fg-faint);">~KES 645 · Cancel any time</div>
+    </div>
+  </div>
+  <div style="display:flex; gap:12px; flex-wrap:wrap;">
+    <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary" style="font-size:0.82rem; padding:12px 24px;">Subscribe — KES 499 →</a>
+    <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-secondary" style="font-size:0.82rem; padding:12px 24px;">Subscribe — $4.99 →</a>
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

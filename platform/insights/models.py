@@ -43,7 +43,7 @@ class InsightsIndexPage(Page):
     subscription_pitch = models.CharField(
         max_length=200,
         blank=True,
-        default="Full reports for Insights members — $0.99/mo.",
+        default="Full reports for Insights members — KES 499 / USD 4.99 per month.",
     )
 
     max_count = 1

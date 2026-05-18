@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     "subscriptions",
     "insights",
     "newsletter",
+    "dashboard",
+    "core",
     # Wagtail
     "wagtail.contrib.settings",
     "wagtail.contrib.sitemaps",
@@ -117,7 +119,7 @@ SITE_ID = 1
 ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
 ACCOUNT_LOGIN_METHODS = {"email"}
 ACCOUNT_EMAIL_VERIFICATION = "optional"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/dashboard/"
 LOGOUT_REDIRECT_URL = "/"
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -129,7 +131,6 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_EMAIL_AUTHENTICATION = True
-LOGOUT_REDIRECT_URL = "/"
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -174,12 +175,12 @@ PAYSTACK_PUBLIC_KEY = os.getenv("PAYSTACK_PUBLIC_KEY", "")
 PAYSTACK_WEBHOOK_SECRET = os.getenv("PAYSTACK_WEBHOOK_SECRET", "")
 PAYSTACK_BASE_URL = "https://api.paystack.co"
 PAYSTACK_CURRENCY_PRICES = {
-    # Amounts in smallest unit (kobo/pesewas/cents). $0.99 equivalent.
-    "KES": 13000,   # KES 130
-    "NGN": 165000,  # NGN 1650
-    "GHS": 1500,    # GHS 15
-    "USD": 99,      # USD 0.99
-    "ZAR": 1800,    # ZAR 18
+    # Amounts in smallest unit (kobo/pesewas/cents).
+    "KES": 49900,   # KES 499
+    "NGN": 490000,  # NGN 4900
+    "GHS": 6900,    # GHS 69
+    "USD": 499,     # USD 4.99
+    "ZAR": 9500,    # ZAR 95
 }
 PAYSTACK_INSIGHTS_PLAN_CODE = os.getenv("PAYSTACK_INSIGHTS_PLAN_CODE", "")
 
