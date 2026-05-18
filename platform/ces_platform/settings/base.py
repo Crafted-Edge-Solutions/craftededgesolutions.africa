@@ -184,10 +184,18 @@ PAYSTACK_CURRENCY_PRICES = {
 }
 PAYSTACK_INSIGHTS_PLAN_CODE = os.getenv("PAYSTACK_INSIGHTS_PLAN_CODE", "")
 
-# Listmonk
-LISTMONK_BASE_URL = os.getenv("LISTMONK_BASE_URL", "http://localhost:9000")
-LISTMONK_USERNAME = os.getenv("LISTMONK_USERNAME", "listmonk")
-LISTMONK_PASSWORD = os.getenv("LISTMONK_PASSWORD", "listmonk")
+# Zoho Campaigns — email marketing (free up to 2,000 contacts / 6,000 emails/mo)
+# Setup: https://api-console.zoho.com/ → Self Client → ZohoCampaigns.contact.CREATE,UPDATE
+ZOHO_CAMPAIGNS_CLIENT_ID = os.getenv("ZOHO_CAMPAIGNS_CLIENT_ID", "")
+ZOHO_CAMPAIGNS_CLIENT_SECRET = os.getenv("ZOHO_CAMPAIGNS_CLIENT_SECRET", "")
+ZOHO_CAMPAIGNS_REFRESH_TOKEN = os.getenv("ZOHO_CAMPAIGNS_REFRESH_TOKEN", "")
+ZOHO_CAMPAIGNS_LIST_KEY = os.getenv("ZOHO_CAMPAIGNS_LIST_KEY", "")
+ZOHO_CAMPAIGNS_DC = os.getenv("ZOHO_CAMPAIGNS_DC", "com")  # com | eu | in | au | jp
+
+# Listmonk (kept for backward compat — superseded by Zoho Campaigns)
+LISTMONK_BASE_URL = os.getenv("LISTMONK_BASE_URL", "")
+LISTMONK_USERNAME = os.getenv("LISTMONK_USERNAME", "")
+LISTMONK_PASSWORD = os.getenv("LISTMONK_PASSWORD", "")
 LISTMONK_LIST_ID_INSIGHTS = int(os.getenv("LISTMONK_LIST_ID_INSIGHTS", "0"))
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
