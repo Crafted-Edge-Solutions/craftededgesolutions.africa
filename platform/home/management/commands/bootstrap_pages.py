@@ -15,7 +15,7 @@ Safe to run multiple times — skips creation if pages already exist.
 from django.core.management.base import BaseCommand
 from wagtail.models import Page, Site
 
-from home.models import AboutPage, ContactPage, HomePage, ServicesPage, SolutionsIndexPage
+from home.models import AboutPage, ContactPage, HomePage, LegalPage, ServicesPage, SolutionsIndexPage
 from insights.models import InsightsIndexPage
 
 
@@ -69,6 +69,8 @@ class Command(BaseCommand):
         add_child_if_missing(ServicesPage, home, title="Services", slug="services")
         add_child_if_missing(ContactPage, home, title="Contact", slug="contact")
         add_child_if_missing(SolutionsIndexPage, home, title="Work", slug="solutions")
+        add_child_if_missing(LegalPage, home, title="Privacy Policy", slug="privacy")
+        add_child_if_missing(LegalPage, home, title="Terms of Service", slug="terms")
         add_child_if_missing(
             InsightsIndexPage,
             home,

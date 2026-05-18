@@ -44,11 +44,12 @@
           <a href="/insights/" class="nav-upgrade">Upgrade →</a>
         {% endif %}
         <a href="/accounts/logout/" class="nav-auth-link">Sign out</a>
+        <a href="/contact/" class="nav-cta">Start a project →</a>
       {% else %}
         <a href="/accounts/login/" class="nav-auth-link">Sign in</a>
-        <a href="/accounts/signup/" class="nav-cta">Join free →</a>
+        <a href="/accounts/signup/" class="nav-auth-link">Sign up</a>
+        <a href="/contact/" class="nav-cta">Start a project →</a>
       {% endif %}
-      {% if not request.user.is_authenticated %}{% else %}<a href="/contact/" class="nav-cta">Start a project →</a>{% endif %}
     </div>
     <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -62,13 +63,16 @@
     <a href="/about/">Studio</a>
     <a href="/insights/">Insights</a>
     <a href="/contact/">Contact</a>
+    <a href="/privacy/">Privacy Policy</a>
+    <a href="/terms/">Terms of Service</a>
+    <hr style="border:none; border-top:1px solid var(--line); margin:8px 0;" />
     {% if request.user.is_authenticated %}
     <a href="/accounts/logout/">Sign out</a>
     {% else %}
     <a href="/accounts/login/">Sign in</a>
     <a href="/accounts/signup/">Create account</a>
     {% endif %}
-    <a href="/contact/">→ Start a project</a>
+    <a href="/contact/" style="color:var(--accent);">→ Start a project</a>
   </div>
 
   {% if messages %}
@@ -115,15 +119,17 @@
         </ul>
       </div>
       <div class="footer-col">
-        <h5>— Elsewhere</h5>
+        <h5>— Legal & Account</h5>
         <ul>
-          <li><a href="https://meshack.craftededgesolutions.africa" target="_blank" rel="noopener">Founder</a></li>
-          <li><a href="/insights/">Insights</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
           {% if request.user.is_authenticated %}
           <li><a href="/accounts/logout/">Sign out</a></li>
           {% else %}
           <li><a href="/accounts/login/">Sign in</a></li>
+          <li><a href="/accounts/signup/">Create account</a></li>
           {% endif %}
+          <li><a href="https://meshack.craftededgesolutions.africa" target="_blank" rel="noopener">Founder</a></li>
         </ul>
       </div>
     </div>

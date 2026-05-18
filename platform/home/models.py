@@ -128,6 +128,19 @@ class CaseStudyPage(Page):
         verbose_name = "Case study"
 
 
+class LegalPage(Page):
+    body = RichTextField(blank=True)
+    last_updated = models.DateField(auto_now=True)
+
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+
+    content_panels = Page.content_panels + [FieldPanel("body")]
+
+    class Meta:
+        verbose_name = "Legal page"
+
+
 class ContactPage(Page):
     intro = models.TextField(
         blank=True,

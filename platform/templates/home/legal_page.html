@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}{{ page.title }} — Crafted Edge Solutions{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="eyebrow">— Legal</div>
+    <h1>{{ page.title }}</h1>
+  </div>
+</section>
+
+<section style="padding:80px 32px 120px; border-top:1px solid var(--line);">
+  <div style="max-width:760px; margin:0 auto;">
+    <p style="font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:48px;">Last updated: {{ page.last_updated }}</p>
+    <div class="legal-body">
+      {{ page.body|richtext }}
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.legal-body h2 { font-family:var(--f-display); font-size:1.6rem; font-weight:400; letter-spacing:-0.02em; margin:48px 0 16px; color:var(--fg); }
+.legal-body h3 { font-family:var(--f-display); font-size:1.2rem; font-weight:400; margin:32px 0 12px; color:var(--fg); }
+.legal-body p { color:var(--fg-mid); line-height:1.75; margin-bottom:20px; }
+.legal-body ul { color:var(--fg-mid); line-height:1.75; padding-left:20px; margin-bottom:20px; }
+.legal-body a { color:var(--accent); }
+</style>
+{% endblock %}

@@ -1606,3 +1606,10 @@
 @media (max-width: 700px) {
   .insights-pricing-grid { grid-template-columns: 1fr; }
 }
+
+/* ===== Field errors ===== */
+.field-error {
+  font-size: 0.8rem;
+  color: #ff6b6b;
+  margin-top: 4px;
+}
