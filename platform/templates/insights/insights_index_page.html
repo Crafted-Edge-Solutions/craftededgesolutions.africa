@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Insights — Crafted Edge Solutions{% endblock %}
+
+{% block content %}
+<section id="insights-hero" class="page-hero">
+  <div class="container">
+    <p class="label-caps">Insights</p>
+    <h1 class="display">Technical Reports<br />from <em>the Studio</em></h1>
+    <p class="body-large">{{ page.intro }}</p>
+
+    {% if not request.user.is_insights_member %}
+    <div class="insights-pitch">
+      <p>{{ page.subscription_pitch }}</p>
+      <div class="insights-pitch-actions">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary">Unlock Insights — KES 130/mo</a>
+          <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-ghost">Pay in USD ($0.99)</a>
+        {% else %}
+          <a href="/accounts/signup/?next=/insights/" class="btn btn-primary">Create account to subscribe</a>
+          <a href="/accounts/login/?next=/insights/" class="btn btn-ghost">Already a member? Sign in</a>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <div class="insights-member-badge">
+      <span class="badge-premium">✦ Insights Member</span>
+      <span class="fg-dim">Full access active</span>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section id="insights-list">
+  <div class="container">
+    <div class="posts-grid">
+      {% for post in posts %}
+      <article class="post-card {% if post.is_premium and not request.user.is_insights_member %}post-card--locked{% endif %}">
+        <div class="post-card-meta">
+          <span class="post-category label-caps">{{ post.get_category_display }}</span>
+          {% if post.is_premium %}
+            <span class="post-premium-tag">Premium</span>
+          {% endif %}
+          <span class="post-read-time">{{ post.estimated_read_minutes }} min read</span>
+        </div>
+        <h2 class="post-title"><a href="{{ post.url }}">{{ post.title }}</a></h2>
+        {% if post.summary %}
+          <p class="post-summary">{{ post.summary }}</p>
+        {% endif %}
+        <div class="post-card-footer">
+          <span class="post-date">{{ post.first_published_at|date:"M j, Y" }}</span>
+          <a href="{{ post.url }}" class="post-read-link">
+            {% if post.is_premium and not request.user.is_insights_member %}
+              Unlock →
+            {% else %}
+              Read →
+            {% endif %}
+          </a>
+        </div>
+      </article>
+      {% empty %}
+      <p class="fg-mid">No reports published yet. Check back soon.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

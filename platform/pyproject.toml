@@ -1,0 +1,15 @@
+[project]
+name = "ces-platform"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "Django>=5.2,<5.3",
+    "wagtail>=6.4,<6.5",
+    "gunicorn>=23,<24",
+    "whitenoise>=6.8,<7",
+    "dj-database-url>=2.2,<3",
+    "python-dotenv>=1.0,<2",
+    "psycopg[binary]>=3.2,<4",
+    "django-allauth[socialaccount]>=65.0,<66",
+    "httpx>=0.28,<1",
+]

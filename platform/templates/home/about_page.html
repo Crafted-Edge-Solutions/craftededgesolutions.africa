@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}Studio — Crafted Edge Solutions{% endblock %}
+{% block meta_description %}A product engineering studio building software, AI systems, and infrastructure for ambitious businesses. Operating globally with roots in East Africa.{% endblock %}
+
+{% block content %}
+
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="eyebrow">— The Studio</div>
+      <h1>A small studio<br/>doing <em>serious work.</em></h1>
+    </div>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <div class="manifesto-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px">— What we are</div>
+        <h2>Product engineering<br/><em>without the overhead.</em></h2>
+      </div>
+      <div class="manifesto-body">
+        {% if page.body %}
+          {{ page.body|richtext }}
+        {% else %}
+          <p>Crafted Edge Solutions is a product engineering studio. We design, build, and operate software for businesses that take their digital infrastructure seriously.</p>
+          <p>We exist for a specific kind of client — one that wants the <strong>technical depth of an internal engineering team</strong> without the cost and risk of building one from scratch. Founders, operators, and product leaders who want a partner that actually ships.</p>
+          <p>We work small and senior. Every line of code, every system architecture, every deployment is touched by people who have done it before — in production, for real businesses, with real money at stake.</p>
+          <p>Operating globally. Built in East Africa.</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section class="principles">
+    <div class="principles-inner">
+      <div class="eyebrow">— Operating principles</div>
+      <h2>How we decide<br/>what's <em>worth doing.</em></h2>
+
+      <div class="principle-row">
+        <div class="pr-num">— 01</div>
+        <h3>Engineering depth<br/>over breadth.</h3>
+        <p>We turn down work outside our wheelhouse. Software platforms, AI systems, automation, and infrastructure — done well. That's the offer. We'd rather refer you to the right specialist than dilute the work.</p>
+      </div>
+      <div class="principle-row">
+        <div class="pr-num">— 02</div>
+        <h3>Systems over<br/>artefacts.</h3>
+        <p>A website without payments, scheduling, and follow-up isn't a system — it's a brochure. We build the full operational layer that makes the surface worth visiting.</p>
+      </div>
+      <div class="principle-row">
+        <div class="pr-num">— 03</div>
+        <h3>Code ownership<br/>is non-negotiable.</h3>
+        <p>You own the code, the data, the infrastructure, and the documentation. We don't lock you in. If you want to take it elsewhere tomorrow, you can — and we'll help.</p>
+      </div>
+      <div class="principle-row">
+        <div class="pr-num">— 04</div>
+        <h3>Maintenance is<br/>part of the work.</h3>
+        <p>Software that isn't maintained decays. We build for the long term and stay attached to what we ship — running it, watching it, improving it.</p>
+      </div>
+      <div class="principle-row">
+        <div class="pr-num">— 05</div>
+        <h3>Honest scope, honest<br/>timelines.</h3>
+        <p>We tell you what something will actually take. If a project is the wrong shape, we say so before it starts — not three months in when momentum is already invested.</p>
+      </div>
+      <div class="principle-row">
+        <div class="pr-num">— 06</div>
+        <h3>Built where we<br/>live.</h3>
+        <p>East Africa understands constraint, resourcefulness, and mobile-first. We bring that operational instinct to global work — building software that performs everywhere it needs to.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section style="padding:120px 32px; border-bottom: 1px solid var(--line);">
+    <div style="max-width:var(--container); margin:0 auto;">
+      <div class="eyebrow" style="margin-bottom:16px">— Today, in production</div>
+      <h2 style="font-family:var(--f-display); font-size:clamp(2.4rem,5vw,4rem); line-height:1; letter-spacing:-0.035em; font-weight:400; max-width:20ch; margin-bottom:56px;">Live systems. Real businesses. <em style="font-style:italic; color:var(--accent)">24/7 operations.</em></h2>
+      <div class="stat-grid">
+        <div class="stat-cell"><div class="stat-num">02<em>+</em></div><div class="stat-label">Companies founded</div><div class="stat-desc">Built and operated by the studio team.</div></div>
+        <div class="stat-cell"><div class="stat-num">05<em>+</em></div><div class="stat-label">Years building</div><div class="stat-desc">Full-stack production systems in the wild.</div></div>
+        <div class="stat-cell"><div class="stat-num">24<em>/7</em></div><div class="stat-label">Systems running</div><div class="stat-desc">Live infrastructure across multiple sectors.</div></div>
+        <div class="stat-cell"><div class="stat-num">10<em>+</em></div><div class="stat-label">Integrations shipped</div><div class="stat-desc">Payments, messaging, AI, and automation.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section" id="process">
+    <div class="process-inner">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px">— Process</div>
+        <h2>Conversation<br/>to <em>live system.</em></h2>
+      </div>
+      <div>
+        <div class="numbered-list">
+          <div class="numbered-row"><div class="num">— 01</div><h3>Discover</h3><p>We map your operations and the bottlenecks holding them back. We ask the questions that surface the actual problem — not just the visible symptom. Outcomes are defined in writing before any work starts.</p></div>
+          <div class="numbered-row"><div class="num">— 02</div><h3>Design</h3><p>System architecture, data model, integration boundaries, and user flows — designed and signed off before code is written. You see the full picture and the scope is fixed.</p></div>
+          <div class="numbered-row"><div class="num">— 03</div><h3>Build</h3><p>Focused sprints. Live staging from week one. You're reviewing real working software, not waiting for a final reveal. Feedback is built into the rhythm, not bolted on at the end.</p></div>
+          <div class="numbered-row"><div class="num">— 04</div><h3>Maintain</h3><p>We launch, connect the systems, train your team — and stay. Monthly check-ins, monitoring, ongoing improvements. The relationship continues for as long as it's useful to you.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="stack-section">
+    <div class="stack-inner">
+      <div class="eyebrow">— Technology</div>
+      <h2>Tools chosen<br/><em>deliberately.</em></h2>
+      <div class="stack-grid">
+        <div class="stack-cat"><div class="stack-cat-label">— Frontend</div><div class="stack-cat-items"><span class="stack-cat-item">React</span><span class="stack-cat-item">Next.js</span><span class="stack-cat-item">TypeScript</span><span class="stack-cat-item">Tailwind CSS</span></div></div>
+        <div class="stack-cat"><div class="stack-cat-label">— Backend</div><div class="stack-cat-items"><span class="stack-cat-item">Django</span><span class="stack-cat-item">FastAPI</span><span class="stack-cat-item">Node.js</span><span class="stack-cat-item">Python</span></div></div>
+        <div class="stack-cat"><div class="stack-cat-label">— Data</div><div class="stack-cat-items"><span class="stack-cat-item">PostgreSQL</span><span class="stack-cat-item">Supabase</span><span class="stack-cat-item">Redis</span><span class="stack-cat-item">Vector DBs</span></div></div>
+        <div class="stack-cat"><div class="stack-cat-label">— AI &amp; Agents</div><div class="stack-cat-items"><span class="stack-cat-item">Claude API</span><span class="stack-cat-item">OpenAI</span><span class="stack-cat-item">Groq · Ollama</span><span class="stack-cat-item">MCP Protocol</span></div></div>
+        <div class="stack-cat"><div class="stack-cat-label">— Payments</div><div class="stack-cat-items"><span class="stack-cat-item">M-Pesa Daraja</span><span class="stack-cat-item">Stripe</span><span class="stack-cat-item">Paystack</span><span class="stack-cat-item">Flutterwave</span></div></div>
+        <div class="stack-cat"><div class="stack-cat-label">— Messaging</div><div class="stack-cat-items"><span class="stack-cat-item">WhatsApp Business</span><span class="stack-cat-item">Listmonk</span><span class="stack-cat-item">Resend</span><span class="stack-cat-item">Twilio</span></div></div>
+        <div class="stack-cat"><div class="stack-cat-label">— Automation</div><div class="stack-cat-items"><span class="stack-cat-item">n8n</span><span class="stack-cat-item">Make</span><span class="stack-cat-item">Zapier</span><span class="stack-cat-item">Custom workers</span></div></div>
+        <div class="stack-cat"><div class="stack-cat-label">— Infrastructure</div><div class="stack-cat-items"><span class="stack-cat-item">Cloudflare</span><span class="stack-cat-item">Railway · Vercel</span><span class="stack-cat-item">Docker · Linux</span><span class="stack-cat-item">Hetzner · DO</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta-band" style="padding:120px 32px; border-top:1px solid var(--line);">
+    <div class="cta-band-inner" style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+      <h2 style="font-family:var(--f-display); font-size:clamp(2.4rem,5vw,4rem); line-height:1; letter-spacing:-0.035em; font-weight:400;">Want to know if<br/>we're the right fit? <em style="font-style:italic; color:var(--accent)">Let's talk.</em></h2>
+      <div style="display:flex; gap:14px; flex-wrap:wrap; align-items:center;">
+        <a href="/contact/" class="btn btn-primary">Book a discovery call →</a>
+        <a href="/services/" class="btn btn-secondary">See capabilities</a>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

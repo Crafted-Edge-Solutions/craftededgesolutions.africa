@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}Crafted Edge Solutions — Software, AI &amp; Infrastructure for Modern Business{% endblock %}
+{% block meta_description %}Crafted Edge Solutions builds modern software platforms, AI-powered systems, and scalable digital infrastructure for ambitious businesses.{% endblock %}
+
+{% block content %}
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-meta">
+      <div class="meta-left">
+        <span class="status-pill"><span class="status-dot"></span>Taking projects · 2026</span>
+      </div>
+      <div class="meta-right">Est. 2024 · Nairobi · EAT</div>
+    </div>
+
+    <div class="hero-main">
+      <h1 class="hero-title">
+        <span class="line fade-in">Crafted</span>
+        <span class="line fade-in fade-in-1">Edge<span class="it">.</span></span>
+      </h1>
+    </div>
+
+    <div class="hero-bottom">
+      <p class="hero-desc fade-in fade-in-2">
+        A product engineering studio building software platforms, AI-powered systems, and scalable digital infrastructure for ambitious businesses.
+      </p>
+      <div class="hero-actions fade-in fade-in-3">
+        <a href="/solutions/" class="btn btn-secondary">Selected work</a>
+        <a href="/contact/" class="btn btn-primary">Start a project →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH MARQUEE -->
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="marquee-item">Software platforms</span>
+      <span class="marquee-item">AI systems</span>
+      <span class="marquee-item">Cloud infrastructure</span>
+      <span class="marquee-item">Conversational agents</span>
+      <span class="marquee-item">M-Pesa integrations</span>
+      <span class="marquee-item">WhatsApp API</span>
+      <span class="marquee-item">Automation workflows</span>
+      <span class="marquee-item">Self-hosted systems</span>
+      <span class="marquee-item">Software platforms</span>
+      <span class="marquee-item">AI systems</span>
+      <span class="marquee-item">Cloud infrastructure</span>
+      <span class="marquee-item">Conversational agents</span>
+      <span class="marquee-item">M-Pesa integrations</span>
+      <span class="marquee-item">WhatsApp API</span>
+      <span class="marquee-item">Automation workflows</span>
+      <span class="marquee-item">Self-hosted systems</span>
+    </div>
+  </div>
+
+  <!-- POSITIONING -->
+  <section id="positioning">
+    <div class="pos-grid container">
+      <div class="pos-title">
+        <div class="eyebrow" style="margin-bottom:20px">— Studio</div>
+        <h2>Engineering<br/><em>that ships.</em></h2>
+      </div>
+      <div class="pos-body">
+        {% if page.intro_body %}
+          {{ page.intro_body|richtext }}
+        {% else %}
+          <p>We design and build software for clients that take engineering seriously. <strong>Web platforms, AI systems, automation infrastructure</strong> — work that runs in production, not concepts that live in a deck.</p>
+          <p>We operate as long-term technical partners — small, senior, opinionated. We don't outsource, we don't subcontract, and we don't disappear after launch.</p>
+          <p>Operating globally. Built in East Africa.</p>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="capabilities">
+    <div class="cap-head container">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px">— Capabilities</div>
+        <h2>End-to-end.<br/><em>Production-ready.</em></h2>
+      </div>
+      <p class="lead">
+        Four areas we work in deeply. Pick one, combine them, or hand us the whole problem — we architect the system around what your business actually needs.
+      </p>
+    </div>
+
+    <div class="cap-list container">
+      <div class="numbered-list">
+        <div class="numbered-row">
+          <div class="num">01</div>
+          <h3>Software<br/>Platforms</h3>
+          <p>Web platforms, internal tools, and client portals — production-grade code we architect, build, and maintain end-to-end. Built on React, Next.js, Django, and FastAPI.</p>
+        </div>
+        <div class="numbered-row">
+          <div class="num">02</div>
+          <h3>AI<br/>Systems</h3>
+          <p>Custom agents with tool use and MCP protocol, conversational interfaces, and document intelligence. Local inference, cloud APIs, or hybrid — fit to your workload and privacy posture.</p>
+        </div>
+        <div class="numbered-row">
+          <div class="num">03</div>
+          <h3>Automation<br/>&amp; Integrations</h3>
+          <p>n8n, M-Pesa Daraja, WhatsApp Business API, Stripe, Listmonk. We connect the systems your business already relies on so they operate without manual handoffs.</p>
+        </div>
+        <div class="numbered-row">
+          <div class="num">04</div>
+          <h3>Infrastructure<br/>&amp; Hosting</h3>
+          <p>Self-hosted Linux, Docker, Cloudflare, Railway, Vercel. Infrastructure you own outright — not rented black boxes — with monitoring, backups, and disaster recovery built in.</p>
+        </div>
+      </div>
+      <div style="margin-top:48px">
+        <a href="/services/" class="btn-arrow">All capabilities <span>→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section id="stats">
+    <div class="stats-head container">
+      <div class="eyebrow">— By the numbers</div>
+      <h2>Real systems. Real businesses. <em>Live in production.</em></h2>
+    </div>
+    <div class="stats-wrap container">
+      <div class="stat-grid">
+        <div class="stat-cell">
+          <div class="stat-num">02<em>+</em></div>
+          <div class="stat-label">Companies founded</div>
+          <div class="stat-desc">Both live, both in production.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">05<em>+</em></div>
+          <div class="stat-label">Years building</div>
+          <div class="stat-desc">Full-stack systems for real businesses.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">24<em>/7</em></div>
+          <div class="stat-label">Systems running</div>
+          <div class="stat-desc">Agents, automations, monitoring — all live.</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-num">10<em>+</em></div>
+          <div class="stat-label">Integrations shipped</div>
+          <div class="stat-desc">M-Pesa, WhatsApp, Stripe, AI APIs, n8n.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH -->
+  <section id="approach">
+    <div class="approach-grid container">
+      <div>
+        <div class="eyebrow" style="margin-bottom:20px">— Approach</div>
+        <h2>The shortest<br/>path from<br/><em>problem to system.</em></h2>
+      </div>
+      <div class="cap-list">
+        <div class="numbered-list">
+          <div class="numbered-row">
+            <div class="num">01</div>
+            <h3>Discover</h3>
+            <p>We map your operations, find the bottlenecks, and define what success looks like — measured. No vague briefs, no fishing for scope.</p>
+          </div>
+          <div class="numbered-row">
+            <div class="num">02</div>
+            <h3>Design</h3>
+            <p>System architecture, data model, and user flows mapped before any code is written. You see the full picture before we commit to building.</p>
+          </div>
+          <div class="numbered-row">
+            <div class="num">03</div>
+            <h3>Build</h3>
+            <p>Focused sprints, live staging from week one. Real working software you can test as it's built — not a final reveal months later.</p>
+          </div>
+          <div class="numbered-row">
+            <div class="num">04</div>
+            <h3>Maintain</h3>
+            <p>We don't disappear at launch. Long-term support, monitoring, and ongoing improvements — we run alongside your business.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT BAND -->
+  <section id="cta">
+    <div class="cta-inner container">
+      <h2>Have something serious<br/>to build? <em>Let's talk.</em></h2>
+      <div class="cta-meta">
+        <div class="cta-meta-item">
+          <div class="cta-meta-label">— Email</div>
+          <a href="mailto:hello@craftededgesolutions.africa" class="cta-meta-value">hello@craftededgesolutions.africa</a>
+        </div>
+        <div class="cta-meta-item">
+          <div class="cta-meta-label">— Phone / WhatsApp</div>
+          <a href="tel:+254769071925" class="cta-meta-value">+254 769 071 925</a>
+        </div>
+        <div class="cta-meta-item">
+          <div class="cta-meta-label">— Location</div>
+          <span class="cta-meta-value">Nairobi, Kenya · Operating globally</span>
+        </div>
+        <div class="cta-cta-actions">
+          <a href="/contact/" class="btn btn-primary">Start a project →</a>
+          <a href="/services/" class="btn btn-secondary">See capabilities</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

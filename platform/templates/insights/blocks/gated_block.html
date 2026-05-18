@@ -1,0 +1,12 @@
+{% load wagtailcore_tags %}
+{% if request.user.is_authenticated and request.user.is_insights_member %}
+  <div class="gated-content">
+    {{ value.content|richtext }}
+  </div>
+{% else %}
+  <div class="gated-teaser">
+    <span class="label-caps">Members only</span>
+    <p>This section is available to Insights members.</p>
+    <a href="{% url 'subscriptions:subscribe' %}" class="btn btn-primary btn-sm">Unlock access</a>
+  </div>
+{% endif %}

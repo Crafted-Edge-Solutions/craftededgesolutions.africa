@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block title %}{{ page.title }} — Insights — Crafted Edge Solutions{% endblock %}
+{% block meta_description %}{{ page.summary|default:page.search_description }}{% endblock %}
+
+{% block content %}
+<article id="insights-post">
+  <header class="post-header container">
+    <nav class="post-breadcrumb">
+      <a href="{{ page.get_parent.url }}">Insights</a>
+      <span>/</span>
+      <span>{{ page.get_category_display }}</span>
+    </nav>
+    <div class="post-header-meta">
+      <span class="post-category label-caps">{{ page.get_category_display }}</span>
+      {% if page.is_premium %}<span class="post-premium-tag">Premium</span>{% endif %}
+      <span class="post-read-time">{{ page.estimated_read_minutes }} min read</span>
+    </div>
+    <h1 class="display">{{ page.title }}</h1>
+    {% if page.summary %}
+      <p class="post-summary body-large">{{ page.summary }}</p>
+    {% endif %}
+    <p class="post-date fg-dim">{{ page.first_published_at|date:"F j, Y" }}</p>
+  </header>
+
+  {% if page.user_can_read(request.user) %}
+    <div class="post-body container prose">
+      {% include_block page.body %}
+    </div>
+  {% else %}
+    <div class="post-body container prose">
+      {% if page.summary %}
+        <p>{{ page.summary }}</p>
+      {% endif %}
+    </div>
+
+    <div class="paywall container">
+      <div class="paywall-inner">
+        <p class="label-caps">Premium Content</p>
+        <h2 class="display">This report is for<br /><em>Insights members</em></h2>
+        <p>Join the studio's Insights membership for full access to all technical reports — $0.99/mo.</p>
+        <div class="paywall-actions">
+          {% if request.user.is_authenticated %}
+            <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary">Unlock for KES 130/mo</a>
+            <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-ghost">Pay in USD ($0.99)</a>
+          {% else %}
+            <a href="/accounts/signup/?next={{ page.url }}" class="btn btn-primary">Create account to subscribe</a>
+            <a href="/accounts/login/?next={{ page.url }}" class="btn btn-ghost">Sign in</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</article>
+{% endblock %}
