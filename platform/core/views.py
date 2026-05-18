@@ -1,4 +1,5 @@
 import json
+import logging
 
 from django.conf import settings
 from django.core.mail import send_mail
@@ -7,6 +8,8 @@ from django.shortcuts import render
 from django.views.decorators.cache import cache_control
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+
+logger = logging.getLogger(__name__)
 
 
 INSIGHTS_PERKS = [
@@ -137,13 +140,16 @@ Timeline: {timeline}
 Message:
 {message}
 """
-    send_mail(
-        subject=f"Enquiry: {service or 'General'} — {name or email}",
-        message=body,
-        from_email=settings.DEFAULT_FROM_EMAIL,
-        recipient_list=["hello@craftededgesolutions.africa"],
-        fail_silently=True,
-    )
+    try:
+        send_mail(
+            subject=f"Enquiry: {service or 'General'} — {name or email}",
+            message=body,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=["hello@craftededgesolutions.africa"],
+            fail_silently=False,
+        )
+    except Exception as exc:
+        logger.error("contact_api send_mail failed: %s", exc)
 
     return JsonResponse({"ok": True})
 
