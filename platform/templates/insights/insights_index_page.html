@@ -23,40 +23,56 @@
       <p style="color:var(--fg-mid); line-height:1.7; margin-bottom:0;">Premium posts cover implementation specifics, real project economics, and lessons from live production systems. Free posts are teasers.</p>
     </div>
     <div>
-      <div class="insights-pricing-grid">
-
-        <div class="insights-tier">
-          <div class="insights-tier-label">— Kenya / East Africa</div>
-          <div class="insights-tier-price">KES <strong>499</strong><span>/mo</span></div>
-          <div class="insights-tier-desc">~$3.85 · Cancel any time</div>
-          {% if request.user.is_authenticated %}
-            <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary" style="width:100%; text-align:center; margin-top:20px;">Subscribe — KES 499 →</a>
-          {% else %}
-            <a href="/accounts/signup/?next={% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary" style="width:100%; text-align:center; margin-top:20px;">Get started →</a>
-          {% endif %}
+      <!-- Locale-aware pricing: JS sets currency based on browser locale -->
+      <div class="insights-tier" id="insights-price-box">
+        <div class="insights-tier-label" id="insights-price-label">— Insights Membership</div>
+        <div class="insights-tier-price" id="insights-price-display">
+          <strong id="insights-price-amount">499</strong><span>/mo</span>
         </div>
-
-        <div class="insights-tier insights-tier--alt">
-          <div class="insights-tier-label">— International</div>
-          <div class="insights-tier-price">USD <strong>4.99</strong><span>/mo</span></div>
-          <div class="insights-tier-desc">~KES 645 · Cancel any time</div>
-          {% if request.user.is_authenticated %}
-            <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-secondary" style="width:100%; text-align:center; margin-top:20px;">Subscribe — $4.99 →</a>
-          {% else %}
-            <a href="/accounts/signup/?next={% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-secondary" style="width:100%; text-align:center; margin-top:20px;">Get started →</a>
-          {% endif %}
-        </div>
-
+        <div class="insights-tier-desc" id="insights-price-sub">Cancel any time</div>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary" style="width:100%; text-align:center; margin-top:20px;" id="insights-subscribe-btn">Subscribe →</a>
+        {% else %}
+          <a href="/accounts/signup/" class="btn btn-primary" style="width:100%; text-align:center; margin-top:20px;" id="insights-subscribe-btn">Get started →</a>
+        {% endif %}
       </div>
 
-      <div style="margin-top:16px; display:flex; align-items:center; gap:10px;">
-        {% if request.user.is_authenticated %}
-          <a href="/accounts/login/" style="font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-dim);">Already subscribed? Sign in →</a>
-        {% else %}
+      <div style="margin-top:16px;">
+        {% if not request.user.is_authenticated %}
           <a href="/accounts/login/?next=/insights/" style="font-family:var(--f-mono); font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-dim);">Already a member? Sign in →</a>
         {% endif %}
       </div>
     </div>
+
+    <script>
+    (function() {
+      var loc = (navigator.language || navigator.userLanguage || 'en-US').toLowerCase();
+      var eastAfrica = ['sw', 'sw-ke', 'sw-tz', 'sw-ug', 'sw-rw', 'en-ke', 'en-tz', 'en-ug', 'en-rw', 'en-et', 'am', 'so'];
+      var isEA = eastAfrica.some(function(l) { return loc === l || loc.startsWith(l.split('-')[0] + '-ke') || loc.startsWith(l.split('-')[0] + '-tz'); });
+      // Also check timezone as signal
+      try {
+        var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || '';
+        if (tz.includes('Nairobi') || tz.includes('Dar_es_Salaam') || tz.includes('Kampala') || tz.includes('Addis_Ababa') || tz.includes('Africa/')) {
+          isEA = true;
+        }
+      } catch(e) {}
+
+      if (!isEA) {
+        // Switch to USD pricing
+        var box = document.getElementById('insights-price-box');
+        var display = document.getElementById('insights-price-display');
+        var sub = document.getElementById('insights-price-sub');
+        var btn = document.getElementById('insights-subscribe-btn');
+        if (display) {
+          display.innerHTML = 'USD <strong>4.99</strong><span>/mo</span>';
+        }
+        if (sub) sub.textContent = 'Cancel any time';
+        if (btn && btn.href && btn.href.indexOf('subscriptions') !== -1) {
+          btn.href = btn.href.replace('currency=KES', 'currency=USD');
+        }
+      }
+    })();
+    </script>
   </div>
 </section>
 {% else %}

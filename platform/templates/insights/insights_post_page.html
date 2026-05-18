@@ -24,7 +24,7 @@
     <p class="post-date fg-dim">{{ page.first_published_at|date:"F j, Y" }}</p>
   </header>
 
-  {% if page.user_can_read(request.user) %}
+  {% if user_can_read %}
     <div class="post-body container prose">
       {% include_block page.body %}
     </div>
@@ -35,19 +35,24 @@
       {% endif %}
     </div>
 
-    <div class="paywall container">
+    <div id="post-paywall">
       <div class="paywall-inner">
-        <p class="label-caps">Premium Content</p>
-        <h2 class="display">This report is for<br /><em>Insights members</em></h2>
-        <p>Join the studio's Insights membership for full access to all technical reports — $0.99/mo.</p>
-        <div class="paywall-actions">
-          {% if request.user.is_authenticated %}
-            <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary">Unlock for KES 130/mo</a>
-            <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-ghost">Pay in USD ($0.99)</a>
-          {% else %}
-            <a href="/accounts/signup/?next={{ page.url }}" class="btn btn-primary">Create account to subscribe</a>
-            <a href="/accounts/login/?next={{ page.url }}" class="btn btn-ghost">Sign in</a>
-          {% endif %}
+        <div class="paywall-left">
+          <p style="font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent);">— Premium Content</p>
+          <h2>This report is for<br /><em>Insights members</em></h2>
+        </div>
+        <div class="paywall-right">
+          <p>Full access to all technical reports, implementation guides, and business intelligence from the studio.</p>
+          <div class="paywall-actions">
+            {% if request.user.is_authenticated %}
+              <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary">Subscribe — KES 499/mo</a>
+              <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-secondary">or $4.99/mo →</a>
+            {% else %}
+              <a href="/accounts/signup/?next={{ page.url }}" class="btn btn-primary">Create account to subscribe</a>
+              <a href="/accounts/login/?next={{ page.url }}" class="btn btn-secondary">Sign in</a>
+            {% endif %}
+          </div>
+          <p style="font-size:0.78rem; color:var(--fg-dim); margin-top:16px;">Cancel any time. Secure payment via Paystack.</p>
         </div>
       </div>
     </div>

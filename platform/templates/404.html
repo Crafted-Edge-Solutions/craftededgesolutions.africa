@@ -1,0 +1,41 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}" />
+  <title>404 — Page not found — Crafted Edge Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/platform.css' %}" />
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-mark">
+      <img src="{% static 'img/logo.png' %}" alt="Crafted Edge Solutions" class="logo-mark" />
+      Crafted Edge<span>.</span>
+    </a>
+  </nav>
+
+  <section style="min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 32px 80px;">
+    <div style="max-width:640px; text-align:center;">
+      <div style="font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:32px;">— Error 404</div>
+      <h1 style="font-family:var(--f-display); font-size:clamp(5rem,18vw,12rem); font-weight:400; letter-spacing:-0.06em; line-height:0.88; color:var(--fg); margin-bottom:32px;">Not<br/><em>found.</em></h1>
+      <p style="color:var(--fg-mid); font-size:1.05rem; line-height:1.7; margin-bottom:48px; max-width:44ch; margin-left:auto; margin-right:auto;">
+        This page doesn't exist or may have been moved. If you typed the address manually, double-check the spelling.
+      </p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="/" class="btn btn-primary">Back to home →</a>
+        <a href="/contact/" class="btn btn-secondary">Contact us</a>
+      </div>
+      <p style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-faint); margin-top:64px;">
+        Crafted Edge Solutions · Nairobi · EAT
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>

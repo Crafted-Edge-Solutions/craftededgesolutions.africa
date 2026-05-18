@@ -135,37 +135,35 @@
         </div>
       </div>
       <div style="display:flex; flex-direction:column; gap:16px;">
-        <!-- KES tier -->
-        <div style="padding:32px; background:var(--bg-card); border:1px solid var(--line); border-radius:8px;">
-          <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:16px;">— Kenya / East Africa</div>
-          <div style="font-family:var(--f-display); font-size:3rem; font-weight:400; letter-spacing:-0.04em; line-height:1; margin-bottom:8px; color:var(--fg);">KES <span style="color:var(--accent);">499</span><span style="font-size:1.2rem; color:var(--fg-dim);">/mo</span></div>
-          <div style="font-size:0.82rem; color:var(--fg-faint); margin-bottom:24px;">~$3.85 · Cancel any time</div>
+        <!-- Locale-aware single price box -->
+        <div id="pricing-insights-box" style="padding:32px; background:var(--bg-card); border:1px solid var(--line); border-radius:8px;">
+          <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:16px;">— Insights Membership</div>
+          <div id="pricing-price-display" style="font-family:var(--f-display); font-size:3rem; font-weight:400; letter-spacing:-0.04em; line-height:1; margin-bottom:8px; color:var(--fg);">KES <span style="color:var(--accent);">499</span><span style="font-size:1.2rem; color:var(--fg-dim);">/mo</span></div>
+          <div style="font-size:0.82rem; color:var(--fg-faint); margin-bottom:24px;">Cancel any time</div>
           {% if request.user.is_authenticated %}
             {% if request.user.is_insights_member %}
               <span style="font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent);">✦ Already a member</span>
             {% else %}
-              <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary" style="width:100%; text-align:center;">Subscribe KES 499 →</a>
+              <a href="{% url 'subscriptions:subscribe' %}?currency=KES" class="btn btn-primary" style="width:100%; text-align:center;" id="pricing-subscribe-btn">Subscribe →</a>
             {% endif %}
           {% else %}
-            <a href="/accounts/signup/?next=/pricing/" class="btn btn-primary" style="width:100%; text-align:center;">Get started →</a>
-          {% endif %}
-        </div>
-        <!-- USD tier -->
-        <div style="padding:32px; background:var(--bg-card); border:1px solid var(--line-strong); border-radius:8px;">
-          <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); margin-bottom:16px;">— International</div>
-          <div style="font-family:var(--f-display); font-size:3rem; font-weight:400; letter-spacing:-0.04em; line-height:1; margin-bottom:8px; color:var(--fg);">USD <span style="color:var(--accent);">4.99</span><span style="font-size:1.2rem; color:var(--fg-dim);">/mo</span></div>
-          <div style="font-size:0.82rem; color:var(--fg-faint); margin-bottom:24px;">~KES 645 · Cancel any time</div>
-          {% if request.user.is_authenticated %}
-            {% if request.user.is_insights_member %}
-              <span style="font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent);">✦ Already a member</span>
-            {% else %}
-              <a href="{% url 'subscriptions:subscribe' %}?currency=USD" class="btn btn-secondary" style="width:100%; text-align:center;">Subscribe $4.99 →</a>
-            {% endif %}
-          {% else %}
-            <a href="/accounts/signup/?next=/pricing/" class="btn btn-secondary" style="width:100%; text-align:center;">Get started →</a>
+            <a href="/accounts/signup/" class="btn btn-primary" style="width:100%; text-align:center;" id="pricing-subscribe-btn">Get started →</a>
           {% endif %}
         </div>
         <p style="font-size:0.78rem; color:var(--fg-faint); text-align:center;">Billed monthly via Paystack. Secure payment.</p>
+        <script>
+        (function() {
+          var tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch(e) {}
+          var loc = (navigator.language || '').toLowerCase();
+          var isEA = tz.indexOf('Africa') !== -1 || loc.indexOf('-ke') !== -1 || loc.indexOf('-tz') !== -1 || loc.indexOf('-ug') !== -1 || loc === 'sw';
+          if (!isEA) {
+            var d = document.getElementById('pricing-price-display');
+            if (d) d.innerHTML = 'USD <span style="color:var(--accent);">4.99</span><span style="font-size:1.2rem; color:var(--fg-dim);">/mo</span>';
+            var b = document.getElementById('pricing-subscribe-btn');
+            if (b && b.href && b.href.indexOf('currency=') !== -1) b.href = b.href.replace('currency=KES', 'currency=USD');
+          }
+        })();
+        </script>
       </div>
     </div>
   </div>

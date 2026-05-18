@@ -7,11 +7,11 @@
   <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}" />
   <title>{% block title %}{{ page.seo_title|default:page.title }} — Crafted Edge Solutions{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}{{ page.search_description|default:'A product engineering studio building software platforms, AI-powered systems, and scalable digital infrastructure for ambitious businesses.' }}{% endblock %}" />
-  {% block og_tags %}
+  {% block og_tags %}{% if page %}
   <meta property="og:title" content="{{ page.seo_title|default:page.title }}" />
   <meta property="og:description" content="{{ page.search_description|default:'' }}" />
   <meta property="og:type" content="website" />
-  {% endblock %}
+  {% endif %}{% endblock %}
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

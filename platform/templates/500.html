@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>500 — Server error — Crafted Edge Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0a0b; --fg: #f0efea; --fg-mid: #8a8a82; --fg-dim: #5c5c56; --fg-faint: #3a3a36;
+      --accent: #e89240; --line: rgba(255,255,255,0.07);
+      --f-display: "Instrument Serif", Georgia, serif;
+      --f-mono: "JetBrains Mono", monospace;
+      --f-sans: "Inter", system-ui, sans-serif;
+    }
+    body { background: var(--bg); color: var(--fg); font-family: var(--f-sans); -webkit-font-smoothing: antialiased; }
+    nav { padding: 24px 32px; border-bottom: 1px solid var(--line); display: flex; align-items: center; }
+    .nav-mark { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--fg); font-family: var(--f-mono); font-size: 0.82rem; letter-spacing: 0.04em; }
+    .nav-mark span { color: var(--accent); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; border-radius: 100px; font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #d4832e; opacity: 1; }
+    .btn-secondary { background: transparent; color: var(--fg); border: 1px solid rgba(255,255,255,0.15); }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.35); opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-mark">
+      Crafted Edge<span>.</span>
+    </a>
+  </nav>
+
+  <section style="min-height:calc(100vh - 73px); display:flex; align-items:center; justify-content:center; padding:80px 32px;">
+    <div style="max-width:640px; text-align:center;">
+      <div style="font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); margin-bottom:32px;">— Error 500</div>
+      <h1 style="font-family:var(--f-display); font-size:clamp(5rem,18vw,12rem); font-weight:400; letter-spacing:-0.06em; line-height:0.88; color:var(--fg); margin-bottom:32px;">Server<br/><em>error.</em></h1>
+      <p style="color:var(--fg-mid); font-size:1.05rem; line-height:1.7; margin-bottom:48px; max-width:44ch; margin-left:auto; margin-right:auto;">
+        Something went wrong on our end. We've been notified and are looking into it.
+        Please try again in a few minutes.
+      </p>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="/" class="btn btn-primary">Back to home →</a>
+        <a href="mailto:hello@craftededgesolutions.africa" class="btn btn-secondary">Email us</a>
+      </div>
+      <p style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-faint); margin-top:64px;">
+        hello@craftededgesolutions.africa
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>

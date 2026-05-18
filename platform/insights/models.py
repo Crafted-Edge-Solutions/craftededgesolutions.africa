@@ -107,6 +107,11 @@ class InsightsPostPage(Page):
             return True
         return user.is_authenticated and getattr(user, "is_insights_member", False)
 
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
+        context["user_can_read"] = self.user_can_read(request.user)
+        return context
+
     class Meta:
         verbose_name = "Insights post"
         verbose_name_plural = "Insights posts"

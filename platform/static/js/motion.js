@@ -256,7 +256,7 @@
     loader.className = 'page-loader';
     loader.innerHTML = `
       <div class="loader-mark">
-        <img src="logo.png" alt="Crafted Edge" class="loader-logo" />
+        <img src="/static/img/logo.png" alt="Crafted Edge" class="loader-logo" />
         <span class="loader-text">Crafted Edge<span class="loader-dot">.</span></span>
         <div class="loader-bar"><div class="loader-bar-fill"></div></div>
       </div>
