@@ -103,53 +103,81 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-grid container">
+
+      <!-- Brand -->
       <div class="footer-brand">
         <div class="nav-mark">
           <img src="{% static 'img/logo.png' %}" alt="Crafted Edge Solutions" class="logo-mark" style="width:32px;height:32px;" />
           Crafted Edge<span>.</span>
         </div>
-        <p>A product engineering studio building software, AI systems, and infrastructure for ambitious businesses.</p>
+        <p>A principal-led product engineering studio building software, AI systems, and infrastructure for ambitious businesses.</p>
         <div class="footer-contact">
           <a href="mailto:hello@craftededgesolutions.africa">hello@craftededgesolutions.africa</a>
-          <a href="tel:+254769071925">+254 769 071 925</a>
+          <a href="https://wa.me/254769071925" target="_blank" rel="noopener">+254 769 071 925</a>
+        </div>
+        <div style="margin-top:20px; font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--fg-faint);">
+          Nairobi · Kenya · Operating globally
         </div>
       </div>
+
+      <!-- Studio -->
       <div class="footer-col">
         <h5>— Studio</h5>
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/about/#process">Process</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
           <li><a href="/careers/">Careers</a></li>
           <li><a href="/contact/">Contact</a></li>
+          <li><a href="https://meshack.craftededgesolutions.africa" target="_blank" rel="noopener">Founder</a></li>
         </ul>
       </div>
+
+      <!-- Work & Insights -->
+      <div class="footer-col">
+        <h5>— Work & Insights</h5>
+        <ul>
+          <li><a href="/solutions/">Case Studies</a></li>
+          <li><a href="/insights/">Insights</a></li>
+          <li><a href="/insights/#newsletter">Newsletter</a></li>
+          <li><a href="/pricing/#insights">Membership</a></li>
+        </ul>
+      </div>
+
+      <!-- Capabilities -->
       <div class="footer-col">
         <h5>— Capabilities</h5>
         <ul>
-          <li><a href="/services/">Software</a></li>
+          <li><a href="/services/">Software Platforms</a></li>
           <li><a href="/services/">AI Systems</a></li>
           <li><a href="/services/">Automation</a></li>
           <li><a href="/services/">Infrastructure</a></li>
+          <li><a href="/pricing/">Discovery Sprint</a></li>
         </ul>
       </div>
+
+      <!-- Legal & Account -->
       <div class="footer-col">
-        <h5>— Legal & Account</h5>
+        <h5>— Account</h5>
         <ul>
-          <li><a href="/privacy/">Privacy Policy</a></li>
-          <li><a href="/terms/">Terms of Service</a></li>
           {% if request.user.is_authenticated %}
+          <li><a href="/dashboard/">Dashboard</a></li>
+          <li><a href="/dashboard/billing/">Billing</a></li>
+          <li><a href="/dashboard/profile/">Profile</a></li>
           <li><a href="/accounts/logout/">Sign out</a></li>
           {% else %}
           <li><a href="/accounts/login/">Sign in</a></li>
           <li><a href="/accounts/signup/">Create account</a></li>
           {% endif %}
-          <li><a href="https://meshack.craftededgesolutions.africa" target="_blank" rel="noopener">Founder</a></li>
+          <li><a href="/privacy/">Privacy Policy</a></li>
+          <li><a href="/terms/">Terms of Service</a></li>
         </ul>
       </div>
+
     </div>
     <div class="footer-bottom container">
       <p>© {% now "Y" %} Crafted Edge Solutions</p>
-      <p>Nairobi · EAT · Operating globally</p>
+      <p style="font-family:var(--f-mono); font-size:0.72rem; color:var(--fg-faint);">Principal-led · Remote-first · Est. Nairobi</p>
     </div>
   </footer>
 

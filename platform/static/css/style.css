@@ -461,13 +461,14 @@ footer {
   max-width: var(--container);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 56px;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr 1fr;
+  gap: 48px;
   margin-bottom: 80px;
 }
 
-@media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
-@media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; gap: 32px; } }
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 40px; } }
+@media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 400px) { .footer-grid { grid-template-columns: 1fr; gap: 28px; } }
 
 .footer-brand .nav-mark { font-size: 1.4rem; }
 .footer-brand .nav-mark .logo-mark { width: 32px; height: 32px; }
