@@ -7,11 +7,17 @@
   <link rel="apple-touch-icon" href="{% static 'img/favicon.png' %}" />
   <title>{% block title %}{{ page.seo_title|default:page.title }} — Crafted Edge Solutions{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}{{ page.search_description|default:'A product engineering studio building software platforms, AI-powered systems, and scalable digital infrastructure for ambitious businesses.' }}{% endblock %}" />
+  <link rel="canonical" href="https://craftededgesolutions.africa{{ request.path }}" />
   {% block og_tags %}{% if page %}
   <meta property="og:title" content="{{ page.seo_title|default:page.title }}" />
   <meta property="og:description" content="{{ page.search_description|default:'' }}" />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://craftededgesolutions.africa{{ request.path }}" />
+  <meta property="og:site_name" content="Crafted Edge Solutions" />
   {% endif %}{% endblock %}
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"ProfessionalService","name":"Crafted Edge Solutions","url":"https://craftededgesolutions.africa","logo":"https://craftededgesolutions.africa/static/img/logo.png","description":"Principal-led product engineering studio building software platforms, AI systems, and digital infrastructure.","address":{"@type":"PostalAddress","addressLocality":"Nairobi","addressCountry":"KE"},"email":"hello@craftededgesolutions.africa","telephone":"+254769071925","sameAs":["https://meshack.craftededgesolutions.africa"]}
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,6 +41,7 @@
       <li><a href="/about/" {% if "/about/" in request.path %}class="nav-active"{% endif %}>Studio</a></li>
       <li><a href="/insights/" {% if "/insights/" in request.path %}class="nav-active"{% endif %}>Insights</a></li>
       <li><a href="/pricing/" {% if "/pricing/" in request.path %}class="nav-active"{% endif %}>Pricing</a></li>
+      <li><a href="/careers/" {% if "/careers/" in request.path %}class="nav-active"{% endif %}>Careers</a></li>
       <li><a href="/contact/" {% if "/contact/" in request.path %}class="nav-active"{% endif %}>Contact</a></li>
     </ul>
     <div class="nav-auth">
@@ -65,6 +72,7 @@
     <a href="/about/">Studio</a>
     <a href="/insights/">Insights</a>
     <a href="/pricing/">Pricing</a>
+    <a href="/careers/">Careers</a>
     <a href="/contact/">Contact</a>
     <hr style="border:none; border-top:1px solid var(--line); margin:8px 0;" />
     {% if request.user.is_authenticated %}
@@ -111,6 +119,7 @@
         <ul>
           <li><a href="/about/">About</a></li>
           <li><a href="/about/#process">Process</a></li>
+          <li><a href="/careers/">Careers</a></li>
           <li><a href="/contact/">Contact</a></li>
         </ul>
       </div>

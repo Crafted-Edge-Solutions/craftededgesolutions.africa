@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Careers — Crafted Edge Solutions{% endblock %}
+{% block meta_description %}Work with a principal-led engineering studio based in Nairobi. Contract roles, remote-first. We build serious software for serious clients.{% endblock %}
+
+{% block content %}
+
+<section class="page-hero" style="padding:180px 32px 100px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:24px">— Work with us</div>
+    <h1 style="font-family:var(--f-display); font-size:clamp(3.5rem,10vw,8rem); line-height:0.9; letter-spacing:-0.05em; font-weight:400; max-width:14ch; margin-bottom:32px;">
+      Build with<br/><em>the studio.</em>
+    </h1>
+    <p class="lead" style="max-width:52ch; color:var(--fg-mid); font-size:1.1rem; line-height:1.65;">
+      We're a small, high-output studio. Every person we work with is a practitioner —
+      someone who ships real things and cares about the craft.
+      We take on contract collaborators for specific client engagements.
+    </p>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section style="padding:100px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 2fr; gap:80px; align-items:start;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:24px">— How we work</div>
+      <h2 style="font-family:var(--f-display); font-size:clamp(2rem,4vw,3.2rem); font-weight:400; letter-spacing:-0.03em; line-height:1;">
+        Not a job.<br/><em>A collaboration.</em>
+      </h2>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:0;">
+      {% for item in how_we_work %}
+      <div style="padding:28px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:40px 1fr; gap:24px; align-items:start;">
+        <div style="font-family:var(--f-mono); font-size:0.72rem; letter-spacing:0.1em; color:var(--fg-dim); padding-top:3px;">0{{ forloop.counter }}</div>
+        <div>
+          <div style="font-family:var(--f-display); font-size:1.2rem; font-weight:400; letter-spacing:-0.01em; margin-bottom:8px; color:var(--fg);">{{ item.0 }}</div>
+          <div style="font-size:0.9rem; color:var(--fg-mid); line-height:1.65;">{{ item.1 }}</div>
+        </div>
+      </div>
+      {% endfor %}
+      <div style="padding:28px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);"></div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN ROLES -->
+<section style="padding:100px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:48px">— Open roles</div>
+    <div style="display:flex; flex-direction:column; gap:0;">
+      {% for role in roles %}
+      <div style="padding:36px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:1fr auto; gap:40px; align-items:start;">
+        <div>
+          <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px; flex-wrap:wrap;">
+            <h3 style="font-family:var(--f-display); font-size:1.5rem; font-weight:400; letter-spacing:-0.02em; color:var(--fg);">{{ role.title }}</h3>
+            <span style="font-family:var(--f-mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--fg-dim); border:1px solid var(--line-strong); padding:3px 10px; border-radius:100px;">{{ role.type }}</span>
+          </div>
+          <p style="font-size:0.92rem; color:var(--fg-mid); line-height:1.65; margin-bottom:16px; max-width:60ch;">{{ role.description }}</p>
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            {% for skill in role.skills %}
+            <span style="font-family:var(--f-mono); font-size:0.65rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--accent); padding:3px 10px; border:1px solid rgba(232,146,64,0.25); border-radius:100px;">{{ skill }}</span>
+            {% endfor %}
+          </div>
+        </div>
+        <div style="flex-shrink:0;">
+          <a href="mailto:hello@craftededgesolutions.africa?subject=Application: {{ role.title }}" class="btn btn-secondary" style="font-size:0.78rem; padding:11px 20px; white-space:nowrap;">Apply →</a>
+        </div>
+      </div>
+      {% endfor %}
+      <div style="padding:36px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+        <div style="display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center;">
+          <div>
+            <h3 style="font-family:var(--f-display); font-size:1.5rem; font-weight:400; letter-spacing:-0.02em; margin-bottom:8px; color:var(--fg);">Don't see your role?</h3>
+            <p style="font-size:0.9rem; color:var(--fg-mid);">We're always interested in exceptional engineers and writers. Send a note with what you do and why.</p>
+          </div>
+          <a href="mailto:hello@craftededgesolutions.africa?subject=Open application" class="btn btn-primary" style="font-size:0.78rem; padding:11px 20px; white-space:nowrap;">Get in touch →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="padding:100px 32px 120px;">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 2fr; gap:80px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:24px">— What we value</div>
+      <h2 style="font-family:var(--f-display); font-size:clamp(2rem,4vw,3.2rem); font-weight:400; letter-spacing:-0.03em; line-height:1;">
+        Craft over<br/><em>volume.</em>
+      </h2>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      {% for val in values %}
+      <div style="padding:28px; background:var(--bg-card); border:1px solid var(--line); border-radius:6px;">
+        <div style="font-family:var(--f-mono); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:12px;">{{ val.0 }}</div>
+        <div style="font-size:0.9rem; color:var(--fg-mid); line-height:1.65;">{{ val.1 }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

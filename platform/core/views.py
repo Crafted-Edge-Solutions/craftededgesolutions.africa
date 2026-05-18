@@ -1,4 +1,6 @@
+from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.decorators.cache import cache_control
 
 
 INSIGHTS_PERKS = [
@@ -38,9 +40,143 @@ FAQS = [
     ),
 ]
 
+HOW_WE_WORK = [
+    ("Project-based contracts", "We bring you in for specific client engagements — a build, a launch, a production problem that needs solving. You're not on the bench waiting for work."),
+    ("Remote-first", "We work async-first with clear briefs. No daily standups unless the engagement calls for it. We trust our collaborators to own their slice."),
+    ("Principal-led", "Every engagement is overseen by a senior engineer. You'll get context, clear direction, and meaningful feedback — not just a Jira board."),
+    ("Craft over speed", "We move fast but we don't cut corners. Quality code, clean interfaces, systems that last. We expect the same standard from everyone we work with."),
+]
+
+VALUES = [
+    ("Ownership", "We want people who see a problem and fix it without being asked. If it's broken and you notice it, it's yours to surface."),
+    ("Clarity", "Write clearly, communicate early, ask before you assume. Ambiguity compounds fast on small teams."),
+    ("Depth", "We'd rather you know one thing exceptionally well than six things superficially. Specialists ship better software."),
+    ("Honesty", "If a deadline is unrealistic, say so. If the architecture is wrong, say so. We make better decisions with real information."),
+]
+
+OPEN_ROLES = [
+    {
+        "title": "Contract Backend Engineer",
+        "type": "Contract · Remote",
+        "description": "Django/Python engineers who've shipped production APIs. You'll work alongside the principal on client builds — integrations, platform architecture, data pipelines.",
+        "skills": ["Python", "Django", "PostgreSQL", "REST APIs", "Docker"],
+    },
+    {
+        "title": "Frontend / Full-Stack Engineer",
+        "type": "Contract · Remote",
+        "description": "Engineers comfortable owning the full UI layer — ideally with experience in vanilla JS, Alpine, or React. We build fast, clean interfaces. No bloat.",
+        "skills": ["HTML/CSS", "JavaScript", "React or Alpine", "Git"],
+    },
+    {
+        "title": "DevOps / Infrastructure Engineer",
+        "type": "Contract · Remote",
+        "description": "Cloud infrastructure experience (AWS, GCP, or Railway/Fly.io). CI/CD, Terraform, container orchestration. We provision serious systems for serious clients.",
+        "skills": ["Linux", "Docker", "CI/CD", "AWS or GCP", "Terraform"],
+    },
+    {
+        "title": "Technical Writer / Content Strategist",
+        "type": "Part-time · Remote",
+        "description": "You write clearly about engineering and systems. You'll contribute to Insights — our premium technical publication — and help shape studio content.",
+        "skills": ["Technical writing", "Engineering background", "Markdown"],
+    },
+]
+
 
 def pricing(request):
     return render(request, "pricing.html", {
         "insights_perks": INSIGHTS_PERKS,
         "faqs": FAQS,
     })
+
+
+def careers(request):
+    return render(request, "careers.html", {
+        "roles": OPEN_ROLES,
+        "how_we_work": HOW_WE_WORK,
+        "values": VALUES,
+    })
+
+
+@cache_control(max_age=86400)
+def robots_txt(request):
+    lines = [
+        "User-agent: *",
+        "Allow: /",
+        "Disallow: /cms/",
+        "Disallow: /django-admin/",
+        "Disallow: /dashboard/",
+        "Disallow: /accounts/",
+        "Disallow: /subscriptions/",
+        "Disallow: /documents/",
+        "",
+        "# AI crawlers — welcome, see /llms.txt for structured context",
+        "User-agent: GPTBot",
+        "Allow: /",
+        "Disallow: /dashboard/",
+        "Disallow: /cms/",
+        "",
+        "User-agent: ClaudeBot",
+        "Allow: /",
+        "Disallow: /dashboard/",
+        "Disallow: /cms/",
+        "",
+        "User-agent: anthropic-ai",
+        "Allow: /",
+        "",
+        "Sitemap: https://craftededgesolutions.africa/sitemap.xml",
+    ]
+    return HttpResponse("\n".join(lines), content_type="text/plain")
+
+
+@cache_control(max_age=86400)
+def llms_txt(request):
+    content = """\
+# Crafted Edge Solutions
+
+> A principal-led product engineering studio based in Nairobi, Kenya.
+> We build software platforms, AI-powered systems, and scalable digital
+> infrastructure for ambitious businesses in East Africa and globally.
+
+## About
+
+Crafted Edge Solutions is a boutique engineering studio founded by Meshack,
+a senior software engineer based in Nairobi. We operate at the intersection
+of technical rigour and business outcomes — taking on five high-impact
+partnerships at a time. We are not an agency. We are engineers who run a studio.
+
+## Services
+
+- **Fixed-scope builds** — Web platforms, API backends, mobile integrations, AI systems
+- **Discovery Sprint** — 2-week technical roadmap engagement (from KES 120,000)
+- **Monthly Retainer** — Embedded principal engineering (from KES 300,000/month)
+- **Insights Membership** — Premium engineering reports and business intelligence (KES 499/month or USD 4.99/month)
+
+## Key pages
+
+- / — Studio index
+- /services/ — Full capabilities
+- /solutions/ — Case studies and past work
+- /insights/ — Premium technical publication
+- /pricing/ — Engagement tiers and Insights pricing
+- /about/ — Studio background and process
+- /contact/ — Start a project
+- /careers/ — Work with the studio
+
+## Insights publication
+
+Insights is a premium technical publication covering:
+- M-Pesa and East African fintech integrations
+- Django, Python, and full-stack engineering
+- AI and automation for African-context problems
+- Infrastructure and DevOps on tight budgets
+- Product engineering and DX intelligence
+
+Free posts are publicly accessible. Premium posts require an Insights membership.
+
+## Contact
+
+Email: hello@craftededgesolutions.africa
+Phone: +254 769 071 925
+Location: Nairobi, Kenya · Operating globally
+"""
+    return HttpResponse(content, content_type="text/plain; charset=utf-8")
