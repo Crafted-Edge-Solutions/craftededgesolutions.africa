@@ -19,10 +19,11 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-only-insecure-secret-key-change
 DEBUG = os.getenv("DJANGO_DEBUG", "0") == "1"
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost")
 
-# Railway injects RAILWAY_PUBLIC_DOMAIN automatically
+# Railway injects RAILWAY_PUBLIC_DOMAIN automatically; healthcheck uses its own host
 _railway_domain = os.getenv("RAILWAY_PUBLIC_DOMAIN", "")
 if _railway_domain and _railway_domain not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append(_railway_domain)
+ALLOWED_HOSTS.append("healthcheck.railway.app")
 
 CSRF_TRUSTED_ORIGINS = env_list("DJANGO_CSRF_TRUSTED_ORIGINS")
 if _railway_domain:
