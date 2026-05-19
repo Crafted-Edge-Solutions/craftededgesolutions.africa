@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ s.idea_name }} — AI Idea Analysis — Crafted Edge Solutions{% endblock %}
+{% block meta_description %}{{ s.headline|default:"Business idea analysis by Crafted Edge Solutions AI Validator." }}{% endblock %}
+
+{% block og_tags %}
+<meta property="og:title" content="{{ s.idea_name }}: scored {{ s.score|default:'?' }}/10 — {{ s.verdict_label }}" />
+<meta property="og:description" content="{{ s.headline }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://craftededgesolutions.africa/validate/results/{{ s.uid }}/" />
+<meta property="og:site_name" content="Crafted Edge Solutions" />
+{% endblock %}
+
+{% block content %}
+
+{% if not s.analysis_done %}
+<section style="padding:200px 32px; text-align:center;">
+  <div style="font-family:var(--f-display); font-size:2rem; margin-bottom:16px;">Analysing your idea…</div>
+  <p style="color:var(--fg-dim);">This takes 10–20 seconds. Refresh if this page doesn't update.</p>
+</section>
+{% else %}
+
+<!-- SCORE HERO -->
+<section style="padding:160px 32px 80px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:auto 1fr; gap:80px; align-items:center;">
+
+    <div style="text-align:center;">
+      <div style="font-family:var(--f-display); font-size:clamp(6rem,15vw,11rem); line-height:1; color:{{ s.score_color }}; letter-spacing:-0.05em;">{{ s.score }}</div>
+      <div style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-top:4px;">out of 10</div>
+    </div>
+
+    <div>
+      <div style="margin-bottom:20px;">
+        <span style="font-family:var(--f-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:{{ s.verdict_color }}; background:rgba(0,0,0,0.3); border:1px solid {{ s.verdict_color }}; padding:6px 14px; border-radius:100px;">
+          {{ s.verdict_label }}
+        </span>
+      </div>
+      <div class="eyebrow" style="margin-bottom:12px;">— {{ s.idea_name }}</div>
+      <p style="font-family:var(--f-display); font-size:clamp(1.4rem,3vw,2.2rem); line-height:1.2; letter-spacing:-0.025em; color:var(--fg); max-width:32ch; font-weight:400;">
+        {{ s.headline }}
+      </p>
+      <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+        <a href="https://twitter.com/intent/tweet?text={{ s.idea_name|urlencode }}+scored+{{ s.score }}/10+on+%40CraftedEdgeAI%27s+idea+validator.+{{ s.verdict_label }}.+craftededgesolutions.africa/validate/results/{{ s.uid }}/"
+           target="_blank" rel="noopener"
+           style="font-family:var(--f-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-dim); border:1px solid var(--line-strong); padding:8px 16px; border-radius:100px; text-decoration:none;">
+          Share result →
+        </a>
+        <a href="/validate/"
+           style="font-family:var(--f-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-dim); padding:8px 16px; border-radius:100px; text-decoration:none;">
+          Validate another →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BASIC ANALYSIS -->
+<section style="padding:80px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:760px; margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:32px;">— Analysis</div>
+    <div style="color:var(--fg-mid); font-size:1.05rem; line-height:1.8; white-space:pre-line;">{{ s.basic_analysis }}</div>
+  </div>
+</section>
+
+{% if s.is_paid and s.deep_data %}
+<!-- DEEP REPORT -->
+
+<!-- Market Analysis -->
+{% with m=s.deep_data.market_analysis %}
+{% if m %}
+<section style="padding:80px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:40px;">— Market Analysis</div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:40px;">
+      <div style="padding:28px; background:var(--card); border:1px solid var(--line); border-radius:6px;">
+        <div style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-bottom:14px;">Market Size</div>
+        <p style="font-size:0.92rem; color:var(--fg-mid); line-height:1.65;">{{ m.size }}</p>
+      </div>
+      <div style="padding:28px; background:var(--card); border:1px solid var(--line); border-radius:6px;">
+        <div style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-bottom:14px;">Timing</div>
+        <p style="font-size:0.92rem; color:var(--fg-mid); line-height:1.65;">{{ m.timing }}</p>
+      </div>
+      <div style="padding:28px; background:var(--card); border:1px solid var(--line); border-radius:6px;">
+        <div style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-bottom:14px;">Growth</div>
+        <p style="font-size:0.92rem; color:var(--fg-mid); line-height:1.65;">{{ m.growth }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endwith %}
+
+<!-- Strengths + Risks -->
+<section style="padding:80px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:60px;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:28px; color:#22c55e;">— Strengths</div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        {% for item in s.deep_data.strengths %}
+        <div style="display:flex; gap:16px; padding:20px; background:rgba(34,197,94,0.06); border:1px solid rgba(34,197,94,0.15); border-radius:6px;">
+          <span style="font-family:var(--f-mono); font-size:0.72rem; color:rgba(34,197,94,0.6); margin-top:2px; flex-shrink:0;">0{{ forloop.counter }}</span>
+          <span style="font-size:0.9rem; color:var(--fg-mid); line-height:1.6;">{{ item }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div>
+      <div class="eyebrow" style="margin-bottom:28px; color:#ef4444;">— Risks</div>
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        {% for item in s.deep_data.risks %}
+        <div style="display:flex; gap:16px; padding:20px; background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.15); border-radius:6px;">
+          <span style="font-family:var(--f-mono); font-size:0.72rem; color:rgba(239,68,68,0.6); margin-top:2px; flex-shrink:0;">0{{ forloop.counter }}</span>
+          <span style="font-size:0.9rem; color:var(--fg-mid); line-height:1.6;">{{ item }}</span>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Competitors -->
+{% if s.deep_data.competitors %}
+<section style="padding:60px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:28px;">— Competitors & Substitutes in Kenya/EA</div>
+    <div style="display:flex; flex-wrap:wrap; gap:12px;">
+      {% for c in s.deep_data.competitors %}
+      <span style="font-family:var(--f-mono); font-size:0.8rem; color:var(--fg-mid); background:var(--card); border:1px solid var(--line-strong); padding:8px 18px; border-radius:100px;">{{ c }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Next steps -->
+{% if s.deep_data.what_to_do_next %}
+<section style="padding:80px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:760px; margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:32px;">— What to do next</div>
+    <div style="display:flex; flex-direction:column; gap:0;">
+      {% for step in s.deep_data.what_to_do_next %}
+      <div style="display:grid; grid-template-columns:48px 1fr; gap:24px; padding:24px 0; border-top:1px solid var(--line); {% if forloop.last %}border-bottom:1px solid var(--line);{% endif %} align-items:start;">
+        <div style="font-family:var(--f-display); font-size:2rem; color:var(--accent); line-height:1;">{{ forloop.counter }}</div>
+        <div style="font-size:0.95rem; color:var(--fg-mid); line-height:1.7; padding-top:8px;">{{ step }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Hard truth -->
+{% if s.deep_data.the_hard_truth %}
+<section style="padding:80px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:760px; margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:24px; color:var(--accent);">— The hard truth</div>
+    <p style="font-family:var(--f-display); font-size:clamp(1.4rem,3vw,2rem); line-height:1.3; letter-spacing:-0.025em; font-weight:400; color:var(--fg);">
+      <em>{{ s.deep_data.the_hard_truth }}</em>
+    </p>
+  </div>
+</section>
+{% endif %}
+
+{% else %}
+<!-- UPGRADE CTA (free tier) -->
+<section style="padding:80px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:760px; margin:0 auto; display:grid; grid-template-columns:1fr auto; gap:60px; align-items:center;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:20px;">— Deep Report · KES 500</div>
+      <h2 style="font-family:var(--f-display); font-size:clamp(1.8rem,4vw,2.8rem); font-weight:400; letter-spacing:-0.035em; line-height:1.1; margin-bottom:20px;">
+        Get the full picture<br/><em>before you build.</em>
+      </h2>
+      <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:32px;">
+        {% for item in upgrade_items %}
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:5px; height:5px; background:var(--accent); border-radius:50%; flex-shrink:0;"></div>
+          <span style="font-size:0.88rem; color:var(--fg-mid);">{{ item }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% if payment_error %}
+      <div style="color:#f87171; font-size:0.88rem; margin-bottom:16px;">{{ payment_error }}</div>
+      {% endif %}
+      <form method="post" action="/validate/upgrade/{{ s.uid }}/">
+        {% csrf_token %}
+        <button type="submit"
+                style="background:var(--accent); color:#000; font-family:var(--f-sans); font-size:0.95rem; font-weight:500; border:none; border-radius:6px; padding:16px 36px; cursor:pointer;">
+          Get deep report — KES 500 →
+        </button>
+      </form>
+    </div>
+    <div style="padding:32px; background:var(--card); border:1px solid var(--line-strong); border-radius:8px; text-align:center; min-width:180px;">
+      <div style="font-family:var(--f-display); font-size:4rem; color:var(--accent); line-height:1; margin-bottom:8px;">500</div>
+      <div style="font-family:var(--f-mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-dim);">KES · one time</div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CONSULTING CTA -->
+<section style="padding:80px 32px 120px;">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:20px;">— Ready to build it?</div>
+      <h2 style="font-family:var(--f-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:400; letter-spacing:-0.04em; line-height:1.05; margin-bottom:20px;">
+        We build what<br/>the AI <em>approves.</em>
+      </h2>
+      <p style="color:var(--fg-mid); font-size:0.95rem; line-height:1.7; max-width:40ch; margin-bottom:32px;">
+        Crafted Edge Solutions is a product engineering studio. If your idea scores well and you're ready to build,
+        we can design, engineer, and launch it — end to end.
+      </p>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="/contact/" style="background:var(--accent); color:#000; font-family:var(--f-sans); font-size:0.9rem; font-weight:500; padding:14px 28px; border-radius:6px; text-decoration:none;">Book a consultation →</a>
+        <a href="/insights/" style="color:var(--fg-mid); font-family:var(--f-sans); font-size:0.9rem; padding:14px 20px; text-decoration:none; border:1px solid var(--line-strong); border-radius:6px;">Read Insights</a>
+      </div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:20px;">
+      {% for offer in consulting_offers %}
+      <div style="padding:24px; background:var(--card); border:1px solid var(--line); border-radius:6px;">
+        <div style="font-family:var(--f-mono); font-size:0.75rem; color:var(--accent); margin-bottom:8px;">{{ offer.label }}</div>
+        <div style="font-size:0.88rem; color:var(--fg-dim); line-height:1.6;">{{ offer.desc }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endif %}
+
+{% endblock %}

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "newsletter",
     "dashboard",
     "core",
+    "validator",
     # Wagtail
     "wagtail.contrib.settings",
     "wagtail.contrib.sitemaps",

@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}AI Idea Validator — Crafted Edge Solutions{% endblock %}
+{% block meta_description %}Submit your business idea. Get an honest AI critique powered by DeepSeek reasoning — scored, verdicted, and specific to the Kenyan market. Free basic analysis, KES 500 deep report.{% endblock %}
+
+{% block og_tags %}
+<meta property="og:title" content="AI Idea Validator — Crafted Edge Solutions" />
+<meta property="og:description" content="Get your business idea scored, critiqued, and analysed by AI trained for the Kenyan market. Brutally honest. Free to start." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://craftededgesolutions.africa/validate/" />
+{% endblock %}
+
+{% block content %}
+
+<section style="padding:180px 32px 80px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:end;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:24px">— AI Idea Validator</div>
+      <h1 style="font-family:var(--f-display); font-size:clamp(3rem,8vw,6.5rem); line-height:0.92; letter-spacing:-0.05em; font-weight:400; margin-bottom:32px;">
+        Your idea.<br/><em>Honestly</em><br/>scored.
+      </h1>
+      <p style="color:var(--fg-mid); font-size:1.05rem; line-height:1.65; max-width:44ch; margin-bottom:40px;">
+        Submit your business idea and get a scored, structured critique from AI — built for the Kenyan market.
+        No cheerleading. No generic advice. Just the things you need to hear.
+      </p>
+      <div style="display:flex; gap:40px;">
+        <div>
+          <div style="font-family:var(--f-display); font-size:2rem; color:var(--accent); margin-bottom:4px;">Free</div>
+          <div style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-dim);">Basic critique + score</div>
+        </div>
+        <div style="width:1px; background:var(--line);"></div>
+        <div>
+          <div style="font-family:var(--f-display); font-size:2rem; color:var(--accent); margin-bottom:4px;">KES 500</div>
+          <div style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-dim);">Deep market report</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div style="background:var(--card); border:1px solid var(--line); border-radius:8px; padding:40px;">
+        <div style="font-family:var(--f-mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-bottom:32px;">— What you get free</div>
+        <div style="display:flex; flex-direction:column; gap:20px; margin-bottom:32px;">
+            {% for item in free_items %}
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="width:6px; height:6px; background:var(--accent); border-radius:50%; flex-shrink:0;"></div>
+            <span style="font-size:0.9rem; color:var(--fg-mid);">{{ item }}</span>
+          </div>
+          {% endfor %}
+        </div>
+        <div style="border-top:1px solid var(--line); padding-top:24px; margin-bottom:8px;">
+          <div style="font-family:var(--f-mono); font-size:0.7rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-bottom:16px;">— KES 500 deep report adds</div>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            {% for item in paid_items %}
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:6px; height:6px; background:rgba(232,146,64,0.35); border-radius:50%; flex-shrink:0;"></div>
+              <span style="font-size:0.9rem; color:var(--fg-dim);">{{ item }}</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding:80px 32px 120px;">
+  <div style="max-width:760px; margin:0 auto;">
+
+    {% if errors %}
+    <div style="background:rgba(239,68,68,0.08); border:1px solid rgba(239,68,68,0.3); border-radius:6px; padding:20px 24px; margin-bottom:40px;">
+      {% for error in errors %}
+      <div style="color:#f87171; font-size:0.9rem; line-height:1.6;">{{ error }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="post" action="/validate/submit/" style="display:flex; flex-direction:column; gap:32px;">
+      {% csrf_token %}
+
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:10px;">— Idea name</label>
+        <input type="text" name="idea_name" required maxlength="200"
+               value="{{ form_data.idea_name|default:'' }}"
+               placeholder="e.g. M-Pesa savings coach for boda boda operators"
+               style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:14px 16px; color:var(--fg); font-family:var(--f-sans); font-size:0.95rem; outline:none; box-sizing:border-box;" />
+      </div>
+
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:10px;">— What it does</label>
+        <textarea name="idea_description" required rows="5"
+                  placeholder="Describe your idea in 2-4 sentences. What is it, how does it work, what makes it different?"
+                  style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:14px 16px; color:var(--fg); font-family:var(--f-sans); font-size:0.95rem; outline:none; resize:vertical; box-sizing:border-box; line-height:1.6;">{{ form_data.idea_description|default:'' }}</textarea>
+      </div>
+
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:10px;">— Target market</label>
+        <input type="text" name="target_market" required maxlength="300"
+               value="{{ form_data.target_market|default:'' }}"
+               placeholder="e.g. Small traders in Nairobi's informal sector, 25–45 years old"
+               style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:14px 16px; color:var(--fg); font-family:var(--f-sans); font-size:0.95rem; outline:none; box-sizing:border-box;" />
+      </div>
+
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:10px;">— Problem it solves</label>
+        <textarea name="problem_solved" required rows="4"
+                  placeholder="What specific pain point does this address? Why do people struggle without it right now?"
+                  style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:14px 16px; color:var(--fg); font-family:var(--f-sans); font-size:0.95rem; outline:none; resize:vertical; box-sizing:border-box; line-height:1.6;">{{ form_data.problem_solved|default:'' }}</textarea>
+      </div>
+
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:10px;">— Your email</label>
+        <input type="email" name="email" required
+               value="{{ form_data.email|default:'' }}"
+               placeholder="you@example.com"
+               style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:14px 16px; color:var(--fg); font-family:var(--f-sans); font-size:0.95rem; outline:none; box-sizing:border-box;" />
+        <div style="font-size:0.8rem; color:var(--fg-dim); margin-top:8px;">Up to 3 free analyses per email. No spam — we'll send you the results link.</div>
+      </div>
+
+      <div>
+        <button type="submit"
+                style="background:var(--accent); color:#000; font-family:var(--f-sans); font-size:0.95rem; font-weight:500; border:none; border-radius:6px; padding:16px 40px; cursor:pointer; letter-spacing:0.01em;">
+          Analyse my idea — free →
+        </button>
+      </div>
+
+    </form>
+
+    <div style="margin-top:80px; padding-top:40px; border-top:1px solid var(--line);">
+      <div style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-bottom:20px;">— Powered by</div>
+      <p style="color:var(--fg-dim); font-size:0.88rem; line-height:1.65; max-width:52ch;">
+        DeepSeek-R1 reasoning model via Groq, with Kenya-specific context built by Crafted Edge Solutions.
+        Results are AI-generated — treat them as a starting point for research, not a final verdict.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
