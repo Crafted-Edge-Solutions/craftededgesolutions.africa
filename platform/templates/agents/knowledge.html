@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Knowledge Base — {{ tenant.business_name }}{% endblock %}
+
+{% block content %}
+<section style="padding:120px 32px 60px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:flex; justify-content:space-between; align-items:end; gap:32px; flex-wrap:wrap;">
+    <div>
+      <a href="/agents/{{ tenant.slug }}/" style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-dim); text-decoration:none;">← Dashboard</a>
+      <h1 style="font-family:var(--f-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:400; letter-spacing:-0.04em; line-height:1.05; margin:12px 0 0;">
+        Knowledge Base
+      </h1>
+      <p style="color:var(--fg-dim); margin-top:12px; font-size:0.9rem;">{{ entries.count }} active entr{{ entries.count|pluralize:"y,ies" }} — your agent reads all of these on every conversation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ADD ENTRY -->
+<section style="padding:48px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:24px;">— Add entry</div>
+    <form method="post" action="/agents/{{ tenant.slug }}/knowledge/add/" style="display:grid; grid-template-columns:1fr 1fr auto; gap:16px; align-items:start;">
+      {% csrf_token %}
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:8px;">Question / Topic</label>
+        <textarea name="question" required rows="3" placeholder="What are your opening hours?"
+                  style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:12px 14px; color:var(--fg); font-family:var(--f-sans); font-size:0.9rem; resize:vertical; box-sizing:border-box;"></textarea>
+      </div>
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:8px;">Answer</label>
+        <textarea name="answer" required rows="3" placeholder="We are open Monday to Saturday, 8am to 6pm."
+                  style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:12px 14px; color:var(--fg); font-family:var(--f-sans); font-size:0.9rem; resize:vertical; box-sizing:border-box;"></textarea>
+      </div>
+      <div>
+        <label style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); display:block; margin-bottom:8px;">Category (optional)</label>
+        <input type="text" name="category" placeholder="Hours, Pricing, Returns…"
+               style="width:100%; background:var(--card); border:1px solid var(--line-strong); border-radius:6px; padding:12px 14px; color:var(--fg); font-family:var(--f-sans); font-size:0.9rem; box-sizing:border-box; margin-bottom:16px;" />
+        <button type="submit" style="width:100%; background:var(--accent); color:#000; font-family:var(--f-sans); font-size:0.88rem; font-weight:500; border:none; border-radius:6px; padding:12px; cursor:pointer;">
+          Add →
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ENTRIES LIST -->
+<section style="padding:48px 32px 100px;">
+  <div style="max-width:var(--container); margin:0 auto;">
+    {% if entries %}
+    <div style="display:flex; flex-direction:column; gap:0;">
+      {% regroup entries by category as grouped %}
+      {% for group in grouped %}
+      {% if group.grouper %}
+      <div style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--accent); padding:24px 0 12px; border-top:1px solid var(--line);">— {{ group.grouper }}</div>
+      {% endif %}
+      {% for entry in group.list %}
+      <div style="display:grid; grid-template-columns:1fr 1fr auto; gap:24px; padding:20px 0; border-top:1px solid var(--line); align-items:start; {% if forloop.last and forloop.parentloop.last %}border-bottom:1px solid var(--line);{% endif %}">
+        <div style="font-size:0.9rem; color:var(--fg); line-height:1.6;">{{ entry.question }}</div>
+        <div style="font-size:0.9rem; color:var(--fg-mid); line-height:1.6;">{{ entry.answer }}</div>
+        <form method="post" action="/agents/{{ tenant.slug }}/knowledge/{{ entry.pk }}/delete/" onsubmit="return confirm('Delete this entry?');">
+          {% csrf_token %}
+          <button type="submit" style="background:none; border:1px solid rgba(239,68,68,0.3); color:#ef4444; font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; padding:6px 12px; border-radius:4px; cursor:pointer;">Delete</button>
+        </form>
+      </div>
+      {% endfor %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align:center; padding:80px 0; color:var(--fg-dim);">
+      No entries yet. Add your first FAQ above.
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

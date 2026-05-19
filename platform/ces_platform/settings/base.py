@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "dashboard",
     "core",
     "validator",
+    "agents",
     # Wagtail
     "wagtail.contrib.settings",
     "wagtail.contrib.sitemaps",
@@ -198,6 +199,11 @@ LISTMONK_BASE_URL = os.getenv("LISTMONK_BASE_URL", "")
 LISTMONK_USERNAME = os.getenv("LISTMONK_USERNAME", "")
 LISTMONK_PASSWORD = os.getenv("LISTMONK_PASSWORD", "")
 LISTMONK_LIST_ID_INSIGHTS = int(os.getenv("LISTMONK_LIST_ID_INSIGHTS", "0"))
+
+# WhatsApp / Meta Cloud API
+WHATSAPP_ACCESS_TOKEN = os.getenv("WHATSAPP_ACCESS_TOKEN", "")
+WHATSAPP_APP_SECRET = os.getenv("WHATSAPP_APP_SECRET", "")
+WHATSAPP_VERIFY_TOKEN = os.getenv("WHATSAPP_VERIFY_TOKEN", "ces-whatsapp-webhook-2026")
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True

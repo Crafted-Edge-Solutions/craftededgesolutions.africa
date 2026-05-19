@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}AI Agent Clients — Crafted Edge Solutions{% endblock %}
+
+{% block content %}
+<section style="padding:120px 32px 60px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div class="eyebrow" style="margin-bottom:16px;">— CES Staff · AI Agent Clients</div>
+    <h1 style="font-family:var(--f-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:400; letter-spacing:-0.04em;">All Tenants</h1>
+  </div>
+</section>
+
+<section style="padding:48px 32px 100px;">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div style="display:flex; flex-direction:column; gap:0;">
+      {% for tenant in tenants %}
+      <a href="/agents/{{ tenant.slug }}/"
+         style="display:grid; grid-template-columns:1fr auto auto auto; gap:40px; padding:20px 0; border-top:1px solid var(--line); text-decoration:none; align-items:center; {% if forloop.last %}border-bottom:1px solid var(--line);{% endif %}">
+        <div>
+          <div style="font-size:1rem; color:var(--fg); margin-bottom:4px;">{{ tenant.business_name }}</div>
+          <div style="font-family:var(--f-mono); font-size:0.72rem; color:var(--fg-dim);">{{ tenant.whatsapp_phone_number_id }}</div>
+        </div>
+        <span style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; color:var(--fg-dim); letter-spacing:0.08em;">{{ tenant.get_plan_display|truncatechars:12 }}</span>
+        <span style="font-family:var(--f-mono); font-size:0.72rem; color:var(--fg-dim);">{{ tenant.conversations_this_month }} conv/mo</span>
+        <span style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:{% if tenant.is_active %}#22c55e{% else %}#ef4444{% endif %};">
+          {% if tenant.is_active %}● Live{% else %}○ Paused{% endif %}
+        </span>
+      </a>
+      {% empty %}
+      <div style="padding:60px; text-align:center; color:var(--fg-dim);">No tenants yet. Add via Django admin.</div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

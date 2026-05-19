@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{{ tenant.business_name }} — Agent Dashboard{% endblock %}
+
+{% block content %}
+<section style="padding:120px 32px 60px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:flex; justify-content:space-between; align-items:end; gap:32px; flex-wrap:wrap;">
+    <div>
+      <div class="eyebrow" style="margin-bottom:12px;">— AI Agent Dashboard</div>
+      <h1 style="font-family:var(--f-display); font-size:clamp(2rem,5vw,3.5rem); font-weight:400; letter-spacing:-0.04em; line-height:1.05; margin-bottom:8px;">
+        {{ tenant.business_name }}
+      </h1>
+      <span style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--accent); background:rgba(232,146,64,0.1); border:1px solid rgba(232,146,64,0.25); padding:4px 12px; border-radius:100px;">
+        ● Live · {{ tenant.get_plan_display }}
+      </span>
+    </div>
+    <div style="display:flex; gap:12px;">
+      <a href="/agents/{{ tenant.slug }}/knowledge/" style="font-family:var(--f-mono); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-mid); border:1px solid var(--line-strong); padding:10px 20px; border-radius:6px; text-decoration:none;">Manage FAQs</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS ROW -->
+<section style="padding:48px 32px; border-bottom:1px solid var(--line);">
+  <div style="max-width:var(--container); margin:0 auto; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
+    {% for label, value, sub in stats %}
+    <div style="padding:28px; background:var(--card); border:1px solid var(--line); border-radius:6px;">
+      <div style="font-family:var(--f-mono); font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--fg-dim); margin-bottom:12px;">{{ label }}</div>
+      <div style="font-family:var(--f-display); font-size:2.8rem; letter-spacing:-0.04em; line-height:1; color:var(--fg); margin-bottom:6px;">{{ value }}</div>
+      <div style="font-size:0.8rem; color:var(--fg-dim);">{{ sub }}</div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- RECENT CONVERSATIONS -->
+<section style="padding:48px 32px 100px;">
+  <div style="max-width:var(--container); margin:0 auto;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:32px;">
+      <div class="eyebrow">— Recent Conversations</div>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:0;">
+      {% for convo in recent_convos %}
+      {% with last=convo.messages.last %}
+      <a href="/agents/{{ tenant.slug }}/conversations/{{ convo.pk }}/"
+         style="display:grid; grid-template-columns:1fr auto; gap:24px; padding:20px 0; border-top:1px solid var(--line); text-decoration:none; {% if forloop.last %}border-bottom:1px solid var(--line);{% endif %}">
+        <div>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:6px;">
+            <span style="font-family:var(--f-mono); font-size:0.8rem; color:var(--fg);">{{ convo.customer_phone }}</span>
+            {% if convo.is_escalated %}
+            <span style="font-family:var(--f-mono); font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#ef4444; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); padding:2px 8px; border-radius:100px;">Escalated</span>
+            {% elif convo.is_resolved %}
+            <span style="font-family:var(--f-mono); font-size:0.65rem; text-transform:uppercase; letter-spacing:0.08em; color:#22c55e; background:rgba(34,197,94,0.1); border:1px solid rgba(34,197,94,0.3); padding:2px 8px; border-radius:100px;">Resolved</span>
+            {% endif %}
+          </div>
+          {% if last %}
+          <div style="font-size:0.88rem; color:var(--fg-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:60ch;">
+            {% if last.direction == "out" %}<span style="color:var(--fg-dim); font-size:0.75rem;">Agent: </span>{% else %}<span style="color:var(--fg-mid); font-size:0.75rem;">Customer: </span>{% endif %}
+            {{ last.body|truncatechars:100 }}
+          </div>
+          {% endif %}
+        </div>
+        <div style="text-align:right; flex-shrink:0;">
+          <div style="font-family:var(--f-mono); font-size:0.72rem; color:var(--fg-dim);">{{ convo.last_message_at|timesince }} ago</div>
+          <div style="font-family:var(--f-mono); font-size:0.72rem; color:var(--fg-dim); margin-top:4px;">{{ convo.messages.count }} msg</div>
+        </div>
+      </a>
+      {% empty %}
+      <div style="padding:60px 0; text-align:center; color:var(--fg-dim); font-size:0.9rem;">
+        No conversations yet. Your agent is live and waiting.
+      </div>
+      {% endwith %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

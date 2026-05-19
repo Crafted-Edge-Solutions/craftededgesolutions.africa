@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Conversation — {{ tenant.business_name }}{% endblock %}
+
+{% block content %}
+<section style="padding:120px 32px 40px; border-bottom:1px solid var(--line);">
+  <div style="max-width:800px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+    <div>
+      <a href="/agents/{{ tenant.slug }}/" style="font-family:var(--f-mono); font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--fg-dim); text-decoration:none;">← Dashboard</a>
+      <h1 style="font-family:var(--f-display); font-size:2rem; font-weight:400; letter-spacing:-0.03em; margin:12px 0 6px;">{{ conversation.customer_phone }}</h1>
+      <div style="font-size:0.85rem; color:var(--fg-dim);">Started {{ conversation.started_at|date:"d M Y, H:i" }}</div>
+    </div>
+    {% if conversation.is_escalated and not conversation.is_resolved %}
+    <form method="post">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="resolve" />
+      <button type="submit" style="background:var(--accent); color:#000; font-family:var(--f-sans); font-size:0.88rem; font-weight:500; border:none; border-radius:6px; padding:10px 24px; cursor:pointer;">
+        Mark resolved — hand back to agent
+      </button>
+    </form>
+    {% endif %}
+  </div>
+</section>
+
+<section style="padding:40px 32px 100px;">
+  <div style="max-width:800px; margin:0 auto; display:flex; flex-direction:column; gap:12px;">
+    {% for msg in messages %}
+    <div style="display:flex; {% if msg.direction == 'out' %}justify-content:flex-end;{% endif %}">
+      <div style="max-width:72%; padding:14px 18px; border-radius:{% if msg.direction == 'out' %}16px 16px 4px 16px{% else %}16px 16px 16px 4px{% endif %}; background:{% if msg.direction == 'out' %}rgba(232,146,64,0.12); border:1px solid rgba(232,146,64,0.2){% else %}var(--card); border:1px solid var(--line){% endif %};">
+        <div style="font-size:0.9rem; color:var(--fg); line-height:1.6; white-space:pre-wrap;">{{ msg.body }}</div>
+        <div style="font-family:var(--f-mono); font-size:0.65rem; color:var(--fg-dim); margin-top:8px; text-align:right;">
+          {{ msg.timestamp|date:"H:i" }}
+          {% if msg.is_escalation_trigger %} · <span style="color:#ef4444;">escalated</span>{% endif %}
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div style="text-align:center; color:var(--fg-dim); padding:40px;">No messages.</div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
