@@ -24,6 +24,7 @@ urlpatterns = [
     path("careers/", careers, name="careers"),
     path("api/contact/", contact_api, name="contact_api"),
     path("newsletter/", include("newsletter.urls")),
+    path("insights/", include("insights.urls")),
     path("robots.txt", robots_txt, name="robots_txt"),
     path("llms.txt", llms_txt, name="llms_txt"),
     path("sitemap.xml", sitemap, {"sitemaps": wagtail_sitemaps}, name="sitemap"),
